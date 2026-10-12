@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Méthode et limites{% endblock %}
+{% block content %}
+<h1>Méthode et limites</h1>
+<p class="lead">Les règles suivies pour que les résultats soient comparables et honnêtes, puis ce qu'ils ne disent pas.</p>
+
+<h2>Protocole</h2>
+<div class="card">
+  <ul>
+    <li><strong>Découpage chronologique.</strong> Les {{ fmt(100 * params.split.train_fraction, 0) }} % de jours les plus anciens servent à
+    l'apprentissage{% if splits %} ({{ splits.n_train }} jours, jusqu'au {{ splits.train_fin }}), les {{ splits.n_test }} suivants au test{% endif %}.
+    Jamais de tirage aléatoire ni de validation croisée classique.</li>
+    <li><strong>Origines glissantes.</strong> Depuis chaque jour du test, chaque modèle prévoit J+1 à J+7. Chaque origine est évaluée ;
+    les paramètres sont réestimés tous les {{ params.evaluation.refit_every_days }} jours.</li>
+    <li><strong>Deux références.</strong> La persistance (demain comme aujourd'hui) et la climatologie (normale saisonnière lissée sur
+    {{ params.features.climatology_window_days }} jours, calculée sur l'apprentissage seul).</li>
+    <li><strong>Tests.</strong> Diebold-Mariano avec la correction de Harvey-Leybourne-Newbold et une variance de long terme sur h - 1 retards ;
+    correction de Holm au seuil de {{ fmt(100 * params.evaluation.holm_alpha, 0) }} %.</li>
+  </ul>
+</div>
+
+<h2>Ex ante et ex post</h2>
+<div class="card">
+  <p><span class="tag ex-ante">ex ante</span> Le modèle n'utilise que ce qui est connu à la date d'émission : observations passées,
+  calendrier, astronomie, normale saisonnière. C'est la seule performance opérationnelle.</p>
+  <p><span class="tag ex-post">ex post</span> Le modèle reçoit en plus la météo observée des jours visés (nuages, pluie, humidité,
+  température, aérosols), sans les grandeurs de rayonnement. C'est une borne optimiste : elle dit ce qu'apporterait une prévision météo parfaite.</p>
+</div>
+
+<h2>Jours imputés</h2>
+<div class="card">
+  <p>PVGIS enregistre un rayonnement nul certains jours où l'image satellitaire manque. Un jour est corrigé si la hauteur du soleil donnée
+  par PVGIS est inférieure de plus de {{ params.imputation.sun_height_gap_deg }}° à la hauteur astronomique, ou si l'irradiation PVGIS vaut
+  moins de {{ fmt(100 * params.imputation.ghi_ratio_threshold, 0) }} % de celle de NASA POWER un jour clair. Le jour reste signalé.</p>
+  {% if sensitivity %}
+  <div class="table-wrap"><table>
+    <thead><tr><th>Ville</th><th>Modèle</th><th class="num">Jours imputés</th><th class="num">RMSE avec</th><th class="num">RMSE sans</th><th class="num">Écart</th></tr></thead>
+    <tbody>
+    {% for r in sensitivity %}
+    <tr><td>{{ r.ville }}</td><td>{{ model_labels.get(r.modele, r.modele) }}</td><td class="num">{{ r.jours_imputes }}</td>
+    <td class="num">{{ fmt(r.rmse_avec, 4) }}</td><td class="num">{{ fmt(r.rmse_sans, 4) }}</td><td class="num">{{ fmt(r.ecart_rmse, 5) }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  <p class="note">Les modèles sont réestimés sans les jours imputés, puis évalués sur le même test.</p>
+  {% endif %}
+</div>
+
+<h2>Limites</h2>
+<div class="card">
+  <ul>
+    <li><strong>Données simulées.</strong> La production est simulée par PVGIS à partir d'images satellitaires, pour une installation
+    théorique sans panne, ombrage ni salissure.</li>
+    <li><strong>Technologies.</strong> Les écarts entre technologies viennent des modèles de rendement de PVGIS. La dégradation dans le temps
+    et la fiabilité mécanique ne sont pas modélisées.</li>
+    <li><strong>Prévisibilité faible.</strong> Une fois la saison retirée, la météo d'un jour renseigne peu sur les suivants : au-delà de deux
+    jours, les modèles ex ante rejoignent la normale.</li>
+    <li><strong>Ex post n'est pas une prévision.</strong> La météo observée remplace une prévision météo, qui serait imparfaite.</li>
+    <li><strong>Une seule période de test</strong> (environ deux ans).</li>
+    <li><strong>Économie.</strong> Tarifs, coûts et taux sont des hypothèses non vérifiées.</li>
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+@page { size: A4; margin: 18mm 17mm 20mm 17mm; }
+html { font-size: 10pt; }
+body { font-family: "Segoe UI", system-ui, sans-serif; color: #0b0b0b; line-height: 1.45; max-width: none; margin: 0; padding: 0; background: #fff; }
+header#title-block-header { text-align: center; margin: 60mm 0 20mm; break-after: page; }
+header#title-block-header .title { font-size: 22pt; line-height: 1.25; margin-bottom: 8mm; }
+header#title-block-header .subtitle { font-size: 12pt; color: #52514e; font-weight: 400; }
+header#title-block-header .author, header#title-block-header .date { font-size: 11pt; color: #52514e; margin-top: 4mm; }
+nav#TOC { font-size: 9pt; }
+nav#TOC > ul { list-style: none; padding-left: 0; }
+nav#TOC ul ul { list-style: none; padding-left: 14px; }
+nav#TOC a { color: #0b0b0b; text-decoration: none; }
+h1 { font-size: 15pt; margin: 0 0 6pt; break-before: page; break-after: avoid; }
+h2 { font-size: 12pt; margin: 14pt 0 4pt; break-after: avoid; }
+p, li { orphans: 3; widows: 3; }
+ul, ol { padding-left: 16px; }
+li { margin: 2pt 0; }
+figure { margin: 8pt 0; text-align: center; break-inside: avoid; }
+figure img, p > img { max-width: 100%; height: auto; }
+figcaption { font-size: 8.5pt; color: #52514e; margin-top: 2pt; }
+table { border-collapse: collapse; width: 100%; font-size: 8pt; margin: 6pt 0 2pt; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th, td { border-bottom: 0.5pt solid #c3c2b7; padding: 2.5pt 4pt; vertical-align: top; text-align: left; }
+th { background: #f0efec; font-weight: 600; }
+caption { caption-side: bottom; font-size: 8.5pt; color: #52514e; text-align: left; padding-top: 3pt; }
+code { font-family: Consolas, monospace; font-size: 8.5pt; background: #f0efec; padding: 0 2px; }
+blockquote { margin: 6pt 0; padding: 4pt 10pt; border-left: 2pt solid #fab219; background: #fcfcfb; }

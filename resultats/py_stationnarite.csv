@@ -1,0 +1,12 @@
+série,ADF stat,ADF p,ADF retards,KPSS stat,KPSS p,conclusion à 5 %
+production,-5.844,0.0,25,0.027,0.1,stationnaire
+production - diff. ordre 1,-24.06,0.0,26,0.013,0.1,stationnaire
+production - désaisonnalisée (Fourier),-34.77,0.0,3,0.392,0.0808,stationnaire
+nébulosité,-7.406,0.0,25,0.042,0.1,stationnaire
+nébulosité - diff. ordre 1,-24.443,0.0,26,0.03,0.1,stationnaire
+nébulosité - désaisonnalisée (Fourier),-28.7,0.0,5,0.181,0.1,stationnaire
+température,-5.497,0.0,34,0.062,0.1,stationnaire
+température - diff. ordre 1,-11.768,0.0,34,0.015,0.1,stationnaire
+température - désaisonnalisée (Fourier),-20.825,0.0,6,1.934,0.01,désaccord (saisonnalité ou rupture ?)
+"production désaisonnalisée, avec tendance",-34.825,0.0,3,0.031,0.1,stationnaire
+"température désaisonnalisée, avec tendance",-23.993,0.0,4,0.041,0.1,stationnaire

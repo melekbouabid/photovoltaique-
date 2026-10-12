@@ -1,0 +1,7 @@
+|--- variabilite_journaliere <= 1.39
+|   |--- temperature_moyenne_c <= 13.57
+|   |   |--- class: CIS
+|   |--- temperature_moyenne_c >  13.57
+|   |   |--- class: CdTe
+|--- variabilite_journaliere >  1.39
+|   |--- class: CIS

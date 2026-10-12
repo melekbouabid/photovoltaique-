@@ -1,0 +1,3026 @@
+genere_le: '2026-10-11T17:33:49'
+periode: 2005-01-01 / 2023-12-31
+pas: journalier (agrégé depuis l'horaire PVGIS, jour UTC)
+installation:
+  puissance_kwc: 1
+  pertes_systeme_pct: 14
+  orientation: plein sud, pente optimale du site
+  technologies:
+  - crystSi
+  - CIS
+  - CdTe
+unites:
+  pv_*_kwh_kwc: kWh par kWc et par jour
+  ghi_*: kWh/m² par jour
+  jour_impute_pvgis: 0/1
+fuseau: 'PVGIS : UTC ; Open-Meteo : heure locale ; NASA POWER : heure solaire locale'
+licences:
+  pvgis: PVGIS 5.3 © Union européenne (JRC) ; rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source
+  open_meteo: Open-Meteo Historical Weather API (ERA5, Copernicus/ECMWF), CC BY 4.0
+  nasa_power: NASA Langley Research Center, projet POWER (MERRA-2, CERES), données ouvertes
+reconstruction: python -m solarvision.cli ingest (télécharge ce qui manque), puis --reprocess sans réseau
+villes_presentes:
+- barcelone
+- bilbao
+- bizerte
+- bordeaux
+- gabes
+- gafsa
+- grenade
+- kairouan
+- lille
+- lyon
+- madrid
+- malaga
+- marseille
+- medenine
+- montpellier
+- murcie
+- nantes
+- nice
+- palma
+- paris
+- saragosse
+- seville
+- sfax
+- sousse
+- strasbourg
+- tataouine
+- toulouse
+- tozeur
+- tunis
+- valence
+villes_manquantes: []
+villes:
+  paris:
+    coordonnees:
+      lat: 48.8566
+      lon: 2.3522
+      altitude_m: 42.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 38.0
+    sources:
+      pvgis:
+        origine: cache v1 (data/brut) + téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/paris/orientation_CIS_est.json
+          octets: 5201
+          sha256: f04066efa24f7aad16e38cd3cdc890a3a987bb10285c63c27d756f7d038225b8
+          recupere_le: '2026-10-11T17:14:26'
+        - fichier: data/raw/pvgis/paris/orientation_CIS_optimale.json
+          octets: 5201
+          sha256: 24f2797ca90c2bd80e5c9dd4c4b8edae12c2b91b9b8058d6ea7b66829a50d028
+          recupere_le: '2026-10-11T17:14:29'
+        - fichier: data/raw/pvgis/paris/orientation_CIS_ouest.json
+          octets: 5203
+          sha256: be22cb194203033fb8245c552942e30ef6ad0b17616194ec1245a1b94232de75
+          recupere_le: '2026-10-11T17:14:27'
+        - fichier: data/raw/pvgis/paris/orientation_CIS_sud.json
+          octets: 5205
+          sha256: c73cd0c5293b54cfe2fc22200ac6cc0742e0258ed524ff64ca28c2986564e6e7
+          recupere_le: '2026-10-11T17:14:25'
+        - fichier: data/raw/pvgis/paris/series_CdTe_2005_2009.csv.gz
+          octets: 492614
+          sha256: dee7117f50f0398071e6a653859ae309ed0037e97c464669a805c41dd0f44da8
+          recupere_le: '2026-10-11T16:11:09'
+        - fichier: data/raw/pvgis/paris/series_CdTe_2010_2014.csv.gz
+          octets: 494135
+          sha256: 0c65fb8e4aaccd23508f0799c5f7427487b23af2e66997ca1ad2052cb83ec81b
+          recupere_le: '2026-10-11T16:11:09'
+        - fichier: data/raw/pvgis/paris/series_CdTe_2015_2019.csv.gz
+          octets: 495075
+          sha256: e1fa569253b997260eedd21e25b4d38bbae19c0103dea34a3515d44df210ab24
+          recupere_le: '2026-10-11T16:11:30'
+        - fichier: data/raw/pvgis/paris/series_CdTe_2020_2023.csv.gz
+          octets: 396785
+          sha256: de8f8e4be24079845d9e0f85f2b60fc86be1d153d4fbd9477e0308c8eed58002
+          recupere_le: '2026-10-11T16:11:27'
+        - fichier: data/raw/pvgis/paris/series_CIS_2005_2009.csv.gz
+          octets: 495764
+          sha256: a6901f07746f4a6d72b68cd77ce9133b32158e61b9d8326c355371fbf1341839
+          recupere_le: '2026-10-11T16:10:28'
+        - fichier: data/raw/pvgis/paris/series_CIS_2010_2014.csv.gz
+          octets: 497518
+          sha256: 3a7241df40ac75d0cac2bf9bd4242d96e6f55f92a379c12f83ecf522e0aaf11e
+          recupere_le: '2026-10-11T16:10:26'
+        - fichier: data/raw/pvgis/paris/series_CIS_2015_2019.csv.gz
+          octets: 498174
+          sha256: e92d118d4913b49e058c0472ba8e661e59eb24170eb06c21e8ba66b69311c26d
+          recupere_le: '2026-10-11T16:10:26'
+        - fichier: data/raw/pvgis/paris/series_CIS_2020_2023.csv.gz
+          octets: 399568
+          sha256: 5022e803fe6b4b5bff459b00a245fcc48b48cebd54b80fae0a0e27ce41524fd4
+          recupere_le: '2026-10-11T16:11:01'
+        - fichier: data/brut/pvgis/paris_horaire.parquet
+          octets: 3331283
+          sha256: 107df3a5e09991f4cfdbb8e152b4349888c2784c71bb863608e20c3fa51c4efc
+          recupere_le: '2026-10-10T12:10:30'
+      open_meteo:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/open_meteo/paris.csv
+          octets: 458252
+          sha256: 74f6910e37fcb59f61760f0dc9f6950c624be23d33cea7733e9cdec7e79e1dea
+          recupere_le: '2026-10-10T12:04:12'
+      nasa_power:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/nasa_power/paris.csv
+          octets: 452133
+          sha256: c19266ff5d23ea7198261aee506f4e9324c88c4491a9d09517efb7dec5ce6b53
+          recupere_le: '2026-10-10T12:04:13'
+    table_traitee:
+      fichier: data/processed/paris.csv
+      octets: 284573
+      sha256: 03edd44faec64629e1afc6ec0d9c7209f47af18e1a039b36b7b6a069ecd69c82
+      recupere_le: '2026-10-11T17:32:51'
+  lyon:
+    coordonnees:
+      lat: 45.764
+      lon: 4.8357
+      altitude_m: 173.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 37.0
+    sources:
+      pvgis:
+        origine: cache v1 (data/brut) + téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/lyon/orientation_CIS_est.json
+          octets: 5204
+          sha256: 8585d2366f827a247d699b751eed4eacfddf6a2a9b14041b0a3824a5166f5c84
+          recupere_le: '2026-10-11T17:14:13'
+        - fichier: data/raw/pvgis/lyon/orientation_CIS_optimale.json
+          octets: 5206
+          sha256: cab5099b777af1a10915ecbcd3ea8892d87298cd82442d6d8ae7a6f31b4365f6
+          recupere_le: '2026-10-11T17:14:16'
+        - fichier: data/raw/pvgis/lyon/orientation_CIS_ouest.json
+          octets: 5198
+          sha256: a93f6db9c05e584df29494898a61f679fae992d795aaaf19545c48d635c678ac
+          recupere_le: '2026-10-11T17:14:14'
+        - fichier: data/raw/pvgis/lyon/orientation_CIS_sud.json
+          octets: 5207
+          sha256: 1fa19f2176690a56dd22df9f84474d7a78ee3192fcc51cc911c30c34ba4cf5bf
+          recupere_le: '2026-10-11T17:14:12'
+        - fichier: data/raw/pvgis/lyon/series_CdTe_2005_2009.csv.gz
+          octets: 496278
+          sha256: ed9546e1ec38aada70233127518b722bd5cac6ccf390e0f916d38040cfd5a6e8
+          recupere_le: '2026-10-11T16:13:52'
+        - fichier: data/raw/pvgis/lyon/series_CdTe_2010_2014.csv.gz
+          octets: 497117
+          sha256: c8fce620f37c296eec775c8810f96a5c1f178e247b05141ae0560beef8e8bc63
+          recupere_le: '2026-10-11T16:14:12'
+        - fichier: data/raw/pvgis/lyon/series_CdTe_2015_2019.csv.gz
+          octets: 496975
+          sha256: aeb4ac56d8c42bfdf3596e457fa5e10a85af6c2e020b1bb93c67b8fadc29e0c7
+          recupere_le: '2026-10-11T16:14:10'
+        - fichier: data/raw/pvgis/lyon/series_CdTe_2020_2023.csv.gz
+          octets: 398468
+          sha256: 41d1eca02e13ac9f72101a545315358c24ce7d98eba4c118a83936ed41102b85
+          recupere_le: '2026-10-11T16:14:12'
+        - fichier: data/raw/pvgis/lyon/series_CIS_2005_2009.csv.gz
+          octets: 498775
+          sha256: fd7e55c4116b526fae8940031aec8b74eb1612cada3defa5f3045e7eefb98fc6
+          recupere_le: '2026-10-11T16:13:36'
+        - fichier: data/raw/pvgis/lyon/series_CIS_2010_2014.csv.gz
+          octets: 500055
+          sha256: 12bcc76edf36868febb4fcb84669cf40e5d5c45f17f1148e6cf3b733501ab578
+          recupere_le: '2026-10-11T16:13:34'
+        - fichier: data/raw/pvgis/lyon/series_CIS_2015_2019.csv.gz
+          octets: 499703
+          sha256: 26833f5554f9dc3ac39f311b774fb726a7813e7471325c31b8e42fb3af18f37b
+          recupere_le: '2026-10-11T16:13:35'
+        - fichier: data/raw/pvgis/lyon/series_CIS_2020_2023.csv.gz
+          octets: 400483
+          sha256: 9d0f28ae186ef78f031e7324ac62a8fa7c7d803d6eeb44ee7fa2219d34d73c39
+          recupere_le: '2026-10-11T16:13:49'
+        - fichier: data/brut/pvgis/lyon_horaire.parquet
+          octets: 3365497
+          sha256: 214d20859baed28b147471211fdd977788afbf75a4e26d643705b71c9d9d5aca
+          recupere_le: '2026-10-10T12:10:25'
+      open_meteo:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/open_meteo/lyon.csv
+          octets: 460229
+          sha256: 0c995d7740eeffa8b1774c0f13d5ca177f70f80abe557c25529480aa73fe1736
+          recupere_le: '2026-10-10T12:05:22'
+      nasa_power:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/nasa_power/lyon.csv
+          octets: 453083
+          sha256: e6a9c0621152b3d6e6f20c00331e1fa53ad7d28e88bbe27124a754034e2c678e
+          recupere_le: '2026-10-10T12:04:31'
+    table_traitee:
+      fichier: data/processed/lyon.csv
+      octets: 284573
+      sha256: 07beb11a60178dfc9413c5cee63c3473cbf0fb48a1257fb188a7a72d78030cce
+      recupere_le: '2026-10-11T17:32:52'
+  marseille:
+    coordonnees:
+      lat: 43.2965
+      lon: 5.3698
+      altitude_m: 28.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 39.0
+    sources:
+      pvgis:
+        origine: cache v1 (data/brut) + téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/marseille/orientation_CdTe_est.json
+          octets: 5208
+          sha256: e0eba7dc46ff57704892a2a65e89727ef5cf0d18c2546bc0207937d8c16d07ae
+          recupere_le: '2026-10-11T17:14:19'
+        - fichier: data/raw/pvgis/marseille/orientation_CdTe_optimale.json
+          octets: 5212
+          sha256: 6d8608079166324e981d198a4c6869d08a22eb66579b0b4830d9574cbd375f92
+          recupere_le: '2026-10-11T17:14:22'
+        - fichier: data/raw/pvgis/marseille/orientation_CdTe_ouest.json
+          octets: 5201
+          sha256: 960285cf948467efc89dc9acf06d82669d249eea933a6c09999a99d57c989067
+          recupere_le: '2026-10-11T17:14:20'
+        - fichier: data/raw/pvgis/marseille/orientation_CdTe_sud.json
+          octets: 5212
+          sha256: c8628ba15fb237c332102eded5f6077ff9281b358bb669fe00aa5e780664a1d7
+          recupere_le: '2026-10-11T17:14:18'
+        - fichier: data/raw/pvgis/marseille/series_CdTe_2005_2009.csv.gz
+          octets: 504772
+          sha256: eb5c548578a0d5ba3f55fb160c0b7cad3b9ea9e5e82c8254f75c061731d853f0
+          recupere_le: '2026-10-11T16:14:51'
+        - fichier: data/raw/pvgis/marseille/series_CdTe_2010_2014.csv.gz
+          octets: 505851
+          sha256: c632d3cdeeefad1cb8d8b3756e8103350789ca61130a2803a3780f747d2bf0bf
+          recupere_le: '2026-10-11T16:14:49'
+        - fichier: data/raw/pvgis/marseille/series_CdTe_2015_2019.csv.gz
+          octets: 504115
+          sha256: e7ebd0814213621eaebe038616e6a8ba7981ea7294d20fbb1332be2a318aea0a
+          recupere_le: '2026-10-11T16:14:59'
+        - fichier: data/raw/pvgis/marseille/series_CdTe_2020_2023.csv.gz
+          octets: 405359
+          sha256: 32585dc181c68ed2cdfe1d6220114d8ed9e64f12edba619e6cdf353f997dd62b
+          recupere_le: '2026-10-11T16:15:01'
+        - fichier: data/raw/pvgis/marseille/series_CIS_2005_2009.csv.gz
+          octets: 506390
+          sha256: 18bc2270e03996360a82f36aca4c7f11ada21802fc79ddf7aa8fe5efca25a0e9
+          recupere_le: '2026-10-11T16:14:36'
+        - fichier: data/raw/pvgis/marseille/series_CIS_2010_2014.csv.gz
+          octets: 507206
+          sha256: b3d3bd30a0e4cbb7e8c1cdd4d08f1cdcb2a455f70a5bd4e1ca260eecc30ccdeb
+          recupere_le: '2026-10-11T16:14:34'
+        - fichier: data/raw/pvgis/marseille/series_CIS_2015_2019.csv.gz
+          octets: 505658
+          sha256: 343c33438afe3196a2ac4c14fbb14aecb1300d9fea021857c525c6e265d7923a
+          recupere_le: '2026-10-11T16:14:36'
+        - fichier: data/raw/pvgis/marseille/series_CIS_2020_2023.csv.gz
+          octets: 406469
+          sha256: bdb76f080e76d84cf5f41e0701f126f7e1072d944b6d097d4932ee8ff12d41b8
+          recupere_le: '2026-10-11T16:14:43'
+        - fichier: data/brut/pvgis/marseille_horaire.parquet
+          octets: 3398997
+          sha256: 183e9a88e240e166f2a0142d1b3ef24d2a04795ecbb3c2b4da714f88c63916c8
+          recupere_le: '2026-10-10T12:10:14'
+      open_meteo:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/open_meteo/marseille.csv
+          octets: 461814
+          sha256: 3ac4e05785a44bb5255119ec1ecec8c493684b741c693b89bd5f9e9723fed20a
+          recupere_le: '2026-10-10T12:06:40'
+      nasa_power:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/nasa_power/marseille.csv
+          octets: 452668
+          sha256: 44923539fd7aeaadae22de04b29cbc9879d47950dda9421cb9043b83e11291f6
+          recupere_le: '2026-10-10T12:04:55'
+    table_traitee:
+      fichier: data/processed/marseille.csv
+      octets: 284573
+      sha256: 2d7e0b8e21ce6711215376e1dd057fd6b95d76a54b38408653ce7f5e1c7832b7
+      recupere_le: '2026-10-11T17:32:54'
+  toulouse:
+    coordonnees:
+      lat: 43.6047
+      lon: 1.4442
+      altitude_m: 150.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 37.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/toulouse/orientation_CIS_est.json
+          octets: 5208
+          sha256: 470081b99432b166438b481a5c2cdb4ee696334244e398d7ddf45c67268fcd5c
+          recupere_le: '2026-10-11T17:14:32'
+        - fichier: data/raw/pvgis/toulouse/orientation_CIS_optimale.json
+          octets: 5208
+          sha256: b9106417a83c7c0c9e3d5f2545619780409237328f963b3d08a4ec195206fbf4
+          recupere_le: '2026-10-11T17:14:34'
+        - fichier: data/raw/pvgis/toulouse/orientation_CIS_ouest.json
+          octets: 5203
+          sha256: 1494cfb7a5856a64365e71419f6e2838c8d94b3229c00c1fe31bae607635be03
+          recupere_le: '2026-10-11T17:14:33'
+        - fichier: data/raw/pvgis/toulouse/orientation_CIS_sud.json
+          octets: 5211
+          sha256: f78bca4077aba66047fa1a210b6dbe21464f5b61e76843962d209dd4ae1ab77b
+          recupere_le: '2026-10-11T17:14:31'
+        - fichier: data/raw/pvgis/toulouse/pvcalc.json
+          octets: 5213
+          sha256: 47e4d1c9bfaf6ad39fdb81b995f65708e52078c480d7a33be08106fc514e86d2
+          recupere_le: '2026-10-11T16:12:43'
+        - fichier: data/raw/pvgis/toulouse/series_CdTe_2005_2009.csv.gz
+          octets: 499865
+          sha256: f6de1c3b5dfadb8994c88cd60b99b0efd3efefb4154fffa89a537a4620d338cf
+          recupere_le: '2026-10-11T16:15:40'
+        - fichier: data/raw/pvgis/toulouse/series_CdTe_2010_2014.csv.gz
+          octets: 502365
+          sha256: b8e8ce2336f6c48fdf4e4b9781a4040645948533d37b45216d1c592af5284af0
+          recupere_le: '2026-10-11T16:15:43'
+        - fichier: data/raw/pvgis/toulouse/series_CdTe_2015_2019.csv.gz
+          octets: 501505
+          sha256: 956358431d02330f0a38782cc64c9db37c90f1f2e0972f892b0680de157b124b
+          recupere_le: '2026-10-11T16:15:49'
+        - fichier: data/raw/pvgis/toulouse/series_CdTe_2020_2023.csv.gz
+          octets: 402196
+          sha256: 4221d914e81b8cee9fe480b4ed2df172a69b13a1f40561f49d39da1a0dfbaa0a
+          recupere_le: '2026-10-11T16:15:56'
+        - fichier: data/raw/pvgis/toulouse/series_CIS_2005_2009.csv.gz
+          octets: 502090
+          sha256: b7167e403c9514bd4ed5299c8033aba666effd141246fb92e97dd0d879ae1b87
+          recupere_le: '2026-10-11T16:15:23'
+        - fichier: data/raw/pvgis/toulouse/series_CIS_2010_2014.csv.gz
+          octets: 504934
+          sha256: 08a31e215e09e511d1b890f523e552565f4ac23cd65276453d490be8726ec3b7
+          recupere_le: '2026-10-11T16:15:28'
+        - fichier: data/raw/pvgis/toulouse/series_CIS_2015_2019.csv.gz
+          octets: 503774
+          sha256: 944106b2e2e680a0c618a9bdc96e77443a2dd717887b4dc02273b2dc342a7aa2
+          recupere_le: '2026-10-11T16:15:33'
+        - fichier: data/raw/pvgis/toulouse/series_CIS_2020_2023.csv.gz
+          octets: 403986
+          sha256: 74e2e062f592495efa93950b1c383671cc44061fc73b45ff46da92e057cb15a9
+          recupere_le: '2026-10-11T16:15:34'
+        - fichier: data/raw/pvgis/toulouse/series_crystSi_2005_2009.csv.gz
+          octets: 501762
+          sha256: af4eb19e3f9e8bc11e0b1d47b9cd9a4273e536c898164d1e30805b5357cb5768
+          recupere_le: '2026-10-11T16:15:04'
+        - fichier: data/raw/pvgis/toulouse/series_crystSi_2010_2014.csv.gz
+          octets: 504484
+          sha256: 31df5a53cce12703a95631aabde83ad8fa2e43df7e4fc5796e3d266f53dbd405
+          recupere_le: '2026-10-11T16:15:10'
+        - fichier: data/raw/pvgis/toulouse/series_crystSi_2015_2019.csv.gz
+          octets: 503588
+          sha256: 52a96f6c235f91b67d018ecbbf8c5d669865c9a3a607877db43885e86698999f
+          recupere_le: '2026-10-11T16:15:14'
+        - fichier: data/raw/pvgis/toulouse/series_crystSi_2020_2023.csv.gz
+          octets: 403628
+          sha256: f8b02a6a169abc959a7ec81b15a4e9fd8005e8ca1bb7945fa09053cea79600f0
+          recupere_le: '2026-10-11T16:15:16'
+        - fichier: data/raw/pvgis/toulouse/series_horizontal_2005_2009.csv.gz
+          octets: 407107
+          sha256: 7f35a172e6cb2e0d2833c24ae504bd53eed3d26b6f988f1ac827642eed4cc6f7
+          recupere_le: '2026-10-11T16:15:58'
+        - fichier: data/raw/pvgis/toulouse/series_horizontal_2010_2014.csv.gz
+          octets: 409117
+          sha256: b905eebad4f5c99984cff573ebc88a52424bb601a5cdc1124bd11b46db86e4b3
+          recupere_le: '2026-10-11T16:16:04'
+        - fichier: data/raw/pvgis/toulouse/series_horizontal_2015_2019.csv.gz
+          octets: 408320
+          sha256: 6e1c9427f7cbadf685f850725a7250318a507b71bb85ae73b9a1166b5e0af351
+          recupere_le: '2026-10-11T16:16:11'
+        - fichier: data/raw/pvgis/toulouse/series_horizontal_2020_2023.csv.gz
+          octets: 327241
+          sha256: 32bbae038a12c5b8dc06bb85cf3f2f144f575e3ea7721f1a4913798ff642d935
+          recupere_le: '2026-10-11T16:16:08'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/toulouse/daily_2005_2023.json
+          octets: 478592
+          sha256: ec7018bac8df1e664048ac5634a5d0ceab37055db9220977cf951d1888c197e5
+          recupere_le: '2026-10-11T16:12:46'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/toulouse/daily_2005_2023.json
+          octets: 1057921
+          sha256: 0de85b9625cade6547421376bf97c9fc83c5208092657dab6a0b3ad9138f0518
+          recupere_le: '2026-10-11T16:12:49'
+    table_traitee:
+      fichier: data/processed/toulouse.csv
+      octets: 284573
+      sha256: 68ab668aa9ccba9f59b25f4627705493f3b78eb892871bc1ad8b4af58739458f
+      recupere_le: '2026-10-11T17:32:56'
+  bordeaux:
+    coordonnees:
+      lat: 44.8378
+      lon: -0.5792
+      altitude_m: 20.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 37.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/bordeaux/orientation_CIS_est.json
+          octets: 5204
+          sha256: def59e5517c20c304c0057b856e727dd7da48270fa616c026c3f5bcbee098f31
+          recupere_le: '2026-10-11T17:14:08'
+        - fichier: data/raw/pvgis/bordeaux/orientation_CIS_optimale.json
+          octets: 5209
+          sha256: df8216fa24a96c9b91bde8911b8c02cee6448833ec379caef6ae721cc2558f43
+          recupere_le: '2026-10-11T17:14:15'
+        - fichier: data/raw/pvgis/bordeaux/orientation_CIS_ouest.json
+          octets: 5201
+          sha256: cfb950bf34e6502d6a44656bf547be76e17c4a2372ca493559a5a215708f1d04
+          recupere_le: '2026-10-11T17:14:09'
+        - fichier: data/raw/pvgis/bordeaux/orientation_CIS_sud.json
+          octets: 5211
+          sha256: 3f82c0363362a6042c315495cb7cc7642cfcbc304ca39d8b60d735680a1ba7be
+          recupere_le: '2026-10-11T17:14:07'
+        - fichier: data/raw/pvgis/bordeaux/pvcalc.json
+          octets: 5214
+          sha256: 5bd320be926e75a1c0a0229d1a0ee40b2a31266791e7a48d252ebcbfb990b5a2
+          recupere_le: '2026-10-11T16:12:45'
+        - fichier: data/raw/pvgis/bordeaux/series_CdTe_2005_2009.csv.gz
+          octets: 494896
+          sha256: 528fa6a933e8cbb0990dcda92e16afd327130e9063ec090eddefaccf21cf9f50
+          recupere_le: '2026-10-11T16:16:56'
+        - fichier: data/raw/pvgis/bordeaux/series_CdTe_2010_2014.csv.gz
+          octets: 497005
+          sha256: aaf037935b8bef238a790a1409285eb66a115f1a139ce9bcf78eb72dbda9de1b
+          recupere_le: '2026-10-11T16:17:05'
+        - fichier: data/raw/pvgis/bordeaux/series_CdTe_2015_2019.csv.gz
+          octets: 496906
+          sha256: af771eb318eb756aa8add7b675815a16e8e0bcf097fde9c6527b5654aecfc692
+          recupere_le: '2026-10-11T16:17:05'
+        - fichier: data/raw/pvgis/bordeaux/series_CdTe_2020_2023.csv.gz
+          octets: 398114
+          sha256: 481c1b38d74fd8f4d1d296ccefef9f0230716267896c6866505be290754031ee
+          recupere_le: '2026-10-11T16:17:06'
+        - fichier: data/raw/pvgis/bordeaux/series_CIS_2005_2009.csv.gz
+          octets: 497104
+          sha256: ce872939db31d03643f2655f5fd7ffc25f008dade6cdc7d71d7acd6dd5eeaf57
+          recupere_le: '2026-10-11T16:16:33'
+        - fichier: data/raw/pvgis/bordeaux/series_CIS_2010_2014.csv.gz
+          octets: 499374
+          sha256: 24ae2ad885b4b4734a2da48b5d334752993264c2e0e4dce269efc56697935fee
+          recupere_le: '2026-10-11T16:16:32'
+        - fichier: data/raw/pvgis/bordeaux/series_CIS_2015_2019.csv.gz
+          octets: 499173
+          sha256: 90cdc032a6e54c4f3ac6c86fc78b3e165b798ab0091f5cb849cf72c4c5b42abf
+          recupere_le: '2026-10-11T16:16:49'
+        - fichier: data/raw/pvgis/bordeaux/series_CIS_2020_2023.csv.gz
+          octets: 400001
+          sha256: 49457afd37fce85681ef9950c553266d6e5866f9a86aa5c5c316f692085707e9
+          recupere_le: '2026-10-11T16:16:47'
+        - fichier: data/raw/pvgis/bordeaux/series_crystSi_2005_2009.csv.gz
+          octets: 496840
+          sha256: 0e2c0f4c633e8d9dff75eb6bd81affae06611e7b39ab66d4aeb76fc80f5881bd
+          recupere_le: '2026-10-11T16:16:17'
+        - fichier: data/raw/pvgis/bordeaux/series_crystSi_2010_2014.csv.gz
+          octets: 498851
+          sha256: 69ae2870cbae2bb1bae6dd30e1837aceb601e5d7848d8daa03d6a3facf23c82e
+          recupere_le: '2026-10-11T16:16:18'
+        - fichier: data/raw/pvgis/bordeaux/series_crystSi_2015_2019.csv.gz
+          octets: 498592
+          sha256: 2560ce2e7b9df534d320dbed600a9527db2b5b7777f498e0817ea5a740d5e2cb
+          recupere_le: '2026-10-11T16:16:18'
+        - fichier: data/raw/pvgis/bordeaux/series_crystSi_2020_2023.csv.gz
+          octets: 399633
+          sha256: eb1714087f97dcb3877d36b8f8dca37ad39843b3b9dc5a9482f8d43528fbaaf8
+          recupere_le: '2026-10-11T16:16:30'
+        - fichier: data/raw/pvgis/bordeaux/series_horizontal_2005_2009.csv.gz
+          octets: 402399
+          sha256: 1b99e7f5c0c581d661fc4851f072909c4792032f6e863479c3db709568936efb
+          recupere_le: '2026-10-11T16:17:16'
+        - fichier: data/raw/pvgis/bordeaux/series_horizontal_2010_2014.csv.gz
+          octets: 403770
+          sha256: df09d27a085cea61bcd09702b7eb727fa8e2ccd3f517f16467657fca69315f9f
+          recupere_le: '2026-10-11T16:17:18'
+        - fichier: data/raw/pvgis/bordeaux/series_horizontal_2015_2019.csv.gz
+          octets: 403708
+          sha256: 394b20bd67406e2453d262dede73e62d1bb648ade79c03381216f2f760f3d8d6
+          recupere_le: '2026-10-11T16:17:19'
+        - fichier: data/raw/pvgis/bordeaux/series_horizontal_2020_2023.csv.gz
+          octets: 323346
+          sha256: c9989a941b72767efce8a8fdbeff833ebf8c1359b5c036dd4c6e711c8df9eb9d
+          recupere_le: '2026-10-11T16:17:26'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/bordeaux/daily_2005_2023.json
+          octets: 478784
+          sha256: d1f71a63f40a49bb69d90a3cd3f52539c837c8638b772afa43abf03010a49d5f
+          recupere_le: '2026-10-11T16:15:49'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/bordeaux/daily_2005_2023.json
+          octets: 1058291
+          sha256: e49cd240775a7ce880cca7332e22f812df84e2ef9c4378d6fa125a5ba6423096
+          recupere_le: '2026-10-11T16:13:00'
+    table_traitee:
+      fichier: data/processed/bordeaux.csv
+      octets: 284573
+      sha256: eb5504ed3191cadf413c9fe3610c4975e38dfd51aeeb1be1c0783ed34dd07a34
+      recupere_le: '2026-10-11T17:32:58'
+  nantes:
+    coordonnees:
+      lat: 47.2184
+      lon: -1.5536
+      altitude_m: 19.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 38.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/nantes/orientation_CIS_est.json
+          octets: 5200
+          sha256: 570ba17a677d6f4774f4551ec61faf5592c0d0a231ae2c1730d410c14a0b1326
+          recupere_le: '2026-10-11T17:14:19'
+        - fichier: data/raw/pvgis/nantes/orientation_CIS_optimale.json
+          octets: 5203
+          sha256: b2690072e3d42859babd3e13a2bd3d41aa21313ae543c1d11788dc2f8b762e52
+          recupere_le: '2026-10-11T17:14:21'
+        - fichier: data/raw/pvgis/nantes/orientation_CIS_ouest.json
+          octets: 5201
+          sha256: c7a61a6234ec3305fc7d1176e91936a8a4d7461ebe40e7bf64a53f244d8bf3a1
+          recupere_le: '2026-10-11T17:14:20'
+        - fichier: data/raw/pvgis/nantes/orientation_CIS_sud.json
+          octets: 5210
+          sha256: 106d9f0f6bc5cb64d82235d6b1f90aa0abe573b549f79669cebf7cdcb93bbb68
+          recupere_le: '2026-10-11T17:14:17'
+        - fichier: data/raw/pvgis/nantes/pvcalc.json
+          octets: 5211
+          sha256: aa9b706b8135eb12bf03b2101102f86ebc8e72a4c88eff23fffb32fd3db58055
+          recupere_le: '2026-10-11T16:12:47'
+        - fichier: data/raw/pvgis/nantes/series_CdTe_2005_2009.csv.gz
+          octets: 496919
+          sha256: 7221810bbfc2b041a351bd7bc0937051abcf7974c99b394f25043294a6d9e335
+          recupere_le: '2026-10-11T16:18:02'
+        - fichier: data/raw/pvgis/nantes/series_CdTe_2010_2014.csv.gz
+          octets: 498931
+          sha256: 432ee9269ec5876cfd36700af5616fd1e5a270a7d85f4c4f95f77bb76574abc0
+          recupere_le: '2026-10-11T16:18:12'
+        - fichier: data/raw/pvgis/nantes/series_CdTe_2015_2019.csv.gz
+          octets: 498427
+          sha256: c48c63d722407992b2ab93de938f4ce03f72e2d60532db496057d1ff8a4006b1
+          recupere_le: '2026-10-11T16:18:27'
+        - fichier: data/raw/pvgis/nantes/series_CdTe_2020_2023.csv.gz
+          octets: 400065
+          sha256: a66e93397a7d236e6488e1233322633295dcbf0d4a9d14f869c387111e86ef4d
+          recupere_le: '2026-10-11T16:18:18'
+        - fichier: data/raw/pvgis/nantes/series_CIS_2005_2009.csv.gz
+          octets: 499373
+          sha256: 662bd03fd1d5290d1b3b0735e9e0a167ec15e12c9948fce11db47097cef84f33
+          recupere_le: '2026-10-11T16:17:50'
+        - fichier: data/raw/pvgis/nantes/series_CIS_2010_2014.csv.gz
+          octets: 501271
+          sha256: a9d3f315587635c095065f60b11b3f1df8b659d29373849336fcc6dbb6aa8c33
+          recupere_le: '2026-10-11T16:17:52'
+        - fichier: data/raw/pvgis/nantes/series_CIS_2015_2019.csv.gz
+          octets: 501135
+          sha256: 2b6a6eca78cb460ceb91d191e1bd89171df539ed0135bc28e0d732ba50ca9213
+          recupere_le: '2026-10-11T16:17:56'
+        - fichier: data/raw/pvgis/nantes/series_CIS_2020_2023.csv.gz
+          octets: 402142
+          sha256: 24ccc30730fdf7535497892935591997d1ec9831adbc5239c4df3eb6e332b876
+          recupere_le: '2026-10-11T16:17:58'
+        - fichier: data/raw/pvgis/nantes/series_crystSi_2005_2009.csv.gz
+          octets: 498917
+          sha256: 23611368d910f5c25a002d6664b0b0007d57b83fa676327f5cc4421d824817dc
+          recupere_le: '2026-10-11T16:17:33'
+        - fichier: data/raw/pvgis/nantes/series_crystSi_2010_2014.csv.gz
+          octets: 500723
+          sha256: 49bcb40da5a3b83a76af369dbb6ca770f9cc69d4c79bf939d48fee4891081399
+          recupere_le: '2026-10-11T16:17:35'
+        - fichier: data/raw/pvgis/nantes/series_crystSi_2015_2019.csv.gz
+          octets: 500153
+          sha256: 9a9b975c19a4b2091283338e3bbbf5bc27078c6b4a5eba3e25b49c05e3c0f336
+          recupere_le: '2026-10-11T16:17:38'
+        - fichier: data/raw/pvgis/nantes/series_crystSi_2020_2023.csv.gz
+          octets: 401432
+          sha256: 253bdce6c806322371c00ca0c4e66576f93b7f0cdc1810cfd13286563db94cbf
+          recupere_le: '2026-10-11T16:17:43'
+        - fichier: data/raw/pvgis/nantes/series_horizontal_2005_2009.csv.gz
+          octets: 404845
+          sha256: 374446b3e85dae8a6a5a50d0725ccedd2b189737ed5aedc99ca8a86e072afbdf
+          recupere_le: '2026-10-11T16:18:27'
+        - fichier: data/raw/pvgis/nantes/series_horizontal_2010_2014.csv.gz
+          octets: 405801
+          sha256: f8e880e608a087813c02f66989b6dae711cfd8371494665ef321e68696928815
+          recupere_le: '2026-10-11T16:18:31'
+        - fichier: data/raw/pvgis/nantes/series_horizontal_2015_2019.csv.gz
+          octets: 405809
+          sha256: 2280a0ae1b595dcf5dc393691f36f6a72eae743e7beae195920e8f7d71a201f5
+          recupere_le: '2026-10-11T16:18:36'
+        - fichier: data/raw/pvgis/nantes/series_horizontal_2020_2023.csv.gz
+          octets: 325321
+          sha256: 05b6a920e7bb02877874d26670398784724f55c6b078c5d171a7abce17ce3872
+          recupere_le: '2026-10-11T16:18:33'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/nantes/daily_2005_2023.json
+          octets: 477707
+          sha256: 8e9820b7e5274bff66e10437a2d0e4ecd5c6d50fe0c6631b18f0328aa0a35d35
+          recupere_le: '2026-10-11T16:18:56'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/nantes/daily_2005_2023.json
+          octets: 1056898
+          sha256: af6ed42360bac3ff593a09eaf5c0e7c480c037f0774c5e4ef4f1e8a8afb1a292
+          recupere_le: '2026-10-11T16:13:12'
+    table_traitee:
+      fichier: data/processed/nantes.csv
+      octets: 284573
+      sha256: 4dc379de3ff18e0ea8f095457dc4e297988abc732fdfbcc5b3d7ee582e5de33c
+      recupere_le: '2026-10-11T17:33:01'
+  lille:
+    coordonnees:
+      lat: 50.6292
+      lon: 3.0573
+      altitude_m: 20.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 40.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/lille/orientation_CIS_est.json
+          octets: 5199
+          sha256: e18f27ad0353ee92c0f29feadbc04ae6d92c2d8e075dc63ee70176ec6f6346f8
+          recupere_le: '2026-10-11T17:14:13'
+        - fichier: data/raw/pvgis/lille/orientation_CIS_optimale.json
+          octets: 5200
+          sha256: 7774dca65f0e90682038a60e6c7a3c57c314dee07d8e47c2812ee094e315728e
+          recupere_le: '2026-10-11T17:14:16'
+        - fichier: data/raw/pvgis/lille/orientation_CIS_ouest.json
+          octets: 5200
+          sha256: 71134e4da7052207c4df77042e45c351c9989cd81bb5e5c6941eefe1f62ae1de
+          recupere_le: '2026-10-11T17:14:14'
+        - fichier: data/raw/pvgis/lille/orientation_CIS_sud.json
+          octets: 5204
+          sha256: 2e52024abc1ee773e589b44988d74e06bfba6cfb75b67421b3df0ea49d4914e2
+          recupere_le: '2026-10-11T17:14:12'
+        - fichier: data/raw/pvgis/lille/pvcalc.json
+          octets: 5207
+          sha256: 2e1a0739de6414201719eab90efa78880992a64706d7f32f2bb6f4cdf08c8abd
+          recupere_le: '2026-10-11T16:12:49'
+        - fichier: data/raw/pvgis/lille/series_CdTe_2005_2009.csv.gz
+          octets: 492420
+          sha256: 609a78781b7f71adb318292703ddb0d563983865e71c5633c4ea4a41c21f28d3
+          recupere_le: '2026-10-11T16:19:20'
+        - fichier: data/raw/pvgis/lille/series_CdTe_2010_2014.csv.gz
+          octets: 494453
+          sha256: 9e54fbdc7a1a03af97fc6deed67b643ee4da81033d827cfd36b9a8771ec87e2a
+          recupere_le: '2026-10-11T16:19:20'
+        - fichier: data/raw/pvgis/lille/series_CdTe_2015_2019.csv.gz
+          octets: 494358
+          sha256: 85ae1918d9473f9e7703373566adcef5205d0541df3c8f1e5070a307370faa70
+          recupere_le: '2026-10-11T16:19:39'
+        - fichier: data/raw/pvgis/lille/series_CdTe_2020_2023.csv.gz
+          octets: 395814
+          sha256: 551bd90ac2760fdb45b0d49571cb4e1351b26e478a91a6d8860ff12206d1c7de
+          recupere_le: '2026-10-11T16:19:36'
+        - fichier: data/raw/pvgis/lille/series_CIS_2005_2009.csv.gz
+          octets: 495701
+          sha256: 03d2670eb77611149756415813cb07274a041b3a552d326d551aed84e356a301
+          recupere_le: '2026-10-11T16:19:03'
+        - fichier: data/raw/pvgis/lille/series_CIS_2010_2014.csv.gz
+          octets: 497803
+          sha256: a03f2f4fc732f32ab897fc01aed993e299c227eca854e1b06b55c62527061d0a
+          recupere_le: '2026-10-11T16:19:07'
+        - fichier: data/raw/pvgis/lille/series_CIS_2015_2019.csv.gz
+          octets: 497720
+          sha256: 492775438e746bf199cf5b74892457a2caa0a91c427b44f0195736b304d721f1
+          recupere_le: '2026-10-11T16:19:07'
+        - fichier: data/raw/pvgis/lille/series_CIS_2020_2023.csv.gz
+          octets: 398803
+          sha256: eda2efa57489f67cadaf259a2396c2eb533a6cc316fb47fde545dbd5f1e4fc62
+          recupere_le: '2026-10-11T16:19:15'
+        - fichier: data/raw/pvgis/lille/series_crystSi_2005_2009.csv.gz
+          octets: 494962
+          sha256: 2a33721b60c16f45d6ddd40b028563495c09b4a8f4c53d2592971a86fc3b41c8
+          recupere_le: '2026-10-11T16:18:42'
+        - fichier: data/raw/pvgis/lille/series_crystSi_2010_2014.csv.gz
+          octets: 496854
+          sha256: c052e5a028d3eae68d0a21914555c449bb09bea9216b017255b566f9034f1a8a
+          recupere_le: '2026-10-11T16:18:45'
+        - fichier: data/raw/pvgis/lille/series_crystSi_2015_2019.csv.gz
+          octets: 496682
+          sha256: bed36009de9dd1737047f62a336123bb3c8766fdec6441c0875560856e5e4cbc
+          recupere_le: '2026-10-11T16:18:56'
+        - fichier: data/raw/pvgis/lille/series_crystSi_2020_2023.csv.gz
+          octets: 397763
+          sha256: fe25519806e526eeffb070494f5d865269038f6af8b732ab73d1d35bba7c27b7
+          recupere_le: '2026-10-11T16:18:55'
+        - fichier: data/raw/pvgis/lille/series_horizontal_2005_2009.csv.gz
+          octets: 404042
+          sha256: 4e23574d6635e2df64812c45e8423b33e1d94cd166946830d70ac9af3aca0316
+          recupere_le: '2026-10-11T16:19:43'
+        - fichier: data/raw/pvgis/lille/series_horizontal_2010_2014.csv.gz
+          octets: 404699
+          sha256: ddeec3cf6db09da6723323135eaca101b0aed8aefc61d3ddf3e7e7d5f78fc511
+          recupere_le: '2026-10-11T16:19:49'
+        - fichier: data/raw/pvgis/lille/series_horizontal_2015_2019.csv.gz
+          octets: 405129
+          sha256: 34117743e1cb083a9b17638ce9738c1651bf0b35e462603de9ab8daa925352ca
+          recupere_le: '2026-10-11T16:19:50'
+        - fichier: data/raw/pvgis/lille/series_horizontal_2020_2023.csv.gz
+          octets: 324688
+          sha256: ef7248ff622207b431396707f251c8fd21077e59ef4bdbbc6f5540d709a542e1
+          recupere_le: '2026-10-11T16:19:52'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/lille/daily_2005_2023.json
+          octets: 475950
+          sha256: 2ffe336ff0e0c0013459d07aa1094ae0307f4658a0f8f4746b9495729aeba83a
+          recupere_le: '2026-10-11T16:22:03'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/lille/daily_2005_2023.json
+          octets: 1057560
+          sha256: e2c1a5908542910cec2f73f81a957654fbb194c05923cd506906a0050c90743e
+          recupere_le: '2026-10-11T16:13:25'
+    table_traitee:
+      fichier: data/processed/lille.csv
+      octets: 284573
+      sha256: c1ca9d324292266a7332f8dc635a765c86e93ad73013a18d1037fb754a5e0f70
+      recupere_le: '2026-10-11T17:33:03'
+  strasbourg:
+    coordonnees:
+      lat: 48.5734
+      lon: 7.7521
+      altitude_m: 147.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 38.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/strasbourg/orientation_CIS_est.json
+          octets: 5205
+          sha256: b7fa1307ca5a0d14a4bd3f18317e019208c26dc70ff642da1d75c27e31ba433e
+          recupere_le: '2026-10-11T17:14:32'
+        - fichier: data/raw/pvgis/strasbourg/orientation_CIS_optimale.json
+          octets: 5204
+          sha256: bf7e0a23c06843b0238ebac8ec2ad3edf54942c23216cf8a05332e530a45e3be
+          recupere_le: '2026-10-11T17:14:34'
+        - fichier: data/raw/pvgis/strasbourg/orientation_CIS_ouest.json
+          octets: 5200
+          sha256: 498cb22ecfb7e3b59d8ae9c8281492ebd86abd25335fdcaa7f812d4a2ad94fb0
+          recupere_le: '2026-10-11T17:14:33'
+        - fichier: data/raw/pvgis/strasbourg/orientation_CIS_sud.json
+          octets: 5207
+          sha256: 0e75bfbd7b406a92bf10b6e3947f6ac411f56c2218655ff445ddafc91236b434
+          recupere_le: '2026-10-11T17:14:30'
+        - fichier: data/raw/pvgis/strasbourg/pvcalc.json
+          octets: 5207
+          sha256: 7f5ae7686aa0717cdf278c4e99832d4fd4b4a9a15be17a55cf95659b378226fc
+          recupere_le: '2026-10-11T16:12:50'
+        - fichier: data/raw/pvgis/strasbourg/series_CdTe_2005_2009.csv.gz
+          octets: 490966
+          sha256: b3495ac731a94cd733316ede11952d46d41c7c37b6a6e04e3068d58aacc32540
+          recupere_le: '2026-10-11T16:20:35'
+        - fichier: data/raw/pvgis/strasbourg/series_CdTe_2010_2014.csv.gz
+          octets: 492034
+          sha256: 1e97de9aca8069b5ed8092fa9a098ad812cbe74e9f3124c5b6a6e268a00982c5
+          recupere_le: '2026-10-11T16:20:41'
+        - fichier: data/raw/pvgis/strasbourg/series_CdTe_2015_2019.csv.gz
+          octets: 492418
+          sha256: dbfc951b63cda0dd09004846305fef9448df7a56ea4f083338b4fe0ad248fe5d
+          recupere_le: '2026-10-11T16:20:44'
+        - fichier: data/raw/pvgis/strasbourg/series_CdTe_2020_2023.csv.gz
+          octets: 394846
+          sha256: a3da50e84aa6e67e0f7b019d151002a6fb2b0beb9b07d25dba835c0e8dfbd6eb
+          recupere_le: '2026-10-11T16:20:44'
+        - fichier: data/raw/pvgis/strasbourg/series_CIS_2005_2009.csv.gz
+          octets: 494155
+          sha256: 230bc5b86438196a9fd6fdcbd18547098e00de1f5dc086e1c164f5d66e246c51
+          recupere_le: '2026-10-11T16:20:17'
+        - fichier: data/raw/pvgis/strasbourg/series_CIS_2010_2014.csv.gz
+          octets: 495161
+          sha256: d0a72bab0d8aac934c587eddd41eab19908058e51252aa7b6aba93887dd14c4e
+          recupere_le: '2026-10-11T16:20:18'
+        - fichier: data/raw/pvgis/strasbourg/series_CIS_2015_2019.csv.gz
+          octets: 495615
+          sha256: 40128e332f5f4d2fd2c228d33c945a8fc2d7c361282c5230937853888e13331b
+          recupere_le: '2026-10-11T16:20:31'
+        - fichier: data/raw/pvgis/strasbourg/series_CIS_2020_2023.csv.gz
+          octets: 397024
+          sha256: 372ec8644b95478eba03c8fc5e7afb28f38d65dee18b61e7a2298228694d2948
+          recupere_le: '2026-10-11T16:20:31'
+        - fichier: data/raw/pvgis/strasbourg/series_crystSi_2005_2009.csv.gz
+          octets: 493337
+          sha256: 1762024394ed4664ba1fc14170b83ff6a038ab29c3826c9964b7f233e4ac0fb4
+          recupere_le: '2026-10-11T16:19:59'
+        - fichier: data/raw/pvgis/strasbourg/series_crystSi_2010_2014.csv.gz
+          octets: 494484
+          sha256: 3c1ea875ffc3abb875fdb7a98f46b1df0d536488ab4617ad56a64193b5dc52bd
+          recupere_le: '2026-10-11T16:20:02'
+        - fichier: data/raw/pvgis/strasbourg/series_crystSi_2015_2019.csv.gz
+          octets: 494597
+          sha256: d27113fb52b2e6e1d67c21bd4b0b42e32f0ee39011109bab93e90e6c34b601c6
+          recupere_le: '2026-10-11T16:20:03'
+        - fichier: data/raw/pvgis/strasbourg/series_crystSi_2020_2023.csv.gz
+          octets: 396189
+          sha256: d284097b368137dc13a47c055ac553fd8e87dadce93cfc73a1c7c5e9653ae13a
+          recupere_le: '2026-10-11T16:20:08'
+        - fichier: data/raw/pvgis/strasbourg/series_horizontal_2005_2009.csv.gz
+          octets: 401503
+          sha256: 1d3133c0466500417a1cf9505e5cc60b6a98f6ace665b05f407cf32bce28b8a6
+          recupere_le: '2026-10-11T16:20:52'
+        - fichier: data/raw/pvgis/strasbourg/series_horizontal_2010_2014.csv.gz
+          octets: 402259
+          sha256: 48f1f9df5d032aba482a8a004d1ed373062909ccc670857c56db0eff8870c8c4
+          recupere_le: '2026-10-11T16:20:54'
+        - fichier: data/raw/pvgis/strasbourg/series_horizontal_2015_2019.csv.gz
+          octets: 402440
+          sha256: 1718a07fbb81da9f91b5906c7a0d9761867b758c07104be6711f427eefacf982
+          recupere_le: '2026-10-11T16:20:56'
+        - fichier: data/raw/pvgis/strasbourg/series_horizontal_2020_2023.csv.gz
+          octets: 322591
+          sha256: 38520bb104d56450ee89d5f4e7bd31876ef2306d6f07cc1e0a976c0d2dec6050
+          recupere_le: '2026-10-11T16:21:01'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/strasbourg/daily_2005_2023.json
+          octets: 477303
+          sha256: b1dfe3ac4e125e32eec9b35e4de5dd709ab6c4dd497ec260d1e78f883d98970b
+          recupere_le: '2026-10-11T16:25:08'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/strasbourg/daily_2005_2023.json
+          octets: 1058095
+          sha256: 113e1fdef0409ee11feac81365c641aa4ff67efba1da3a655f826bfa2a489fbc
+          recupere_le: '2026-10-11T16:13:33'
+    table_traitee:
+      fichier: data/processed/strasbourg.csv
+      octets: 284573
+      sha256: df4e1cf8ae2da92a45672ad8604b65b7f5103abaa9f731f22f97a78886c1053c
+      recupere_le: '2026-10-11T17:33:05'
+  nice:
+    coordonnees:
+      lat: 43.7102
+      lon: 7.262
+      altitude_m: 25.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 39.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/nice/orientation_CIS_est.json
+          octets: 5198
+          sha256: 29221d441998a91a9dc45d7db96ee9257b8c801516dbafdf2d47ffb64ae1e998
+          recupere_le: '2026-10-11T17:14:25'
+        - fichier: data/raw/pvgis/nice/orientation_CIS_optimale.json
+          octets: 5209
+          sha256: 23e167340fc2357540ebd3c35befd57c1811cc21c0189ccac13f4ef1cbb87b2b
+          recupere_le: '2026-10-11T17:14:28'
+        - fichier: data/raw/pvgis/nice/orientation_CIS_ouest.json
+          octets: 5197
+          sha256: 283be539fd428fd57db53cf7b8c1bb21ebf2c914f74756ab96838973580f5b49
+          recupere_le: '2026-10-11T17:14:26'
+        - fichier: data/raw/pvgis/nice/orientation_CIS_sud.json
+          octets: 5216
+          sha256: 69eebf99070b654e91a691a78e917d10cf64e17a797b43533493025caf0cf475
+          recupere_le: '2026-10-11T17:14:22'
+        - fichier: data/raw/pvgis/nice/pvcalc.json
+          octets: 5214
+          sha256: 97732119575c1c64d3b3112ee8697a2f417f440ad79598842d020c4514fc0d88
+          recupere_le: '2026-10-11T16:12:51'
+        - fichier: data/raw/pvgis/nice/series_CdTe_2005_2009.csv.gz
+          octets: 493028
+          sha256: 89935ec56b122f24f2255885fef58c0fec819d9409a9abcfdd8951ef27900456
+          recupere_le: '2026-10-11T16:21:51'
+        - fichier: data/raw/pvgis/nice/series_CdTe_2010_2014.csv.gz
+          octets: 493964
+          sha256: 6441e51a302e1fd227bc3dff046067382e4342bf06ea526ea972a2d9ea792553
+          recupere_le: '2026-10-11T16:21:55'
+        - fichier: data/raw/pvgis/nice/series_CdTe_2015_2019.csv.gz
+          octets: 492840
+          sha256: 8c952f9616730c9ee4a3e019dca3249cca46a04c9ebd0c9f37ffa47b16247124
+          recupere_le: '2026-10-11T16:22:02'
+        - fichier: data/raw/pvgis/nice/series_CdTe_2020_2023.csv.gz
+          octets: 397091
+          sha256: f4facfc92ad7105b7a7f9b749c10402c01b8a950f0e65e1e0515b01f00db471c
+          recupere_le: '2026-10-11T16:22:17'
+        - fichier: data/raw/pvgis/nice/series_CIS_2005_2009.csv.gz
+          octets: 495066
+          sha256: 027c0a1261077e50b72d8fd15efd540a7b7a75eae31a295e0e55b4a228c8246f
+          recupere_le: '2026-10-11T16:21:30'
+        - fichier: data/raw/pvgis/nice/series_CIS_2010_2014.csv.gz
+          octets: 495836
+          sha256: 57e3f6231c4008a6168f11d4eec5f4047a4b2a43b9eb7c785ea5eb2e5c0c3e61
+          recupere_le: '2026-10-11T16:21:31'
+        - fichier: data/raw/pvgis/nice/series_CIS_2015_2019.csv.gz
+          octets: 494835
+          sha256: 5679bd0119435aea195f044e468832576bb0148847b1d04c435a27936c4dbaac
+          recupere_le: '2026-10-11T16:21:35'
+        - fichier: data/raw/pvgis/nice/series_CIS_2020_2023.csv.gz
+          octets: 398613
+          sha256: 3856a52476325526088b9e63f79ea9b20a2be457c6f09bb77a0c7e690c107235
+          recupere_le: '2026-10-11T16:21:42'
+        - fichier: data/raw/pvgis/nice/series_crystSi_2005_2009.csv.gz
+          octets: 494523
+          sha256: fcaa71a3cca562a3e21b5ca0223303a788f3e1012c19a6ceeae44f100786dbb3
+          recupere_le: '2026-10-11T16:21:13'
+        - fichier: data/raw/pvgis/nice/series_crystSi_2010_2014.csv.gz
+          octets: 495204
+          sha256: 214b46e31341a01727878aa0b5f724a2ef56b535c527fe84617accfa3c250c45
+          recupere_le: '2026-10-11T16:21:08'
+        - fichier: data/raw/pvgis/nice/series_crystSi_2015_2019.csv.gz
+          octets: 494239
+          sha256: 79a66f85b80cc73897c07ac648ceb5df79b1338264a9b6666f0936926ca277ae
+          recupere_le: '2026-10-11T16:21:12'
+        - fichier: data/raw/pvgis/nice/series_crystSi_2020_2023.csv.gz
+          octets: 398270
+          sha256: 9a3c6e0cfb76de30627cb3149d38f765ed8a27fe317f45931624bb3b619d7a16
+          recupere_le: '2026-10-11T16:21:23'
+        - fichier: data/raw/pvgis/nice/series_horizontal_2005_2009.csv.gz
+          octets: 397982
+          sha256: 562b2d0b7bf538b594e9b0720814647639f455269add51197a87ec5d9c106596
+          recupere_le: '2026-10-11T16:22:19'
+        - fichier: data/raw/pvgis/nice/series_horizontal_2010_2014.csv.gz
+          octets: 398484
+          sha256: 5fb8fbd5e6fa6e8db1f4bf368540da1ebccef913d660ade8f9844d5f137ffbc6
+          recupere_le: '2026-10-11T16:22:27'
+        - fichier: data/raw/pvgis/nice/series_horizontal_2015_2019.csv.gz
+          octets: 397133
+          sha256: ce6d34eda24a6d438c123de5a14b2a1c2c15d4392a261ff09d2c0241b2006fb1
+          recupere_le: '2026-10-11T16:22:32'
+        - fichier: data/raw/pvgis/nice/series_horizontal_2020_2023.csv.gz
+          octets: 320185
+          sha256: 7c71281cfd50291f4cfd7e69274742f5fc50977c926d6ed383df026689ba65cb
+          recupere_le: '2026-10-11T16:22:30'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/nice/daily_2005_2023.json
+          octets: 480015
+          sha256: 643f6215081c1e8fcc0da84312ec79a3366e3b9d572ddf4e636959391b4d4b65
+          recupere_le: '2026-10-11T16:28:11'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/nice/daily_2005_2023.json
+          octets: 1057366
+          sha256: e58e93708e740a61b7691d0c4510c96e2666447bd6494af087f308551922cc28
+          recupere_le: '2026-10-11T16:13:40'
+    table_traitee:
+      fichier: data/processed/nice.csv
+      octets: 284573
+      sha256: 0b68b4112a46bd133cc85a52861f2a0d93352bfd3a70be5d79a0be5de7662c26
+      recupere_le: '2026-10-11T17:33:07'
+  montpellier:
+    coordonnees:
+      lat: 43.6108
+      lon: 3.8767
+      altitude_m: 55.0
+      fuseau: Europe/Paris
+    pente_optimale_deg: 39.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/montpellier/orientation_CIS_est.json
+          octets: 5202
+          sha256: 6e5b623e7441b0b3164e7f2cd01882f1252ac707a38e1de54c048080381ba7f1
+          recupere_le: '2026-10-11T17:14:19'
+        - fichier: data/raw/pvgis/montpellier/orientation_CIS_optimale.json
+          octets: 5217
+          sha256: fb916a0df9838323f0153003e3d3bfe4c8add225a103ac11ec4d810131ebdadb
+          recupere_le: '2026-10-11T17:14:22'
+        - fichier: data/raw/pvgis/montpellier/orientation_CIS_ouest.json
+          octets: 5202
+          sha256: 19222090935b40cfd6c10d1f49ec6b57a8944653f009fef9332fc8351177b10d
+          recupere_le: '2026-10-11T17:14:20'
+        - fichier: data/raw/pvgis/montpellier/orientation_CIS_sud.json
+          octets: 5213
+          sha256: 3f338860620434ce4831f8d4415a5b5a42ef0ba176696f7c6f41f990764f4239
+          recupere_le: '2026-10-11T17:14:18'
+        - fichier: data/raw/pvgis/montpellier/pvcalc.json
+          octets: 5210
+          sha256: 367bc84fc95292365b3ef20c06e525ed41747e2ed301d89a25772e8d9c4dc54c
+          recupere_le: '2026-10-11T16:12:52'
+        - fichier: data/raw/pvgis/montpellier/series_CdTe_2005_2009.csv.gz
+          octets: 499705
+          sha256: dc8ad28cdb9a7f7a8fb1e6bbc0ee5876f88cc05c27679f5bf6525db9cf73e2fd
+          recupere_le: '2026-10-11T16:23:12'
+        - fichier: data/raw/pvgis/montpellier/series_CdTe_2010_2014.csv.gz
+          octets: 501265
+          sha256: 8d1769156cb42e81d77d9a7b650f3008250dd01893819dae92896a1dd2550223
+          recupere_le: '2026-10-11T16:23:21'
+        - fichier: data/raw/pvgis/montpellier/series_CdTe_2015_2019.csv.gz
+          octets: 500656
+          sha256: 764d3afd34aa6ff3e068fc0c99084ea74dc0a3628ac36475a0050dc9006a20b9
+          recupere_le: '2026-10-11T16:23:22'
+        - fichier: data/raw/pvgis/montpellier/series_CdTe_2020_2023.csv.gz
+          octets: 401258
+          sha256: 965356f7b5fb3d4002cb8f2a673ca7ac5b1ab0d0ce3478da67e192f6ec16f0b9
+          recupere_le: '2026-10-11T16:23:23'
+        - fichier: data/raw/pvgis/montpellier/series_CIS_2005_2009.csv.gz
+          octets: 501415
+          sha256: edc114ca2fbfcc2bb7f15d5ef523438fd8bfa8a4c018f37e4975f70a90dad205
+          recupere_le: '2026-10-11T16:23:02'
+        - fichier: data/raw/pvgis/montpellier/series_CIS_2010_2014.csv.gz
+          octets: 502858
+          sha256: b8fbebdacec15be33eae63231a9a33c4efe66944d4a6fb4103f1b96b0afe9baa
+          recupere_le: '2026-10-11T16:23:01'
+        - fichier: data/raw/pvgis/montpellier/series_CIS_2015_2019.csv.gz
+          octets: 502439
+          sha256: 618b2aacba0fb3838b84edaea8d54fca3d22cda2afb8ceb4796e47b68048c4b9
+          recupere_le: '2026-10-11T16:23:07'
+        - fichier: data/raw/pvgis/montpellier/series_CIS_2020_2023.csv.gz
+          octets: 402409
+          sha256: a05fd4ab35221af54e924fc18872f17400ed5a44749f9cb55c09232989693222
+          recupere_le: '2026-10-11T16:23:10'
+        - fichier: data/raw/pvgis/montpellier/series_crystSi_2005_2009.csv.gz
+          octets: 501097
+          sha256: a47f9a62f1ecfa3f7e0cedc57b7b2c52fdf78361797b465f1bf0c59dc0e33349
+          recupere_le: '2026-10-11T16:22:46'
+        - fichier: data/raw/pvgis/montpellier/series_crystSi_2010_2014.csv.gz
+          octets: 502645
+          sha256: 1085c4c537b410f22458fb007edc909b29cae8697243788d8609a190b7d92b3f
+          recupere_le: '2026-10-11T16:22:49'
+        - fichier: data/raw/pvgis/montpellier/series_crystSi_2015_2019.csv.gz
+          octets: 502050
+          sha256: 3051571dcf5c0e9eb01232b407da3df641a875fdf5409793fb8b350d2d690711
+          recupere_le: '2026-10-11T16:22:48'
+        - fichier: data/raw/pvgis/montpellier/series_crystSi_2020_2023.csv.gz
+          octets: 402278
+          sha256: 5f0228baffc803a5663dcf0f3e925afb58cb0111df9fbf6ceb66b16daeb1b052
+          recupere_le: '2026-10-11T16:22:55'
+        - fichier: data/raw/pvgis/montpellier/series_horizontal_2005_2009.csv.gz
+          octets: 405511
+          sha256: 6164ecbb1f16edfe5b2b23ef8ff6289d146f6d486f3114f0faf867d5ccc66d1b
+          recupere_le: '2026-10-11T16:23:35'
+        - fichier: data/raw/pvgis/montpellier/series_horizontal_2010_2014.csv.gz
+          octets: 406456
+          sha256: af2f3478dd60995421be817a1e1db364cdee2d8f883b2502e61f3fa27ef1a09f
+          recupere_le: '2026-10-11T16:23:36'
+        - fichier: data/raw/pvgis/montpellier/series_horizontal_2015_2019.csv.gz
+          octets: 405819
+          sha256: d971d3e31dc62aed746d75c51e3d423c16d78024f42f0d62eac254c123c72267
+          recupere_le: '2026-10-11T16:23:36'
+        - fichier: data/raw/pvgis/montpellier/series_horizontal_2020_2023.csv.gz
+          octets: 325348
+          sha256: f551687e2c9786b8da942549eb0b7c7c51fb18f942715dbb7e6563dcc2dc13d2
+          recupere_le: '2026-10-11T16:23:43'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/montpellier/daily_2005_2023.json
+          octets: 479283
+          sha256: 3067d8179b578f33b6f8065a6d1a10eb91838ba022bbd036d03f0330d159dbe7
+          recupere_le: '2026-10-11T16:31:19'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/montpellier/daily_2005_2023.json
+          octets: 1057944
+          sha256: 17d9ca7c3bc9e315a16c7402b7367b7950b5cd64615925e9038af7a5191f701f
+          recupere_le: '2026-10-11T16:13:50'
+    table_traitee:
+      fichier: data/processed/montpellier.csv
+      octets: 284573
+      sha256: 48c402208607fd4ef67a5c9d4f786525892dacef7d1928552830eb8e24308fe4
+      recupere_le: '2026-10-11T17:33:09'
+  tunis:
+    coordonnees:
+      lat: 36.8065
+      lon: 10.1815
+      altitude_m: 23.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 33.0
+    sources:
+      pvgis:
+        origine: cache v1 (data/brut) + téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/tunis/orientation_CdTe_est.json
+          octets: 5209
+          sha256: 03940ef870256fdb8ba4eda16d3f95558dc44402363cb80a54e81a79817f39f4
+          recupere_le: '2026-10-11T17:14:36'
+        - fichier: data/raw/pvgis/tunis/orientation_CdTe_optimale.json
+          octets: 5212
+          sha256: 2d44f7a5e02e4861e815ef17a0a309631580fcb318a4ff98b9cb4f6bb2c24006
+          recupere_le: '2026-10-11T17:14:42'
+        - fichier: data/raw/pvgis/tunis/orientation_CdTe_ouest.json
+          octets: 5203
+          sha256: 1fb3a39c89029b1a9b74a21c0c79c955a0e9d8050f046c77660bc72c44435b00
+          recupere_le: '2026-10-11T17:14:37'
+        - fichier: data/raw/pvgis/tunis/orientation_CdTe_sud.json
+          octets: 5219
+          sha256: 4573584221b6636e53b0d7c0e241abf7f57ded3541274d42a56720255636dedc
+          recupere_le: '2026-10-11T17:14:35'
+        - fichier: data/raw/pvgis/tunis/series_CdTe_2005_2009.csv.gz
+          octets: 502354
+          sha256: 6dabf6201fab40e184f880c3e8748f6ea07962d5d57d9c676a6b0c4f5fde98b3
+          recupere_le: '2026-10-11T16:09:26'
+        - fichier: data/raw/pvgis/tunis/series_CdTe_2010_2014.csv.gz
+          octets: 504229
+          sha256: f27e0937233000ba6d2ac2be3d46f882639cf5db1bb2ebfab4ec75ac7e871a48
+          recupere_le: '2026-10-11T16:09:24'
+        - fichier: data/raw/pvgis/tunis/series_CdTe_2015_2019.csv.gz
+          octets: 503523
+          sha256: 017cbbb04d74cab9c842c09bfcaf03606a1a29fc09c11df42ccd9095554ad610
+          recupere_le: '2026-10-11T16:09:43'
+        - fichier: data/raw/pvgis/tunis/series_CdTe_2020_2023.csv.gz
+          octets: 404466
+          sha256: 3c5fa8554fc05252240aa8da566b442f0a8f4ece1137d97d62d9ab738a106529
+          recupere_le: '2026-10-11T16:09:48'
+        - fichier: data/raw/pvgis/tunis/series_CIS_2005_2009.csv.gz
+          octets: 503384
+          sha256: d2933a3030cabf6323c4d815c37059ff6dac36cdce43c29f5851d71376ba495e
+          recupere_le: '2026-10-11T16:08:47'
+        - fichier: data/raw/pvgis/tunis/series_CIS_2010_2014.csv.gz
+          octets: 505056
+          sha256: edd44f95092b0c24dd5655aeb7e03e3ad73179cc20101637c1275b04179f3c7a
+          recupere_le: '2026-10-11T16:08:47'
+        - fichier: data/raw/pvgis/tunis/series_CIS_2015_2019.csv.gz
+          octets: 505044
+          sha256: 3000836817e8e729ffe3d2d4677d3dd7f5c5ec00fa230a2a395c5620eaf5c0e1
+          recupere_le: '2026-10-11T16:08:50'
+        - fichier: data/raw/pvgis/tunis/series_CIS_2020_2023.csv.gz
+          octets: 405376
+          sha256: 01e93107b71752f418456cbe660620c64242548fd102a862867dd0f0aae2a0f2
+          recupere_le: '2026-10-11T16:09:08'
+        - fichier: data/brut/pvgis/tunis_horaire.parquet
+          octets: 3454343
+          sha256: 9434487f9f0d9d9484e40f09f0517607ea830e02acfb6d924d5d3c3dfb02add3
+          recupere_le: '2026-10-10T12:10:09'
+      open_meteo:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/open_meteo/tunis.csv
+          octets: 462865
+          sha256: bcb1282fc57649d9b1474b86bda1ea05b6037c50dc5ea399851f50868e5faaab
+          recupere_le: '2026-10-10T12:07:55'
+      nasa_power:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/nasa_power/tunis.csv
+          octets: 450484
+          sha256: 634bcfc3847b53847bdeaf66ba9a09771e5400f927f305f9d56c09aaf0167534
+          recupere_le: '2026-10-10T12:05:04'
+    table_traitee:
+      fichier: data/processed/tunis.csv
+      octets: 284573
+      sha256: 6e1a0a2048133b3f74f26cb74fc89054ee4e8731e63155926a97ae3e471b25c1
+      recupere_le: '2026-10-11T17:33:10'
+  sfax:
+    coordonnees:
+      lat: 34.7406
+      lon: 10.7603
+      altitude_m: 8.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 33.0
+    sources:
+      pvgis:
+        origine: cache v1 (data/brut) + téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/sfax/orientation_CdTe_est.json
+          octets: 5206
+          sha256: 73cf4ac964352ffa5577f874233d82169410c3371d126bb3d61d42e146d89e06
+          recupere_le: '2026-10-11T17:14:26'
+        - fichier: data/raw/pvgis/sfax/orientation_CdTe_optimale.json
+          octets: 5211
+          sha256: e1d7dd0339540814e2d3df0bbd55298692229640e0cdd3e984bff160a3693fd3
+          recupere_le: '2026-10-11T17:14:30'
+        - fichier: data/raw/pvgis/sfax/orientation_CdTe_ouest.json
+          octets: 5203
+          sha256: c412118024a99885f0836896955127ef3b16738c0f1def68bc38cbb252114577
+          recupere_le: '2026-10-11T17:14:28'
+        - fichier: data/raw/pvgis/sfax/orientation_CdTe_sud.json
+          octets: 5211
+          sha256: 3fefe83365284432f5d3abf27a697b925a2368ebd927b961e7d9bbd3d2aebf78
+          recupere_le: '2026-10-11T17:14:25'
+        - fichier: data/raw/pvgis/sfax/series_CdTe_2005_2009.csv.gz
+          octets: 504903
+          sha256: 8a11186c52029f5dd27de470e22afc306036a3a214e85932dcf65d68b6aece46
+          recupere_le: '2026-10-11T16:24:11'
+        - fichier: data/raw/pvgis/sfax/series_CdTe_2010_2014.csv.gz
+          octets: 505595
+          sha256: e89ac65bdccb18dbde6e76635c214bf00ebdba283fff68ef77949b9c9098ebcf
+          recupere_le: '2026-10-11T16:24:09'
+        - fichier: data/raw/pvgis/sfax/series_CdTe_2015_2019.csv.gz
+          octets: 504027
+          sha256: b47afb3d4a3d4a206bae91bbd7e1bcd3f272d7b4b165c072a2157a81e9a8f89d
+          recupere_le: '2026-10-11T16:24:13'
+        - fichier: data/raw/pvgis/sfax/series_CdTe_2020_2023.csv.gz
+          octets: 405733
+          sha256: a090698b14fdfa5b0ccf1a8ac78aa7cab0bda44f6375a80f0118b25394e18d67
+          recupere_le: '2026-10-11T16:24:19'
+        - fichier: data/raw/pvgis/sfax/series_CIS_2005_2009.csv.gz
+          octets: 506210
+          sha256: fcaa7c61a45e5da07ff13b70344e550b238e81b2484745ad3d1c5acb460d9458
+          recupere_le: '2026-10-11T16:23:47'
+        - fichier: data/raw/pvgis/sfax/series_CIS_2010_2014.csv.gz
+          octets: 507163
+          sha256: 0fd8e10ef214f9ec0a8d61670fc2d8b572fa656fc625fd2f3ac0d9763c95421a
+          recupere_le: '2026-10-11T16:23:50'
+        - fichier: data/raw/pvgis/sfax/series_CIS_2015_2019.csv.gz
+          octets: 505915
+          sha256: 5e340c3f665f5ce33cf7bd107935f35b6d51a505d2b64b04716b32426e5e12ca
+          recupere_le: '2026-10-11T16:23:56'
+        - fichier: data/raw/pvgis/sfax/series_CIS_2020_2023.csv.gz
+          octets: 406568
+          sha256: a4dff1a7caf06ef138b035a96fbb2d8a385db37a7365f375e6e126ea650bce36
+          recupere_le: '2026-10-11T16:24:02'
+        - fichier: data/brut/pvgis/sfax_horaire.parquet
+          octets: 3470287
+          sha256: 1e39d6f4f0941b7915501973e15d551e56069e24bb41139494fc818438ab0340
+          recupere_le: '2026-10-10T12:10:35'
+      open_meteo:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/open_meteo/sfax.csv
+          octets: 463112
+          sha256: 2889a604a347d4282a91dd9759dbcaebce416fe8bf4bef499c530b18eeaf777b
+          recupere_le: '2026-10-10T12:09:08'
+      nasa_power:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/nasa_power/sfax.csv
+          octets: 452354
+          sha256: 491de37dcfa4b785ca32b6e13a7de7c8af578de550906066ccf775cf4aa4093e
+          recupere_le: '2026-10-10T12:05:10'
+    table_traitee:
+      fichier: data/processed/sfax.csv
+      octets: 284573
+      sha256: e2131fafcdeecd46f744b1625ab539260248e3655b112c4eb5ad5938a210ecb6
+      recupere_le: '2026-10-11T17:33:12'
+  tozeur:
+    coordonnees:
+      lat: 33.9197
+      lon: 8.1335
+      altitude_m: 51.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 33.0
+    sources:
+      pvgis:
+        origine: cache v1 (data/brut) + téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/tozeur/orientation_CdTe_est.json
+          octets: 5206
+          sha256: 5034d3846af5e79489514bd5ee40f500c1df97d29c66db1864db0f230d3e1b5c
+          recupere_le: '2026-10-11T17:14:35'
+        - fichier: data/raw/pvgis/tozeur/orientation_CdTe_optimale.json
+          octets: 5215
+          sha256: 0e3738f794f7c423cd08283a9c45631845c196b06f9e56e0e6f1eee76a06ab04
+          recupere_le: '2026-10-11T17:14:39'
+        - fichier: data/raw/pvgis/tozeur/orientation_CdTe_ouest.json
+          octets: 5210
+          sha256: 2a4b30d17cb5aac1ddbd36c450bf7333e7df8706119ef84e948e809247062d31
+          recupere_le: '2026-10-11T17:14:37'
+        - fichier: data/raw/pvgis/tozeur/orientation_CdTe_sud.json
+          octets: 5216
+          sha256: 1323d5ed673ffe64de16bea15294d974c23ef0a26c67cf74b017ac0b7af1c503
+          recupere_le: '2026-10-11T17:14:34'
+        - fichier: data/raw/pvgis/tozeur/series_CdTe_2005_2009.csv.gz
+          octets: 509781
+          sha256: 854aeb3402a68347e879eeda8da99d4f933b3799cbc9652fce3f56dfd7b3c745
+          recupere_le: '2026-10-11T16:24:59'
+        - fichier: data/raw/pvgis/tozeur/series_CdTe_2010_2014.csv.gz
+          octets: 511787
+          sha256: a059c19e05ae413bcbfd315ead4fafdfff82a9b561b041128bc4de32485ed530
+          recupere_le: '2026-10-11T16:24:59'
+        - fichier: data/raw/pvgis/tozeur/series_CdTe_2015_2019.csv.gz
+          octets: 511409
+          sha256: a1d530a1afd6a4b292a233747e4662124347d548df110d1e4181457e8cff942d
+          recupere_le: '2026-10-11T16:25:05'
+        - fichier: data/raw/pvgis/tozeur/series_CdTe_2020_2023.csv.gz
+          octets: 409805
+          sha256: 644e6dabadf991c1d458c720b7edf40ebfc03f0e53b5ee8d74ef59f162e506e4
+          recupere_le: '2026-10-11T16:25:15'
+        - fichier: data/raw/pvgis/tozeur/series_CIS_2005_2009.csv.gz
+          octets: 511116
+          sha256: 76fde14642ed85d7d419a83ee09557a98c2dfd4a3b4fc6a1a0a5bb512b99d345
+          recupere_le: '2026-10-11T16:24:31'
+        - fichier: data/raw/pvgis/tozeur/series_CIS_2010_2014.csv.gz
+          octets: 512791
+          sha256: fef4dc8910534623a41e2dd1168e9c053b839c608b5fca0df000f0e7774e9356
+          recupere_le: '2026-10-11T16:24:27'
+        - fichier: data/raw/pvgis/tozeur/series_CIS_2015_2019.csv.gz
+          octets: 512483
+          sha256: 446ee0ff229440ba585e3a272a5b9af083dbc961eeff765a7bba4909dc1a2dcd
+          recupere_le: '2026-10-11T16:24:31'
+        - fichier: data/raw/pvgis/tozeur/series_CIS_2020_2023.csv.gz
+          octets: 410587
+          sha256: 176951c4dc38abb1c61991ddc64f65d21fb18df7d7e4aec2604b355e11d82ff0
+          recupere_le: '2026-10-11T16:24:46'
+        - fichier: data/brut/pvgis/tozeur_horaire.parquet
+          octets: 3511396
+          sha256: 40882f4d2505acff06e0665bc78892d8ced96dd371c2ba0348e2d28709549b5f
+          recupere_le: '2026-10-10T12:12:06'
+      open_meteo:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/open_meteo/tozeur.csv
+          octets: 460932
+          sha256: a253350f9d06337cc2c696100218ef79b383ab9484922efa6c357806c7259232
+          recupere_le: '2026-10-10T12:10:22'
+      nasa_power:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/nasa_power/tozeur.csv
+          octets: 452704
+          sha256: fb6573010c856440952da09e1e7c5fa44abdff3f8f970bfa0b0cca2e4a768b60
+          recupere_le: '2026-10-10T12:05:20'
+    table_traitee:
+      fichier: data/processed/tozeur.csv
+      octets: 284573
+      sha256: 083a71c1614b9181d7bec16adcc9d8e65dbcf6c726588448ef0c7414f8a32172
+      recupere_le: '2026-10-11T17:33:13'
+  sousse:
+    coordonnees:
+      lat: 35.8256
+      lon: 10.636
+      altitude_m: 24.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 33.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/sousse/orientation_CdTe_est.json
+          octets: 5208
+          sha256: 1d694a25574dcf27fcbcb7c8177943b86828ccb5f5934c1d340e34357382cc45
+          recupere_le: '2026-10-11T17:14:30'
+        - fichier: data/raw/pvgis/sousse/orientation_CdTe_optimale.json
+          octets: 5212
+          sha256: 1a48f47937c80117944b652b5a27f288ac7842de163170f7e7de66b78fd4c881
+          recupere_le: '2026-10-11T17:14:33'
+        - fichier: data/raw/pvgis/sousse/orientation_CdTe_ouest.json
+          octets: 5204
+          sha256: ced30f225301d49a6bcfcb36f50ad9f6a623a308a793f363cd8329c381d836db
+          recupere_le: '2026-10-11T17:14:32'
+        - fichier: data/raw/pvgis/sousse/orientation_CdTe_sud.json
+          octets: 5214
+          sha256: 00d598688e8bda957adb385a72232609f284ffa63287b324a104f2c68bb9507c
+          recupere_le: '2026-10-11T17:14:29'
+        - fichier: data/raw/pvgis/sousse/pvcalc.json
+          octets: 5216
+          sha256: 708dd85810533465417e0924c62793070b77a59052c22b347211e94588ca1594
+          recupere_le: '2026-10-11T16:12:54'
+        - fichier: data/raw/pvgis/sousse/series_CdTe_2005_2009.csv.gz
+          octets: 504024
+          sha256: 75801d7bd74fbfedd8b92cf9704ef9b905335317fb58a3561615b7cc4c2bc4d9
+          recupere_le: '2026-10-11T16:26:11'
+        - fichier: data/raw/pvgis/sousse/series_CdTe_2010_2014.csv.gz
+          octets: 505094
+          sha256: 6aaeb40a9e0148c370953b81217580ff1cc1352cbe491a671dfeb3103167e302
+          recupere_le: '2026-10-11T16:26:13'
+        - fichier: data/raw/pvgis/sousse/series_CdTe_2015_2019.csv.gz
+          octets: 503810
+          sha256: 80e97d404c57b46053ac6721e22c72a3dc4938ff510ddfd8bae358e1c3962086
+          recupere_le: '2026-10-11T16:26:26'
+        - fichier: data/raw/pvgis/sousse/series_CdTe_2020_2023.csv.gz
+          octets: 405172
+          sha256: 7e4844aea4ca7b3182df8b939639417ae02602a1bd70aac613fd3a15aad9f045
+          recupere_le: '2026-10-11T16:26:29'
+        - fichier: data/raw/pvgis/sousse/series_CIS_2005_2009.csv.gz
+          octets: 505414
+          sha256: 2cf8da30baa3f23ed842a4324c4e3ed3deff3e008a0a226364db67739b91a4fb
+          recupere_le: '2026-10-11T16:25:38'
+        - fichier: data/raw/pvgis/sousse/series_CIS_2010_2014.csv.gz
+          octets: 506480
+          sha256: 078e89d39c165af0d2bc7741a9dc957cf919eb29d23228a43fe5d1ceaff1664f
+          recupere_le: '2026-10-11T16:25:50'
+        - fichier: data/raw/pvgis/sousse/series_CIS_2015_2019.csv.gz
+          octets: 505111
+          sha256: f0e3d4f505ef9642d081ba409b2ee9267bead50b8534b0bf9e77a42489d6fced
+          recupere_le: '2026-10-11T16:26:03'
+        - fichier: data/raw/pvgis/sousse/series_CIS_2020_2023.csv.gz
+          octets: 406181
+          sha256: fd20607f01e006aa19e39c72c03f7ccd59f7176149b38716b734b8af38c1cefe
+          recupere_le: '2026-10-11T16:26:07'
+        - fichier: data/raw/pvgis/sousse/series_crystSi_2005_2009.csv.gz
+          octets: 505280
+          sha256: a5c0aa95d93f486d79104f9537906f310112a4cf620493164b5932ca7e7b9ff0
+          recupere_le: '2026-10-11T16:25:21'
+        - fichier: data/raw/pvgis/sousse/series_crystSi_2010_2014.csv.gz
+          octets: 506193
+          sha256: 4de9ca613f043c8e24f5cd4c80405e182b63f835f95b2e9652e6b354aabfe4ae
+          recupere_le: '2026-10-11T16:25:26'
+        - fichier: data/raw/pvgis/sousse/series_crystSi_2015_2019.csv.gz
+          octets: 504983
+          sha256: 0d74ee88c81c590adecdb39dde73dddf590b91f11f0d0762bcfc87805c80cd9f
+          recupere_le: '2026-10-11T16:25:32'
+        - fichier: data/raw/pvgis/sousse/series_crystSi_2020_2023.csv.gz
+          octets: 406183
+          sha256: d9572efbe387d6494e1d0e29122828e12b4bbf51634a6a3b8371572bdbba3beb
+          recupere_le: '2026-10-11T16:25:52'
+        - fichier: data/raw/pvgis/sousse/series_horizontal_2005_2009.csv.gz
+          octets: 407596
+          sha256: 45e631d7b74a6bbc7d6d90b9b4b65acac497bb2f69a1b06413653c4182a1ce7a
+          recupere_le: '2026-10-11T16:26:30'
+        - fichier: data/raw/pvgis/sousse/series_horizontal_2010_2014.csv.gz
+          octets: 407446
+          sha256: 3d98129cefdc1a0c126e1c3bf745b0640b9281545cd5f83b5f8692238ebb0a54
+          recupere_le: '2026-10-11T16:26:42'
+        - fichier: data/raw/pvgis/sousse/series_horizontal_2015_2019.csv.gz
+          octets: 406592
+          sha256: 28f8e8f506fc0b81922361a3447efbc8c9f3253371b3dde2c5280cb7780ececa
+          recupere_le: '2026-10-11T16:26:42'
+        - fichier: data/raw/pvgis/sousse/series_horizontal_2020_2023.csv.gz
+          octets: 326956
+          sha256: 6b05e31b75d921fa43f9031a3c0e5253cd679ea121a17caec008febaf09b2d1f
+          recupere_le: '2026-10-11T16:26:41'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/sousse/daily_2005_2023.json
+          octets: 481121
+          sha256: 6bfa454cbe1a3dbf364670ba813b771f9d17984057d2bdd65095f1862196906f
+          recupere_le: '2026-10-11T16:34:28'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/sousse/daily_2005_2023.json
+          octets: 1057227
+          sha256: 829bc5f256a912722a13c13c084bf24cab1e2c4b256850e27da9b2e6e5e1e9b7
+          recupere_le: '2026-10-11T16:14:08'
+    table_traitee:
+      fichier: data/processed/sousse.csv
+      octets: 284573
+      sha256: 01d674f606825707e288e358449e235cae930904c9a1dfa893a082769b57466b
+      recupere_le: '2026-10-11T17:33:15'
+  bizerte:
+    coordonnees:
+      lat: 37.2744
+      lon: 9.8739
+      altitude_m: 5.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 33.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/bizerte/orientation_CIS_est.json
+          octets: 5205
+          sha256: 6ed299d95a00b3c524f8bf33cf7d491fc376206a6a3eb37d5fcfe151723e5298
+          recupere_le: '2026-10-11T17:14:08'
+        - fichier: data/raw/pvgis/bizerte/orientation_CIS_optimale.json
+          octets: 5206
+          sha256: 8c0010d5ab8dfb2dce2866ee90507e5ed47434c5d1f9c8b3b265013b416d78a9
+          recupere_le: '2026-10-11T17:14:10'
+        - fichier: data/raw/pvgis/bizerte/orientation_CIS_ouest.json
+          octets: 5199
+          sha256: 4db010bfc4d2e380009c6818a0ae626c9cbbaf4cd89c07d677e1cf9131b5a697
+          recupere_le: '2026-10-11T17:14:09'
+        - fichier: data/raw/pvgis/bizerte/orientation_CIS_sud.json
+          octets: 5209
+          sha256: fe2d602f8c928c511f115838a9860186ca686b78c86e8fda3ff09a625850bddf
+          recupere_le: '2026-10-11T17:14:07'
+        - fichier: data/raw/pvgis/bizerte/pvcalc.json
+          octets: 5210
+          sha256: b8afb75c23210a676f490c6e83d738ee37af54031a3b11f72aba6ededc231674
+          recupere_le: '2026-10-11T16:12:56'
+        - fichier: data/raw/pvgis/bizerte/series_CdTe_2005_2009.csv.gz
+          octets: 503058
+          sha256: e19e1f23cfb48a8fd3cfe939963887b9891c49b319624d451128b95f47cf6cc5
+          recupere_le: '2026-10-11T16:27:36'
+        - fichier: data/raw/pvgis/bizerte/series_CdTe_2010_2014.csv.gz
+          octets: 504027
+          sha256: 458099b2030edf52d04cd98dd98f7078eafcd201542ab52a87ffaf9077eabf50
+          recupere_le: '2026-10-11T16:27:54'
+        - fichier: data/raw/pvgis/bizerte/series_CdTe_2015_2019.csv.gz
+          octets: 502696
+          sha256: 9e8942b5efa0b337c36f66a922d67a21f8e35094bc6f07c842edcc0623e71b99
+          recupere_le: '2026-10-11T16:27:48'
+        - fichier: data/raw/pvgis/bizerte/series_CdTe_2020_2023.csv.gz
+          octets: 405025
+          sha256: fbabbf1bb172e704a9b31d63cb78e7a4eba756f4264b589bc1f8811cfc837f3c
+          recupere_le: '2026-10-11T16:27:49'
+        - fichier: data/raw/pvgis/bizerte/series_CIS_2005_2009.csv.gz
+          octets: 504040
+          sha256: b2effac2e501c2bcd2e11471fd613f11695e29c19146f31866a1c4fccedb2bfd
+          recupere_le: '2026-10-11T16:27:08'
+        - fichier: data/raw/pvgis/bizerte/series_CIS_2010_2014.csv.gz
+          octets: 505487
+          sha256: d4f6739feba93bd18a8aeda3ee03f3c87baca6ed9edda3e288db2d4e944f6699
+          recupere_le: '2026-10-11T16:27:10'
+        - fichier: data/raw/pvgis/bizerte/series_CIS_2015_2019.csv.gz
+          octets: 504111
+          sha256: 807dd57a714172473d1cfe5f0df55d9bde249a062c0425990df3346d73857d0c
+          recupere_le: '2026-10-11T16:27:26'
+        - fichier: data/raw/pvgis/bizerte/series_CIS_2020_2023.csv.gz
+          octets: 405991
+          sha256: 39c5554b847d10eb8436081633aa757ddf19c580642909277dc4a6cbddb8e401
+          recupere_le: '2026-10-11T16:27:31'
+        - fichier: data/raw/pvgis/bizerte/series_crystSi_2005_2009.csv.gz
+          octets: 504151
+          sha256: 1f29c41519e776177beaef35e57221fa74351889f1d323002103669e77e38587
+          recupere_le: '2026-10-11T16:26:54'
+        - fichier: data/raw/pvgis/bizerte/series_crystSi_2010_2014.csv.gz
+          octets: 505008
+          sha256: 919c5d9f59a0ca9ff70eeeef087931ef6a667336f8b7cb29b8deb5103c9c1403
+          recupere_le: '2026-10-11T16:26:57'
+        - fichier: data/raw/pvgis/bizerte/series_crystSi_2015_2019.csv.gz
+          octets: 503858
+          sha256: 2915b2ed33520e4755ac71118ba838310715d03ade21fa92491b303172027a2d
+          recupere_le: '2026-10-11T16:26:56'
+        - fichier: data/raw/pvgis/bizerte/series_crystSi_2020_2023.csv.gz
+          octets: 405835
+          sha256: 551d488235a07745cea4354a922b2803d5381daed9315ae068d4d9ba6c0b29be
+          recupere_le: '2026-10-11T16:27:06'
+        - fichier: data/raw/pvgis/bizerte/series_horizontal_2005_2009.csv.gz
+          octets: 406572
+          sha256: e8e3ac05fb1dfea89384fb21287aae92513e0edbfe91f0f8bd4e80bf90f18369
+          recupere_le: '2026-10-11T16:28:03'
+        - fichier: data/raw/pvgis/bizerte/series_horizontal_2010_2014.csv.gz
+          octets: 406927
+          sha256: 072622786625299aa412aae15639da82e464485b63bb31f6b6f937d0841c7dde
+          recupere_le: '2026-10-11T16:28:03'
+        - fichier: data/raw/pvgis/bizerte/series_horizontal_2015_2019.csv.gz
+          octets: 405733
+          sha256: bd3542a9cc59853f1f2ded246e43d5815e235d922be2b5cb50d598cd473fb65e
+          recupere_le: '2026-10-11T16:28:06'
+        - fichier: data/raw/pvgis/bizerte/series_horizontal_2020_2023.csv.gz
+          octets: 327105
+          sha256: b2c7a227f04923b0fed9206063469b0e520f7ae3356ad8aff86087373b0d1e88
+          recupere_le: '2026-10-11T16:28:14'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/bizerte/daily_2005_2023.json
+          octets: 481886
+          sha256: bd9da7f048038a2480f80e95c9e0b18b48e89265b37554bbd800e168e19c6a63
+          recupere_le: '2026-10-11T16:37:32'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/bizerte/daily_2005_2023.json
+          octets: 1058423
+          sha256: b798ed9f5096d8acd5d5afcda70d1514035ae6ec037096608a96077f13222279
+          recupere_le: '2026-10-11T16:14:19'
+    table_traitee:
+      fichier: data/processed/bizerte.csv
+      octets: 284573
+      sha256: f668c7929c46b548e1084566305f9e11c928e7b0569e5b326f83c13e05df3156
+      recupere_le: '2026-10-11T17:33:17'
+  gabes:
+    coordonnees:
+      lat: 33.8815
+      lon: 10.0982
+      altitude_m: 9.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 33.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/gabes/orientation_CdTe_est.json
+          octets: 5208
+          sha256: a7ef0db68684b612dc130e553dc1f22007daf2342da66a2a55779ae08a1f503b
+          recupere_le: '2026-10-11T17:14:08'
+        - fichier: data/raw/pvgis/gabes/orientation_CdTe_optimale.json
+          octets: 5216
+          sha256: a5130d9651ecd657c32f31fbd9ee638bfa865f905e690bd5a3d6a12dffe494ae
+          recupere_le: '2026-10-11T17:14:11'
+        - fichier: data/raw/pvgis/gabes/orientation_CdTe_ouest.json
+          octets: 5207
+          sha256: dde7e0f05cabe090c3f45e8fbf8499c39e4ae69f6634b5fc08f0769d463c5fa9
+          recupere_le: '2026-10-11T17:14:09'
+        - fichier: data/raw/pvgis/gabes/orientation_CdTe_sud.json
+          octets: 5217
+          sha256: b65a9c2d9fdc0ca6b57fff18fd9d893e0b04c6f60c282d654564b8e8896ae9d3
+          recupere_le: '2026-10-11T17:14:07'
+        - fichier: data/raw/pvgis/gabes/pvcalc.json
+          octets: 5210
+          sha256: 2310815322d329cda5da554172b9e2a0c171efd8bb1601c23a02b0b136504088
+          recupere_le: '2026-10-11T16:12:57'
+        - fichier: data/raw/pvgis/gabes/series_CdTe_2005_2009.csv.gz
+          octets: 507371
+          sha256: b916abd6ae1e748892c9a81df8008773b89035d6593d1df14a4de9b7ee339459
+          recupere_le: '2026-10-11T16:29:05'
+        - fichier: data/raw/pvgis/gabes/series_CdTe_2010_2014.csv.gz
+          octets: 508724
+          sha256: c6776757a7ac23b58e39a72005e65d607ce73929ba7afc1d60f8b803cba90557
+          recupere_le: '2026-10-11T16:29:11'
+        - fichier: data/raw/pvgis/gabes/series_CdTe_2015_2019.csv.gz
+          octets: 508944
+          sha256: fe3b0dcdd641fada6181e6ef7781fad61ff36dd62ed6ae534c5f62691309291f
+          recupere_le: '2026-10-11T16:29:16'
+        - fichier: data/raw/pvgis/gabes/series_CdTe_2020_2023.csv.gz
+          octets: 408017
+          sha256: dfa8c1bea7219b14c54bc4301ebe92d0cf97a736e8407f3fc59634d962cab9d9
+          recupere_le: '2026-10-11T16:29:20'
+        - fichier: data/raw/pvgis/gabes/series_CIS_2005_2009.csv.gz
+          octets: 508930
+          sha256: 9225c2e9e1fa2a0f61434786cd79e72bebcbfa206751c271f63fa12c885e8387
+          recupere_le: '2026-10-11T16:28:44'
+        - fichier: data/raw/pvgis/gabes/series_CIS_2010_2014.csv.gz
+          octets: 510330
+          sha256: f2916a4ba362e450cd417ca77694746760d4f3676d8db134b7a09d1ea4a1482d
+          recupere_le: '2026-10-11T16:28:48'
+        - fichier: data/raw/pvgis/gabes/series_CIS_2015_2019.csv.gz
+          octets: 510187
+          sha256: fe6e8c1388d959810e80e9d4cbe6ca1ccac529c4dcb5aafa56656b59a9eabaed
+          recupere_le: '2026-10-11T16:28:54'
+        - fichier: data/raw/pvgis/gabes/series_CIS_2020_2023.csv.gz
+          octets: 409110
+          sha256: c4178c5171fd303239ba759caef74c06a4fd26d636b2a6ad6374f532536bcb86
+          recupere_le: '2026-10-11T16:28:57'
+        - fichier: data/raw/pvgis/gabes/series_crystSi_2005_2009.csv.gz
+          octets: 508857
+          sha256: 1b3454b755e48634c1ceceafff2eff7ecbc026dd754fd7a0bd287b08a84ef7c9
+          recupere_le: '2026-10-11T16:28:19'
+        - fichier: data/raw/pvgis/gabes/series_crystSi_2010_2014.csv.gz
+          octets: 510297
+          sha256: c4679485f8c8a46c354760cd6887e3b30fa417c2d23f1a810449d183f321da53
+          recupere_le: '2026-10-11T16:28:26'
+        - fichier: data/raw/pvgis/gabes/series_crystSi_2015_2019.csv.gz
+          octets: 510137
+          sha256: 97cb2d1c10a92b03cdc824834236e18f168e7f1b1b269f963ecdf6a725e8826f
+          recupere_le: '2026-10-11T16:28:49'
+        - fichier: data/raw/pvgis/gabes/series_crystSi_2020_2023.csv.gz
+          octets: 409030
+          sha256: f9dd4ba5a9825aabe04efbeececf9d626b383aeb934c50bec825d787b71aff75
+          recupere_le: '2026-10-11T16:28:29'
+        - fichier: data/raw/pvgis/gabes/series_horizontal_2005_2009.csv.gz
+          octets: 410189
+          sha256: ca161aaf7320aa9bf0b6a7fc07cc30a73d59f40d89dc987896c5ac440e890d58
+          recupere_le: '2026-10-11T16:29:25'
+        - fichier: data/raw/pvgis/gabes/series_horizontal_2010_2014.csv.gz
+          octets: 410520
+          sha256: eb15d9681155980bb034e1e32b772944f31722451626b3abe83966099c9f6bfb
+          recupere_le: '2026-10-11T16:29:32'
+        - fichier: data/raw/pvgis/gabes/series_horizontal_2015_2019.csv.gz
+          octets: 410831
+          sha256: a742bfc04effab9d178628ce61e024a0aa3b87bf5d211f8c2e3a9756070fe434
+          recupere_le: '2026-10-11T16:29:36'
+        - fichier: data/raw/pvgis/gabes/series_horizontal_2020_2023.csv.gz
+          octets: 329369
+          sha256: 98343ec19ac25ba1a36f93d6de77078571e34335751a07cee942a9b93ab4ad54
+          recupere_le: '2026-10-11T16:29:39'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/gabes/daily_2005_2023.json
+          octets: 481017
+          sha256: 460c4d3853a1b876ccc8f24e880986148288a6e151c15b58f66f3af0db3219b9
+          recupere_le: '2026-10-11T16:40:42'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/gabes/daily_2005_2023.json
+          octets: 1056186
+          sha256: cbb0daef960f8a97e0406c27d955719a474fbc350201f6f3771ddfbe1b88e295
+          recupere_le: '2026-10-11T16:14:32'
+    table_traitee:
+      fichier: data/processed/gabes.csv
+      octets: 284573
+      sha256: aae02b11705121371f86e89db34f218561f7c69c2c299fffcf81238bd09f5487
+      recupere_le: '2026-10-11T17:33:20'
+  kairouan:
+    coordonnees:
+      lat: 35.6781
+      lon: 10.0963
+      altitude_m: 65.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 33.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/kairouan/orientation_CdTe_est.json
+          octets: 5210
+          sha256: 33ae3904b93156dbe5ac433fe0e320a81578f2ba7466ec0fc9ad8b6b51924204
+          recupere_le: '2026-10-11T17:14:13'
+        - fichier: data/raw/pvgis/kairouan/orientation_CdTe_optimale.json
+          octets: 5214
+          sha256: dd5ad71e07390eedb5061c7636c6a54361f162bde1711ef92fc4fb15eee48efa
+          recupere_le: '2026-10-11T17:14:16'
+        - fichier: data/raw/pvgis/kairouan/orientation_CdTe_ouest.json
+          octets: 5208
+          sha256: 82dfa993fb4478731c6f6580eaba1b0b956f53f69845c1f29b84a0ffc23b264f
+          recupere_le: '2026-10-11T17:14:14'
+        - fichier: data/raw/pvgis/kairouan/orientation_CdTe_sud.json
+          octets: 5212
+          sha256: 2ecee0b90201776cf587519d03cc4a2c4db7bd9df5e52b1340a53169720c6e9f
+          recupere_le: '2026-10-11T17:14:12'
+        - fichier: data/raw/pvgis/kairouan/pvcalc.json
+          octets: 5214
+          sha256: 0826bbc58de99f1fcf170da9ceeaeb35cee176de35870011f339036aee981b76
+          recupere_le: '2026-10-11T16:12:59'
+        - fichier: data/raw/pvgis/kairouan/series_CdTe_2005_2009.csv.gz
+          octets: 501806
+          sha256: 2a424862f0fc57170126fdbec5908b3148a76055a9ca67f007226a8fabc063f3
+          recupere_le: '2026-10-11T16:30:34'
+        - fichier: data/raw/pvgis/kairouan/series_CdTe_2010_2014.csv.gz
+          octets: 503204
+          sha256: 809ab64b3bd577df84c1583df5dd73716433cca7b6e2565af2b1dc81e0103128
+          recupere_le: '2026-10-11T16:30:35'
+        - fichier: data/raw/pvgis/kairouan/series_CdTe_2015_2019.csv.gz
+          octets: 503795
+          sha256: 16a1c725cbda4b5e762ac5ed2a754c35c54b4993bd9c45fb93edbcfd185ccf5f
+          recupere_le: '2026-10-11T16:30:41'
+        - fichier: data/raw/pvgis/kairouan/series_CdTe_2020_2023.csv.gz
+          octets: 403422
+          sha256: 4a3e4032b8780ad1d6647e60ccb2b4c5435332487f2ecd917482bde2e0e571d3
+          recupere_le: '2026-10-11T16:30:43'
+        - fichier: data/raw/pvgis/kairouan/series_CIS_2005_2009.csv.gz
+          octets: 503107
+          sha256: 38ae4e73c0046712ed2475a8f30558d2a345bc6b309c2ff3fc569c3e6feea5e3
+          recupere_le: '2026-10-11T16:30:17'
+        - fichier: data/raw/pvgis/kairouan/series_CIS_2010_2014.csv.gz
+          octets: 504516
+          sha256: 7e37375ece9a916cb92e76f4240791be94acc6454c5b473d6b325cf97435b5e6
+          recupere_le: '2026-10-11T16:30:18'
+        - fichier: data/raw/pvgis/kairouan/series_CIS_2015_2019.csv.gz
+          octets: 504974
+          sha256: ced18cf4d018ba739ebebadd2c777a6d125efc281f80ebce4c98e51ecf64b4f2
+          recupere_le: '2026-10-11T16:30:23'
+        - fichier: data/raw/pvgis/kairouan/series_CIS_2020_2023.csv.gz
+          octets: 404398
+          sha256: 3e347d5d8279cbd84716f492bf42e52726de7b5daacdac0cc562cf6a2a3be3e6
+          recupere_le: '2026-10-11T16:30:28'
+        - fichier: data/raw/pvgis/kairouan/series_crystSi_2005_2009.csv.gz
+          octets: 503113
+          sha256: 465c4c1838737b85bf2667047f3c4837de521880bbcd1d47e7f09e4377465aeb
+          recupere_le: '2026-10-11T16:29:47'
+        - fichier: data/raw/pvgis/kairouan/series_crystSi_2010_2014.csv.gz
+          octets: 504642
+          sha256: effcb61f1184ec5a4cc92f9948693c5ff1e7af98ee4968e9f83aa6e96cd868b9
+          recupere_le: '2026-10-11T16:29:59'
+        - fichier: data/raw/pvgis/kairouan/series_crystSi_2015_2019.csv.gz
+          octets: 505062
+          sha256: 40040dfe20b24711a6aecc70e58c03151b342aa55c9c3a32ee9864e9e36f7bb3
+          recupere_le: '2026-10-11T16:30:00'
+        - fichier: data/raw/pvgis/kairouan/series_crystSi_2020_2023.csv.gz
+          octets: 404545
+          sha256: ace2573bbfcda02d7b6dd43b9fce6db7680ded9f0ebb26b0776c2b463958c133
+          recupere_le: '2026-10-11T16:30:06'
+        - fichier: data/raw/pvgis/kairouan/series_horizontal_2005_2009.csv.gz
+          octets: 405419
+          sha256: 27fae2d7135b786683f7862d50d5e4ac7f3c6ef69b17bcbffe0460f54e7ce9b0
+          recupere_le: '2026-10-11T16:30:44'
+        - fichier: data/raw/pvgis/kairouan/series_horizontal_2010_2014.csv.gz
+          octets: 405545
+          sha256: 0eeb73ca66714582faf1e90d6cc665dee9f85ad4e7a16384402cde0330562751
+          recupere_le: '2026-10-11T16:30:57'
+        - fichier: data/raw/pvgis/kairouan/series_horizontal_2015_2019.csv.gz
+          octets: 406119
+          sha256: f0da1f2b74d04a01bfbba652eb0d7687a07a4547438aa73c882f35d06e815675
+          recupere_le: '2026-10-11T16:30:59'
+        - fichier: data/raw/pvgis/kairouan/series_horizontal_2020_2023.csv.gz
+          octets: 325132
+          sha256: af13a0f8f98ac53bb04ef59c4fffbec14fae8ffdd65997cc3bea8f77033c8964
+          recupere_le: '2026-10-11T16:30:57'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/kairouan/daily_2005_2023.json
+          octets: 480420
+          sha256: e4f37f50964fa123cb92760e95624245cf4162d1aacb0230b365ed12f706343c
+          recupere_le: '2026-10-11T16:43:47'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/kairouan/daily_2005_2023.json
+          octets: 1057228
+          sha256: dda0d49542c4ee5937e8d5f3250bcb7feaa6e4cc0f85d485f9f795648a0e91d0
+          recupere_le: '2026-10-11T16:14:41'
+    table_traitee:
+      fichier: data/processed/kairouan.csv
+      octets: 284573
+      sha256: 34d7a316aeaf95a63140192833e7a053699d4850515cc9a7d00e325658704b36
+      recupere_le: '2026-10-11T17:33:22'
+  gafsa:
+    coordonnees:
+      lat: 34.425
+      lon: 8.7842
+      altitude_m: 295.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 33.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/gafsa/pvcalc.json
+          octets: 5212
+          sha256: 053e065b904db95ae420f8a5a548d9b49a4350cea6523de3b8533afebc30833a
+          recupere_le: '2026-10-11T16:13:00'
+        - fichier: data/raw/pvgis/gafsa/series_CdTe_2005_2009.csv.gz
+          octets: 504282
+          sha256: ba4c5511357f953d052bc0164423ac02fa090e002fcf4ae8a1080e38924b04c6
+          recupere_le: '2026-10-11T16:31:49'
+        - fichier: data/raw/pvgis/gafsa/series_CdTe_2010_2014.csv.gz
+          octets: 505854
+          sha256: f4dba560dcd68014a689d48ad756f10eb16351a4983644f2049a62ac1efc137d
+          recupere_le: '2026-10-11T16:32:02'
+        - fichier: data/raw/pvgis/gafsa/series_CdTe_2015_2019.csv.gz
+          octets: 505796
+          sha256: 23ff7d5cb495ebce4aa917bc73f581fa619f3f648fae4f4e4b76b9a4d4892535
+          recupere_le: '2026-10-11T16:32:03'
+        - fichier: data/raw/pvgis/gafsa/series_CdTe_2020_2023.csv.gz
+          octets: 405205
+          sha256: 188a255f568598111ae00e38c68d8dcac0647b8de9fc47c0a59bdf726493fca3
+          recupere_le: '2026-10-11T16:32:02'
+        - fichier: data/raw/pvgis/gafsa/series_CIS_2005_2009.csv.gz
+          octets: 505279
+          sha256: 719350db17e96deacc858dfd31d135052615f04d3172129cc3f3691351e02e38
+          recupere_le: '2026-10-11T16:31:30'
+        - fichier: data/raw/pvgis/gafsa/series_CIS_2010_2014.csv.gz
+          octets: 506773
+          sha256: 0c5c9f76be55d690e7fdcb4416b108ebc183fb1efe1dcb71fbfe622db6f4c080
+          recupere_le: '2026-10-11T16:31:30'
+        - fichier: data/raw/pvgis/gafsa/series_CIS_2015_2019.csv.gz
+          octets: 507217
+          sha256: 9be818f15e996b8711878125570401f9cdf22208d20e4604032eed9757f9a341
+          recupere_le: '2026-10-11T16:31:44'
+        - fichier: data/raw/pvgis/gafsa/series_CIS_2020_2023.csv.gz
+          octets: 406081
+          sha256: 0f70793f06499dc24872c295df120abf7e3e1493785e84d1f90ef685c2fa9037
+          recupere_le: '2026-10-11T16:31:45'
+        - fichier: data/raw/pvgis/gafsa/series_crystSi_2005_2009.csv.gz
+          octets: 505513
+          sha256: 8f87f73c9daac3e4b8400b9c3eee0f19a076632b06fc7d2cf918db5da9d1b847
+          recupere_le: '2026-10-11T16:31:10'
+        - fichier: data/raw/pvgis/gafsa/series_crystSi_2010_2014.csv.gz
+          octets: 507249
+          sha256: 970dcbd5ed52231af621a930c83ff9f6a67a353800d8639f90ac07b97130ff9f
+          recupere_le: '2026-10-11T16:31:11'
+        - fichier: data/raw/pvgis/gafsa/series_crystSi_2015_2019.csv.gz
+          octets: 506863
+          sha256: ec10f1528c9c7fab6b30ca96a1bd0059d5c564a904bd17b6da96bd6b3c69b63d
+          recupere_le: '2026-10-11T16:31:10'
+        - fichier: data/raw/pvgis/gafsa/series_crystSi_2020_2023.csv.gz
+          octets: 406128
+          sha256: 1feb9c9119943267aa4f33714e92558cca5fad3d808d5b77782c0b0bed379c47
+          recupere_le: '2026-10-11T16:31:25'
+        - fichier: data/raw/pvgis/gafsa/series_horizontal_2005_2009.csv.gz
+          octets: 406503
+          sha256: 6ee188e0cc6eb2bdf7c96c6b43762fcb11686271ac5d80f33f9e04e5e5106bff
+          recupere_le: '2026-10-11T16:32:15'
+        - fichier: data/raw/pvgis/gafsa/series_horizontal_2010_2014.csv.gz
+          octets: 406972
+          sha256: 22594961b91081eac5136aca6ab50c2b9c2c9898db0135b37687e51289dbfcf4
+          recupere_le: '2026-10-11T16:32:14'
+        - fichier: data/raw/pvgis/gafsa/series_horizontal_2015_2019.csv.gz
+          octets: 407166
+          sha256: fe8bc035d2e1b70b09fc01a59e6c9a47af56148f77a35b99f5be24895d3cb9d3
+          recupere_le: '2026-10-11T16:32:15'
+        - fichier: data/raw/pvgis/gafsa/series_horizontal_2020_2023.csv.gz
+          octets: 326192
+          sha256: 8effb236e9d40a968cffc4252e1d1d9d0821bda75b1e5f3491fa62005555ea68
+          recupere_le: '2026-10-11T16:32:26'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/gafsa/daily_2005_2023.json
+          octets: 479724
+          sha256: e80ef67d39d0de3863bd5f441ee2bd4630ecd8178831574493aa75189e66e0d6
+          recupere_le: '2026-10-11T17:04:20'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/gafsa/daily_2005_2023.json
+          octets: 1056689
+          sha256: 79274e1f13073707fc878a2d0a7b9553f0cbcbe63651a2de4426ed8b5c48b132
+          recupere_le: '2026-10-11T16:14:49'
+    table_traitee:
+      fichier: data/processed/gafsa.csv
+      octets: 284573
+      sha256: bf1c0a31f61924a38e491240aa5f16dbb562fa90b00dfeb7164c5948d011b586
+      recupere_le: '2026-10-11T17:33:24'
+  medenine:
+    coordonnees:
+      lat: 33.3549
+      lon: 10.5055
+      altitude_m: 90.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 32.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/medenine/pvcalc.json
+          octets: 5217
+          sha256: 010bd7f5502c67e844bda3ab2d4d80617932587b38d734b56be27de35f45f7bf
+          recupere_le: '2026-10-11T16:13:01'
+        - fichier: data/raw/pvgis/medenine/series_CdTe_2005_2009.csv.gz
+          octets: 508530
+          sha256: 0297756e22694dfe7d7502035ab5d06129a3cac7aa825896e233e9d84c16233a
+          recupere_le: '2026-10-11T16:33:10'
+        - fichier: data/raw/pvgis/medenine/series_CdTe_2010_2014.csv.gz
+          octets: 509644
+          sha256: c17da29fddb62b45786b2048644df2905d4373d0796a68c45c9a799d7230a102
+          recupere_le: '2026-10-11T16:34:10'
+        - fichier: data/raw/pvgis/medenine/series_CdTe_2015_2019.csv.gz
+          octets: 509256
+          sha256: d0ce24210613428a20a91fce57a72c794844a2d5cc911aa2ce11e55552557ab2
+          recupere_le: '2026-10-11T16:33:23'
+        - fichier: data/raw/pvgis/medenine/series_CdTe_2020_2023.csv.gz
+          octets: 407719
+          sha256: 28951f46b28727a2fac2369bec3e1d2574748e1ba803ac1b1928004f20f00411
+          recupere_le: '2026-10-11T16:33:35'
+        - fichier: data/raw/pvgis/medenine/series_CIS_2005_2009.csv.gz
+          octets: 509886
+          sha256: 79891bc6648ec558507acd70e1a954956b71a0188f60bed20bb5086302118105
+          recupere_le: '2026-10-11T16:32:47'
+        - fichier: data/raw/pvgis/medenine/series_CIS_2010_2014.csv.gz
+          octets: 511191
+          sha256: 2e0134e477676aef0f2e03128049a70d1b6bd07d230d319220314c917f1fcfec
+          recupere_le: '2026-10-11T16:32:57'
+        - fichier: data/raw/pvgis/medenine/series_CIS_2015_2019.csv.gz
+          octets: 510659
+          sha256: 0a0528f9fa525c3c00d7b46afc065560b35595774d4b2ac663139ae05df60af1
+          recupere_le: '2026-10-11T16:33:02'
+        - fichier: data/raw/pvgis/medenine/series_CIS_2020_2023.csv.gz
+          octets: 409133
+          sha256: a28cc2b0d39e826dd48767a4d15f6940b6bc8ecc0b21a9ff861c0632d16d1564
+          recupere_le: '2026-10-11T16:33:23'
+        - fichier: data/raw/pvgis/medenine/series_crystSi_2005_2009.csv.gz
+          octets: 509979
+          sha256: 90e75b1eaa459ff625c4421cdc0470ccc87d5c8544168e6cf07346fc4237370c
+          recupere_le: '2026-10-11T16:32:30'
+        - fichier: data/raw/pvgis/medenine/series_crystSi_2010_2014.csv.gz
+          octets: 511269
+          sha256: 17463deeae43268a4573182fe403837608e7b3204a3e91521c71f056f32185d4
+          recupere_le: '2026-10-11T16:32:29'
+        - fichier: data/raw/pvgis/medenine/series_crystSi_2015_2019.csv.gz
+          octets: 510699
+          sha256: 89bbe8cf970e0dc4a044fc9bfa6a7f2f8142f53232318c6b4289e3508e1e9723
+          recupere_le: '2026-10-11T16:32:57'
+        - fichier: data/raw/pvgis/medenine/series_crystSi_2020_2023.csv.gz
+          octets: 409209
+          sha256: 41461e934bd9010ddaa6844a83ac82c1dec47d3dc6b24fae74349cb801bb9ba2
+          recupere_le: '2026-10-11T16:32:42'
+        - fichier: data/raw/pvgis/medenine/series_horizontal_2005_2009.csv.gz
+          octets: 410568
+          sha256: 8c346e0e19b40924e04ade2ca070a24a65b20c9fe742392cfa9ec66b0d074312
+          recupere_le: '2026-10-11T16:33:34'
+        - fichier: data/raw/pvgis/medenine/series_horizontal_2010_2014.csv.gz
+          octets: 411015
+          sha256: 73db32380eee6fa46877321c714897c16d5c431d1db22ce3a22f1a5df2f2d8a6
+          recupere_le: '2026-10-11T16:33:45'
+        - fichier: data/raw/pvgis/medenine/series_horizontal_2015_2019.csv.gz
+          octets: 410884
+          sha256: 0d5ab9a5e2651b4d3971e9dccd5896a57cbe3345ef9d5a7b298619d55d84d60f
+          recupere_le: '2026-10-11T16:33:45'
+        - fichier: data/raw/pvgis/medenine/series_horizontal_2020_2023.csv.gz
+          octets: 329038
+          sha256: 0bf0d9188ecbdade53aadc0b86cca5f1e89fdbab9713dfe7045afb83399650b2
+          recupere_le: '2026-10-11T16:33:56'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/medenine/daily_2005_2023.json
+          octets: 480633
+          sha256: b0101d43b6f31d287e88cb82a5aa4bb67ba24e0a70029e62ed92e929018ebebd
+          recupere_le: '2026-10-11T17:07:27'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/medenine/daily_2005_2023.json
+          octets: 1056185
+          sha256: 48c4fb340c485eec98197a8342caf2e14c19fb0a9c9e62327993b0056cd73c22
+          recupere_le: '2026-10-11T16:15:01'
+    table_traitee:
+      fichier: data/processed/medenine.csv
+      octets: 284573
+      sha256: 9ec2d7552bd5321016c3dadeedea43c1f3f77902244290010774fd59a1ceb3a2
+      recupere_le: '2026-10-11T17:33:27'
+  tataouine:
+    coordonnees:
+      lat: 32.9297
+      lon: 10.4518
+      altitude_m: 238.0
+      fuseau: Africa/Tunis
+    pente_optimale_deg: 32.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/tataouine/pvcalc.json
+          octets: 5209
+          sha256: 457c83d8e550141724cc5d3457a07cae18c2949552e094972516cb4491b4f5ac
+          recupere_le: '2026-10-11T16:13:03'
+        - fichier: data/raw/pvgis/tataouine/series_CdTe_2005_2009.csv.gz
+          octets: 509342
+          sha256: 78e6e0c95d524b9016024347d601e4405c9d16425818407373db2d1a6b60ccae
+          recupere_le: '2026-10-11T16:34:55'
+        - fichier: data/raw/pvgis/tataouine/series_CdTe_2010_2014.csv.gz
+          octets: 510895
+          sha256: 9aacdfa139a11d86488b4680edf3d5aacf3d64ea0279ab04227988ae417abc90
+          recupere_le: '2026-10-11T16:35:04'
+        - fichier: data/raw/pvgis/tataouine/series_CdTe_2015_2019.csv.gz
+          octets: 510440
+          sha256: 37c5c7b07084a3d471e988c8af908d5a1109fceae1137fb13d8d827418ee0f08
+          recupere_le: '2026-10-11T16:35:05'
+        - fichier: data/raw/pvgis/tataouine/series_CdTe_2020_2023.csv.gz
+          octets: 408755
+          sha256: b0400cd9fef544f63d9290ed47363d12cef5b17485b29b29f79c01dc7984991e
+          recupere_le: '2026-10-11T16:35:07'
+        - fichier: data/raw/pvgis/tataouine/series_CIS_2005_2009.csv.gz
+          octets: 510589
+          sha256: ea12b58773c4c103dd41acd54b711172e41197ac3d2ff88b829ee3321a7e517f
+          recupere_le: '2026-10-11T16:34:33'
+        - fichier: data/raw/pvgis/tataouine/series_CIS_2010_2014.csv.gz
+          octets: 512250
+          sha256: d971a61f4a7dd82b7e79a30dde3338c45f4c4558cb9b2360d8b4731e6dfe9be3
+          recupere_le: '2026-10-11T16:34:40'
+        - fichier: data/raw/pvgis/tataouine/series_CIS_2015_2019.csv.gz
+          octets: 511679
+          sha256: 5acf1aead22aa434f0d6ed09846835907200a51f5b32d4ccfa4012e1d76fd76e
+          recupere_le: '2026-10-11T16:34:47'
+        - fichier: data/raw/pvgis/tataouine/series_CIS_2020_2023.csv.gz
+          octets: 409789
+          sha256: f201eb11d94769ac7331c77b134410813d70020d20d2bb1d0b44b9c2b34f81ae
+          recupere_le: '2026-10-11T16:34:49'
+        - fichier: data/raw/pvgis/tataouine/series_crystSi_2005_2009.csv.gz
+          octets: 510647
+          sha256: 5e6cbb09fcdd1e5a950ecbc4a351e5c3387d36d3cca527432baeaaaf10f7050b
+          recupere_le: '2026-10-11T16:34:01'
+        - fichier: data/raw/pvgis/tataouine/series_crystSi_2010_2014.csv.gz
+          octets: 512318
+          sha256: 5794c704e831dda84c4b69a495429e882c5cbda0b0b733cea48008e1c41cd284
+          recupere_le: '2026-10-11T16:34:27'
+        - fichier: data/raw/pvgis/tataouine/series_crystSi_2015_2019.csv.gz
+          octets: 511710
+          sha256: c4a69939b1c090bbbd1b52267aa160829c020bfb18262f82b263cd0d53f21990
+          recupere_le: '2026-10-11T16:34:18'
+        - fichier: data/raw/pvgis/tataouine/series_crystSi_2020_2023.csv.gz
+          octets: 409893
+          sha256: 9fddf919857f093b8c27a2e033ccc8b4ba266294ca4a1c18d0c31e6683398468
+          recupere_le: '2026-10-11T16:34:36'
+        - fichier: data/raw/pvgis/tataouine/series_horizontal_2005_2009.csv.gz
+          octets: 411225
+          sha256: d3e1c7f5fd3badf77ad0223e33686ba76eb2df62293b2594b27099b03d333d66
+          recupere_le: '2026-10-11T16:35:13'
+        - fichier: data/raw/pvgis/tataouine/series_horizontal_2010_2014.csv.gz
+          octets: 411537
+          sha256: 13e099c3adb34e50a0644ad38b922cc139cad4698618260716efa83a4b4a6bcb
+          recupere_le: '2026-10-11T16:35:16'
+        - fichier: data/raw/pvgis/tataouine/series_horizontal_2015_2019.csv.gz
+          octets: 411280
+          sha256: 30dd7e3c4b4bc95f28e533f73da3eb86059aadfc84644f605c0e8769b45ae824
+          recupere_le: '2026-10-11T16:35:16'
+        - fichier: data/raw/pvgis/tataouine/series_horizontal_2020_2023.csv.gz
+          octets: 329483
+          sha256: aef450fc156f5acc63cea5153cbacb96c199117416e2ca337d241ee262309b2f
+          recupere_le: '2026-10-11T16:35:18'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/tataouine/daily_2005_2023.json
+          octets: 480174
+          sha256: 17463d2889e638fd0258a9844cadf2ca4f8544843114a2c78162924da0851da1
+          recupere_le: '2026-10-11T17:10:33'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/tataouine/daily_2005_2023.json
+          octets: 1055259
+          sha256: 270f359776ccf4f171ef04666f440ad49018c31c67bd4ccc2cfca122df868381
+          recupere_le: '2026-10-11T16:15:08'
+    table_traitee:
+      fichier: data/processed/tataouine.csv
+      octets: 284573
+      sha256: ffcb97a230f9dcc499ed7f48dc2b75688f6393118134c5b79b376a2b117ac41c
+      recupere_le: '2026-10-11T17:33:29'
+  madrid:
+    coordonnees:
+      lat: 40.4168
+      lon: -3.7038
+      altitude_m: 665.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 37.0
+    sources:
+      pvgis:
+        origine: cache v1 (data/brut) + téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/madrid/orientation_CIS_est.json
+          octets: 5207
+          sha256: 7917c25561282e9edd3dd7ae65a24d2fc40c1d38eca734ea30e7606ef079dc98
+          recupere_le: '2026-10-11T17:14:17'
+        - fichier: data/raw/pvgis/madrid/orientation_CIS_optimale.json
+          octets: 5214
+          sha256: 2d9e733015fd44afb3b1010902a6e1e3c273503d52d879940d9ec14e8d3b38ae
+          recupere_le: '2026-10-11T17:14:24'
+        - fichier: data/raw/pvgis/madrid/orientation_CIS_ouest.json
+          octets: 5209
+          sha256: 7a112cd3d80fb8297147baf6659f37a7077e84483c38c710f01deb38b1e2a75b
+          recupere_le: '2026-10-11T17:14:21'
+        - fichier: data/raw/pvgis/madrid/orientation_CIS_sud.json
+          octets: 5216
+          sha256: b435792631addb397060c36c438d50cc2e0bea16547bde44461c07692956cb88
+          recupere_le: '2026-10-11T17:14:16'
+        - fichier: data/raw/pvgis/madrid/series_CdTe_2005_2009.csv.gz
+          octets: 499961
+          sha256: cc610828bc472993aa54ab32ae33b0232709bb7b1f832ee16fa9b7643f433504
+          recupere_le: '2026-10-11T16:12:17'
+        - fichier: data/raw/pvgis/madrid/series_CdTe_2010_2014.csv.gz
+          octets: 501816
+          sha256: 6d531983da299e242644452acd7004363ac59860fb3fbcf941f4abd4f2dad438
+          recupere_le: '2026-10-11T16:12:20'
+        - fichier: data/raw/pvgis/madrid/series_CdTe_2015_2019.csv.gz
+          octets: 501165
+          sha256: c3d47287c9927d434385d10b04bb034a7a46d37326d142e9c0168d38cd37d0c6
+          recupere_le: '2026-10-11T16:12:24'
+        - fichier: data/raw/pvgis/madrid/series_CdTe_2020_2023.csv.gz
+          octets: 400930
+          sha256: beba2d5f1d6000d1edf20fc11666ba97596253ad436675bf817868f603544a70
+          recupere_le: '2026-10-11T16:12:36'
+        - fichier: data/raw/pvgis/madrid/series_CIS_2005_2009.csv.gz
+          octets: 501643
+          sha256: d66093d6d8e96ee50dfe936efccfcf000fe27692440fbd2052deaab8086778cb
+          recupere_le: '2026-10-11T16:11:33'
+        - fichier: data/raw/pvgis/madrid/series_CIS_2010_2014.csv.gz
+          octets: 503975
+          sha256: bad73cc5a77036f1900cf4c6f3d005aebbc4fae321c317ed8043fdba2b85ac68
+          recupere_le: '2026-10-11T16:11:49'
+        - fichier: data/raw/pvgis/madrid/series_CIS_2015_2019.csv.gz
+          octets: 503122
+          sha256: fcdb63fe80d03d60dc03e91a8dbcfab1bf522ccd7af2b1beb61839ae96e98e66
+          recupere_le: '2026-10-11T16:11:55'
+        - fichier: data/raw/pvgis/madrid/series_CIS_2020_2023.csv.gz
+          octets: 402836
+          sha256: 83e9a7b64bb53ac5964d2dc4c42a39d4b90774ed94ae6b0bc278c02636f99b46
+          recupere_le: '2026-10-11T16:11:49'
+        - fichier: data/brut/pvgis/madrid_horaire.parquet
+          octets: 3469898
+          sha256: dc5a31055e1788bd3c7998958ea310d235449d41eee222c3649ca23bfb431e8a
+          recupere_le: '2026-10-10T12:13:10'
+      open_meteo:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/open_meteo/madrid.csv
+          octets: 459656
+          sha256: 6c4f9b3e8f0c82739a85532b12f4f788a37b1eb0b7a6f8d69d737698e3032800
+          recupere_le: '2026-10-10T12:11:34'
+      nasa_power:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/nasa_power/madrid.csv
+          octets: 452592
+          sha256: d8f1802366110690aebffd0ed4e6528b4e92a32536a50887d37a404f69b14aa1
+          recupere_le: '2026-10-10T12:05:27'
+    table_traitee:
+      fichier: data/processed/madrid.csv
+      octets: 284573
+      sha256: 33cda6bf04b149665ad0ca2a570d4f0a7cfec019ee7fa0b0d9c69f111f8e788f
+      recupere_le: '2026-10-11T17:33:30'
+  seville:
+    coordonnees:
+      lat: 37.3891
+      lon: -5.9845
+      altitude_m: 16.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 35.0
+    sources:
+      pvgis:
+        origine: cache v1 (data/brut) + téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/seville/orientation_CdTe_est.json
+          octets: 5205
+          sha256: 90717dc6bd6c693a51572dc8f3879e6ffee95c81c065dceb3de9445b81f72780
+          recupere_le: '2026-10-11T17:14:31'
+        - fichier: data/raw/pvgis/seville/orientation_CdTe_optimale.json
+          octets: 5212
+          sha256: 988c29334081163f458ae2eeefa221c8f644617ae76bb56fefc88913c5d32a64
+          recupere_le: '2026-10-11T17:14:33'
+        - fichier: data/raw/pvgis/seville/orientation_CdTe_ouest.json
+          octets: 5205
+          sha256: f7368c93b54e64487f7f46bcd95c6f2d1ff4732d1f011ce30c6dc4f0c408a1d8
+          recupere_le: '2026-10-11T17:14:32'
+        - fichier: data/raw/pvgis/seville/orientation_CdTe_sud.json
+          octets: 5222
+          sha256: 901c550af37a94cb5044782b8d1b71b8b176ee26cdc4f1affa852a7a5b86450f
+          recupere_le: '2026-10-11T17:14:24'
+        - fichier: data/raw/pvgis/seville/series_CdTe_2005_2009.csv.gz
+          octets: 500681
+          sha256: fe62730ebaa206820002acf2687057844781d3743a52269de460e3dbacab67d8
+          recupere_le: '2026-10-11T16:36:11'
+        - fichier: data/raw/pvgis/seville/series_CdTe_2010_2014.csv.gz
+          octets: 502246
+          sha256: cb3b86cdf3699740d553512739db5b66659828be3769c33c946e195b22cbb980
+          recupere_le: '2026-10-11T16:36:12'
+        - fichier: data/raw/pvgis/seville/series_CdTe_2015_2019.csv.gz
+          octets: 502062
+          sha256: a7a32d8e0ba322f7681ff5b15b8bfff21325e624946a7e7596923243b1ffd838
+          recupere_le: '2026-10-11T16:36:13'
+        - fichier: data/raw/pvgis/seville/series_CdTe_2020_2023.csv.gz
+          octets: 401957
+          sha256: 08064515fb38232359873c2d8e60f532c624a84954485161245ae7c1cc1f6e1d
+          recupere_le: '2026-10-11T16:36:27'
+        - fichier: data/raw/pvgis/seville/series_CIS_2005_2009.csv.gz
+          octets: 502073
+          sha256: b0b2aa5fc492246f8d22c898cbaa42d7d14203223d3af54babd7bcf418792797
+          recupere_le: '2026-10-11T16:35:40'
+        - fichier: data/raw/pvgis/seville/series_CIS_2010_2014.csv.gz
+          octets: 503592
+          sha256: b6444d1ca9c2dd1298841920f7c6c8fa0b7ecbcf398dee4212809b5d66e20349
+          recupere_le: '2026-10-11T16:35:34'
+        - fichier: data/raw/pvgis/seville/series_CIS_2015_2019.csv.gz
+          octets: 503110
+          sha256: b101cbb278156731fbf3addba8c2d1a4b3f885094fdfb8829293da27029f79f5
+          recupere_le: '2026-10-11T16:35:43'
+        - fichier: data/raw/pvgis/seville/series_CIS_2020_2023.csv.gz
+          octets: 403051
+          sha256: 0122272fe6d5da07e6e23029df7f011b9e22f784df0d36885f2408cdee5f3672
+          recupere_le: '2026-10-11T16:35:47'
+        - fichier: data/brut/pvgis/seville_horaire.parquet
+          octets: 3469868
+          sha256: cae0ed3577c817d0a143ea35145c29373ff88255c2954b1360bdf5120537cd38
+          recupere_le: '2026-10-10T12:16:11'
+      open_meteo:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/open_meteo/seville.csv
+          octets: 461817
+          sha256: 320ebf5995352be092b6a08fe557e3642b7831fe781dbae9b306141db6bf4c26
+          recupere_le: '2026-10-10T12:12:47'
+      nasa_power:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/nasa_power/seville.csv
+          octets: 451817
+          sha256: 39a1d7e4938815961e5227420288ecb86a48d496215740a4cac754fb0abbb25b
+          recupere_le: '2026-10-10T12:05:35'
+    table_traitee:
+      fichier: data/processed/seville.csv
+      octets: 284573
+      sha256: fef47886e066f7584975e5b0289bb44540f99d4c0a2291a9788aad392125c17d
+      recupere_le: '2026-10-11T17:33:31'
+  barcelone:
+    coordonnees:
+      lat: 41.3874
+      lon: 2.1686
+      altitude_m: 15.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 38.0
+    sources:
+      pvgis:
+        origine: cache v1 (data/brut) + téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/barcelone/orientation_CIS_est.json
+          octets: 5205
+          sha256: 96afaea3c8abf83848ffae3edc8f211f71261e4ae18495fcf0b2e89fafc6f63f
+          recupere_le: '2026-10-11T17:14:08'
+        - fichier: data/raw/pvgis/barcelone/orientation_CIS_optimale.json
+          octets: 5214
+          sha256: 7f80740abd981446245de818d4ac9b6324de406a8726af92261af3487edc9254
+          recupere_le: '2026-10-11T17:14:11'
+        - fichier: data/raw/pvgis/barcelone/orientation_CIS_ouest.json
+          octets: 5205
+          sha256: fcaf08cc2ce03c06f363a587f14a7432c1bd50ef4872997855d8cc2a10002bb3
+          recupere_le: '2026-10-11T17:14:09'
+        - fichier: data/raw/pvgis/barcelone/orientation_CIS_sud.json
+          octets: 5213
+          sha256: a68b2d0a00ffcf29ee20e2a7d4f9deef0b44fed7033b01312beb83f484ef4774
+          recupere_le: '2026-10-11T17:14:07'
+        - fichier: data/raw/pvgis/barcelone/series_CdTe_2005_2009.csv.gz
+          octets: 501000
+          sha256: 6f50829bc5df625b7d6978fa384c04863bff673e23f1f3b4bdc12c087d957eec
+          recupere_le: '2026-10-11T16:36:55'
+        - fichier: data/raw/pvgis/barcelone/series_CdTe_2010_2014.csv.gz
+          octets: 501926
+          sha256: c1481f7ea70805bd9c0a5ce14ec1512e68876eb8fd09f4049f8c13ed086d2451
+          recupere_le: '2026-10-11T16:37:07'
+        - fichier: data/raw/pvgis/barcelone/series_CdTe_2015_2019.csv.gz
+          octets: 500317
+          sha256: d4a8bd238006d6dbb7d58aa437642a1d9706de6cb03d080902543ccd608baf4c
+          recupere_le: '2026-10-11T16:37:07'
+        - fichier: data/raw/pvgis/barcelone/series_CdTe_2020_2023.csv.gz
+          octets: 403097
+          sha256: 6d4e1de863df0900a34d754160c99229a4577d4aa3a20a444bd5c3732a825888
+          recupere_le: '2026-10-11T16:37:09'
+        - fichier: data/raw/pvgis/barcelone/series_CIS_2005_2009.csv.gz
+          octets: 502855
+          sha256: f02e351c0aff6e63c5c503070bb219a01299938febed302f992b37fd72b5112c
+          recupere_le: '2026-10-11T16:36:33'
+        - fichier: data/raw/pvgis/barcelone/series_CIS_2010_2014.csv.gz
+          octets: 503978
+          sha256: 0c4d9f16129934fa5626c1b1735ba7db08c6ca2ae9d25b2652203a276e3e05b5
+          recupere_le: '2026-10-11T16:36:40'
+        - fichier: data/raw/pvgis/barcelone/series_CIS_2015_2019.csv.gz
+          octets: 502016
+          sha256: 0301837818415bec559250c23850be4f6d88445c220c2dd10962064db591c8b9
+          recupere_le: '2026-10-11T16:36:49'
+        - fichier: data/raw/pvgis/barcelone/series_CIS_2020_2023.csv.gz
+          octets: 404119
+          sha256: 6a29176d8b9aadb07e7a116d7863ca8fdd8f5442eecee89710b50839a6cf7200
+          recupere_le: '2026-10-11T16:36:50'
+        - fichier: data/brut/pvgis/barcelone_horaire.parquet
+          octets: 3415826
+          sha256: b76a7bdb5bd291c21c0eccf4c6cb038eb6c17bd65eebb894718ce6e941b83d23
+          recupere_le: '2026-10-10T12:16:15'
+      open_meteo:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/open_meteo/barcelone.csv
+          octets: 462465
+          sha256: 0c3a497bb295c7ebd04f20da5d7515baed88cc2dd882a63823ca00598c9c2329
+          recupere_le: '2026-10-10T12:13:57'
+      nasa_power:
+        origine: cache v1 (data/brut)
+        fichiers:
+        - fichier: data/brut/nasa_power/barcelone.csv
+          octets: 451421
+          sha256: f38f2a0a179375f403357e7d9974d656fbf18735a8b4a04abfefb2d05b1fbcd6
+          recupere_le: '2026-10-10T12:05:44'
+    table_traitee:
+      fichier: data/processed/barcelone.csv
+      octets: 284573
+      sha256: c00ae26c47870cbe282de3d4cb9a30dd4f8c1cab51312742fff62476d65930aa
+      recupere_le: '2026-10-11T17:33:33'
+  valence:
+    coordonnees:
+      lat: 39.4699
+      lon: -0.3763
+      altitude_m: 15.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 37.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/valence/pvcalc.json
+          octets: 5215
+          sha256: 257fe3b9db17d2870e8bd5fe6fcc53a873186298acd41c9ceea05e792b30924b
+          recupere_le: '2026-10-11T16:13:04'
+        - fichier: data/raw/pvgis/valence/series_CdTe_2005_2009.csv.gz
+          octets: 501852
+          sha256: 0f075c4079e8e5db1b1be8ccd68412bc76401e582ec60833dc0f203df3cb11fe
+          recupere_le: '2026-10-11T16:37:51'
+        - fichier: data/raw/pvgis/valence/series_CdTe_2010_2014.csv.gz
+          octets: 503891
+          sha256: 8005e0308f63eb89fbf58d76f140945902354403ee7d18a7ec2bc4062d8344c3
+          recupere_le: '2026-10-11T16:37:55'
+        - fichier: data/raw/pvgis/valence/series_CdTe_2015_2019.csv.gz
+          octets: 501194
+          sha256: 23aea3eab38e1645deb22636ac3820d345dc9c91afd1c6be8a8dcf5ebcd8ff03
+          recupere_le: '2026-10-11T16:37:56'
+        - fichier: data/raw/pvgis/valence/series_CdTe_2020_2023.csv.gz
+          octets: 403480
+          sha256: 59ec467a2c8dc145f5ad7d5fe2cbebb03424551c8583de17d5dd6736b493bd7f
+          recupere_le: '2026-10-11T16:38:02'
+        - fichier: data/raw/pvgis/valence/series_CIS_2005_2009.csv.gz
+          octets: 503577
+          sha256: a61bdb7aed1a97b43ecb2db563a225f396ea221054b16dcc12b361db99e87302
+          recupere_le: '2026-10-11T16:37:33'
+        - fichier: data/raw/pvgis/valence/series_CIS_2010_2014.csv.gz
+          octets: 505469
+          sha256: e7daddc94abb96d0f7167fa24400abf346e2a3ff3f8dbaad7fc3f828f4a41f93
+          recupere_le: '2026-10-11T16:37:36'
+        - fichier: data/raw/pvgis/valence/series_CIS_2015_2019.csv.gz
+          octets: 503162
+          sha256: 7fbea31f770579c85a8a783f2cdbd92e2bfca966c4bf3678fe6554d0bbeda0b2
+          recupere_le: '2026-10-11T16:37:41'
+        - fichier: data/raw/pvgis/valence/series_CIS_2020_2023.csv.gz
+          octets: 404938
+          sha256: f70b5bd3566a3d95050c970723cfd0534345519b9b4bd11d5c727fa3903bb7b2
+          recupere_le: '2026-10-11T16:37:43'
+        - fichier: data/raw/pvgis/valence/series_crystSi_2005_2009.csv.gz
+          octets: 503322
+          sha256: e2dfda7b4b1fdd3d34c340a0a46783a245dfa7c7585da378b669f7351a161538
+          recupere_le: '2026-10-11T16:37:20'
+        - fichier: data/raw/pvgis/valence/series_crystSi_2010_2014.csv.gz
+          octets: 505214
+          sha256: 7d179cd2f8cb8119780620fd7f9ebdb62ec59f9f0d858ae6e38374adc3309008
+          recupere_le: '2026-10-11T16:37:20'
+        - fichier: data/raw/pvgis/valence/series_crystSi_2015_2019.csv.gz
+          octets: 502607
+          sha256: b0ba48d3578598dfd539c7092bc3f26bace11c2425b8330e60e2c752bc5e07c0
+          recupere_le: '2026-10-11T16:37:22'
+        - fichier: data/raw/pvgis/valence/series_crystSi_2020_2023.csv.gz
+          octets: 404751
+          sha256: 72b32b6f1e7026131657b6c55a9cf237da5ce67ebeb29cec216ba486bc65817e
+          recupere_le: '2026-10-11T16:37:31'
+        - fichier: data/raw/pvgis/valence/series_horizontal_2005_2009.csv.gz
+          octets: 405990
+          sha256: 81865525b909c078b07d9f2a8e676fc5d06e447865a53d25be1cf95c36550268
+          recupere_le: '2026-10-11T16:38:12'
+        - fichier: data/raw/pvgis/valence/series_horizontal_2010_2014.csv.gz
+          octets: 406684
+          sha256: bbde74ad2881786569ce91712957debcbc6d78786e0ae1840b7d800f801815f5
+          recupere_le: '2026-10-11T16:38:12'
+        - fichier: data/raw/pvgis/valence/series_horizontal_2015_2019.csv.gz
+          octets: 404459
+          sha256: bc42e404448519b73ffeb1e6c7e1edf15b8ce60697e83bea15c2ea0a94445851
+          recupere_le: '2026-10-11T16:38:19'
+        - fichier: data/raw/pvgis/valence/series_horizontal_2020_2023.csv.gz
+          octets: 325857
+          sha256: 9fda34fbc4756099a121eb10a0db23d54a7b91baacb8a1439aec1503a993e57b
+          recupere_le: '2026-10-11T16:38:21'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/valence/daily_2005_2023.json
+          octets: 480317
+          sha256: 1a8e62582dd35910cc638e82cb39ac6c513ec4e46a9f07bac7376ffb6b1aae35
+          recupere_le: '2026-10-11T17:13:41'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/valence/daily_2005_2023.json
+          octets: 1057558
+          sha256: ae486f4d708f5dfb2b0cdb6f2e1813a333fd03904114fce4af2582b1cd9abb39
+          recupere_le: '2026-10-11T16:15:16'
+    table_traitee:
+      fichier: data/processed/valence.csv
+      octets: 284573
+      sha256: 6db3b9ce684db645bdfd848e81b4d7cbd0bb2e30538e934d628b2c93831db771
+      recupere_le: '2026-10-11T17:33:35'
+  malaga:
+    coordonnees:
+      lat: 36.7213
+      lon: -4.4214
+      altitude_m: 22.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 34.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/malaga/pvcalc.json
+          octets: 5219
+          sha256: 1d93a6b541e41b196ad8a608dbfc7f46594590b85aaa58a0754bd19a729c0597
+          recupere_le: '2026-10-11T16:13:06'
+        - fichier: data/raw/pvgis/malaga/series_CdTe_2005_2009.csv.gz
+          octets: 499845
+          sha256: e97f96ebf579cc3db8b606b41c26ccbf7760e6995d616758281091e29d62f088
+          recupere_le: '2026-10-11T16:39:03'
+        - fichier: data/raw/pvgis/malaga/series_CdTe_2010_2014.csv.gz
+          octets: 501542
+          sha256: dfed2824ec6addbf0d1953901654c8fb563a4ca01a668f3e0a5e7a94cec84231
+          recupere_le: '2026-10-11T16:39:11'
+        - fichier: data/raw/pvgis/malaga/series_CdTe_2015_2019.csv.gz
+          octets: 501556
+          sha256: b36c083a5dc5c1840bac10ddef40ca5ff7c23db8cc00be0b96578b1ea4c373ba
+          recupere_le: '2026-10-11T16:39:09'
+        - fichier: data/raw/pvgis/malaga/series_CdTe_2020_2023.csv.gz
+          octets: 401284
+          sha256: 44e70e18cea2128b7fdbce0873c6fbfe4fc5f084a61037d71e641b43f198df22
+          recupere_le: '2026-10-11T16:39:11'
+        - fichier: data/raw/pvgis/malaga/series_CIS_2005_2009.csv.gz
+          octets: 501272
+          sha256: c458ee59fa6b11c3741406eb3f9df9a6cfb31d6e6a43309d70093c4869fa64b0
+          recupere_le: '2026-10-11T16:38:48'
+        - fichier: data/raw/pvgis/malaga/series_CIS_2010_2014.csv.gz
+          octets: 502831
+          sha256: f36ec88a3f49300cd70e9ffdceea8572ed594327bfc77c05b2b63d211d20e8fb
+          recupere_le: '2026-10-11T16:38:49'
+        - fichier: data/raw/pvgis/malaga/series_CIS_2015_2019.csv.gz
+          octets: 503071
+          sha256: 4065fe53e597d7b9af240ca034e6827a401e0e96f52b25386fc6f8323f4284c2
+          recupere_le: '2026-10-11T16:38:47'
+        - fichier: data/raw/pvgis/malaga/series_CIS_2020_2023.csv.gz
+          octets: 402377
+          sha256: 1bb8067efbe3fbfe59fdac3dc93992820a6bbf19d739237ce3c1ea5ca4b5d26c
+          recupere_le: '2026-10-11T16:38:59'
+        - fichier: data/raw/pvgis/malaga/series_crystSi_2005_2009.csv.gz
+          octets: 500951
+          sha256: 466e5d0283b0084af89cbd9e5aaf64d96e7f71dd64d5b5424a95769015caa5cf
+          recupere_le: '2026-10-11T16:38:24'
+        - fichier: data/raw/pvgis/malaga/series_crystSi_2010_2014.csv.gz
+          octets: 502492
+          sha256: 012ffb593919a41c049bec66f182ca91f454dd4236e3bdb34d9cd974970649f7
+          recupere_le: '2026-10-11T16:38:31'
+        - fichier: data/raw/pvgis/malaga/series_crystSi_2015_2019.csv.gz
+          octets: 502730
+          sha256: 22b9f24a7617257d1c635ee44312759840e93f1b2208b3bf6418ce68727dc32a
+          recupere_le: '2026-10-11T16:38:34'
+        - fichier: data/raw/pvgis/malaga/series_crystSi_2020_2023.csv.gz
+          octets: 402127
+          sha256: dda593061a40c17fef75cee704261496d26df090b75b8e3a023bcf876d4c8724
+          recupere_le: '2026-10-11T16:38:34'
+        - fichier: data/raw/pvgis/malaga/series_horizontal_2005_2009.csv.gz
+          octets: 402470
+          sha256: 513c9f838dfebda60215bdb2959dbc6c1c796f8ef0872c462681b22f22064f91
+          recupere_le: '2026-10-11T16:39:20'
+        - fichier: data/raw/pvgis/malaga/series_horizontal_2010_2014.csv.gz
+          octets: 403314
+          sha256: fa9e397a2b5614bc5743cd9496ce00c2fa5d45e6cef7dacf7d82172227d2d671
+          recupere_le: '2026-10-11T16:39:20'
+        - fichier: data/raw/pvgis/malaga/series_horizontal_2015_2019.csv.gz
+          octets: 403339
+          sha256: 6f9969d71a04f8a6a2f153a436cd8d7b337e5b4b5fa95b83d2be6924b623d216
+          recupere_le: '2026-10-11T16:39:24'
+        - fichier: data/raw/pvgis/malaga/series_horizontal_2020_2023.csv.gz
+          octets: 322524
+          sha256: 98167aa1f2648e5f62ae9afcc4d1ae37b2ffe02e3d627f1aef993086d795eb83
+          recupere_le: '2026-10-11T16:39:28'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/malaga/daily_2005_2023.json
+          octets: 481456
+          sha256: 334f72efd8426d5f07dc1fe948655a31252b4ea8985179e8653bd85c13661bfb
+          recupere_le: '2026-10-11T17:16:46'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/malaga/daily_2005_2023.json
+          octets: 1056527
+          sha256: e76feaf05a65a52c7b83e50fcf459152fd98c1dff5d581163c8fbb2525e2edf8
+          recupere_le: '2026-10-11T16:15:23'
+    table_traitee:
+      fichier: data/processed/malaga.csv
+      octets: 284573
+      sha256: 0bfc07c6b6e39c79046a45d7808d0005236091afe37084b446986390c1ec3ba7
+      recupere_le: '2026-10-11T17:33:37'
+  saragosse:
+    coordonnees:
+      lat: 41.6488
+      lon: -0.8891
+      altitude_m: 214.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 38.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/saragosse/pvcalc.json
+          octets: 5217
+          sha256: 1fb43163787a18a4cd04d8d37dc53c65bccc863263bd41b1abd4449e9b790b65
+          recupere_le: '2026-10-11T16:13:07'
+        - fichier: data/raw/pvgis/saragosse/series_CdTe_2005_2009.csv.gz
+          octets: 508450
+          sha256: ee8ce784b81a97870a07eddfe9d71f057b38999631b47b73e358166d2c1135f2
+          recupere_le: '2026-10-11T16:40:15'
+        - fichier: data/raw/pvgis/saragosse/series_CdTe_2010_2014.csv.gz
+          octets: 510274
+          sha256: f0f909a962b7b349bc35831f1ba169d6b3009fd57dfe53c5a3cf51fc73eed6ba
+          recupere_le: '2026-10-11T16:40:14'
+        - fichier: data/raw/pvgis/saragosse/series_CdTe_2015_2019.csv.gz
+          octets: 509790
+          sha256: 4f1c3dd254721aae67c0459c811b560dab2f4f2c8702dd4835d7b853b1ec8412
+          recupere_le: '2026-10-11T16:40:16'
+        - fichier: data/raw/pvgis/saragosse/series_CdTe_2020_2023.csv.gz
+          octets: 407071
+          sha256: 093b1cbf5bf509d2197fdee62da65601a906837d71a61024940d007e1bea82df
+          recupere_le: '2026-10-11T16:40:24'
+        - fichier: data/raw/pvgis/saragosse/series_CIS_2005_2009.csv.gz
+          octets: 510133
+          sha256: 822c4aa62ccc20e8bab0747e1163e4a6ae1e9edacab9676495e84c23c420645f
+          recupere_le: '2026-10-11T16:39:52'
+        - fichier: data/raw/pvgis/saragosse/series_CIS_2010_2014.csv.gz
+          octets: 512177
+          sha256: dd32e5ee557c31f0882f9f1aab50286132d4d66204fe781a184d3b68601e139c
+          recupere_le: '2026-10-11T16:39:59'
+        - fichier: data/raw/pvgis/saragosse/series_CIS_2015_2019.csv.gz
+          octets: 511613
+          sha256: f6ed72e27c6f86399b3dab5cd099c7b8a78dc4019b870fd302025e0341cdd846
+          recupere_le: '2026-10-11T16:39:59'
+        - fichier: data/raw/pvgis/saragosse/series_CIS_2020_2023.csv.gz
+          octets: 408481
+          sha256: e13aa4f254cfafb7d0d38e68960387dab68642fd8b9e721be6ddb9395e48f47a
+          recupere_le: '2026-10-11T16:40:03'
+        - fichier: data/raw/pvgis/saragosse/series_crystSi_2005_2009.csv.gz
+          octets: 510045
+          sha256: 54bebfcdec5967c55efb365b635bc2ac44c5990131e5e85ad2659b8aac6a7e92
+          recupere_le: '2026-10-11T16:39:31'
+        - fichier: data/raw/pvgis/saragosse/series_crystSi_2010_2014.csv.gz
+          octets: 512065
+          sha256: 60799409a7cf4daab0920de12e9bd66ac285f41bd7a275b12de0252befc2ea7c
+          recupere_le: '2026-10-11T16:39:44'
+        - fichier: data/raw/pvgis/saragosse/series_crystSi_2015_2019.csv.gz
+          octets: 511608
+          sha256: 1588205e0bb15ea64c4094fcfd24ca0f7502512b1786abb5f70bab00b28f8288
+          recupere_le: '2026-10-11T16:39:38'
+        - fichier: data/raw/pvgis/saragosse/series_crystSi_2020_2023.csv.gz
+          octets: 408452
+          sha256: 4481b99920c91a5b6a19063b60a75f87781be80d786a646e1fa293faad930f29
+          recupere_le: '2026-10-11T16:39:41'
+        - fichier: data/raw/pvgis/saragosse/series_horizontal_2005_2009.csv.gz
+          octets: 413229
+          sha256: 9f46839176a769fba0af69b51b0c0f559c9fcd8a95ad347d8c99ce9efe51dc5c
+          recupere_le: '2026-10-11T16:40:27'
+        - fichier: data/raw/pvgis/saragosse/series_horizontal_2010_2014.csv.gz
+          octets: 414434
+          sha256: 8e3edaa64850a61773f1cdc72b18ef3feb197b8ddd46cb153fa720b0179b19ee
+          recupere_le: '2026-10-11T16:40:29'
+        - fichier: data/raw/pvgis/saragosse/series_horizontal_2015_2019.csv.gz
+          octets: 413787
+          sha256: 338c1a88319e8e71c866a5c45c9c12c76cddc9a838750f47b5eb4d440337de7c
+          recupere_le: '2026-10-11T16:40:37'
+        - fichier: data/raw/pvgis/saragosse/series_horizontal_2020_2023.csv.gz
+          octets: 330580
+          sha256: 76013b2a6c11deaf8db338bd6fe05ab810317c8dcbe19faf2009df302ba5d0cb
+          recupere_le: '2026-10-11T16:40:40'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/saragosse/daily_2005_2023.json
+          octets: 478741
+          sha256: 62ec81e2fd30bed40ab5640cf0cb4eb31a5d02e1257ee9a84ee9fef84dface78
+          recupere_le: '2026-10-11T17:19:51'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/saragosse/daily_2005_2023.json
+          octets: 1056624
+          sha256: 4b6a8d40f0bdf62da91323452dafca2ed8a866becd3c6d2a77667020573ae684
+          recupere_le: '2026-10-11T16:15:31'
+    table_traitee:
+      fichier: data/processed/saragosse.csv
+      octets: 284573
+      sha256: a24c843abaf366e4089385d21d86e3af5dbfa3bbc2b753454d4900f367c9d225
+      recupere_le: '2026-10-11T17:33:40'
+  bilbao:
+    coordonnees:
+      lat: 43.263
+      lon: -2.935
+      altitude_m: 20.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 36.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/bilbao/pvcalc.json
+          octets: 5206
+          sha256: 5737ead44448e4dc79cc490417641193aa6391262849aa47c87c997e55d055f5
+          recupere_le: '2026-10-11T16:13:09'
+        - fichier: data/raw/pvgis/bilbao/series_CdTe_2005_2009.csv.gz
+          octets: 495261
+          sha256: a2187d1624966e666d7f3f226da25eed3b54747552641ea02f985aafbcf818f9
+          recupere_le: '2026-10-11T16:41:33'
+        - fichier: data/raw/pvgis/bilbao/series_CdTe_2010_2014.csv.gz
+          octets: 496956
+          sha256: d5ddd338260f0bfb5e1eedfb1403a641899e106fd8b112050bb4a4d0012c6d0e
+          recupere_le: '2026-10-11T16:41:35'
+        - fichier: data/raw/pvgis/bilbao/series_CdTe_2015_2019.csv.gz
+          octets: 497089
+          sha256: 7230a63a873d2437f0bcc15a47e02ac7e8e63a20d5a5a6e36468624f22002ede
+          recupere_le: '2026-10-11T16:41:33'
+        - fichier: data/raw/pvgis/bilbao/series_CdTe_2020_2023.csv.gz
+          octets: 398779
+          sha256: 7a15aed6d27fe68616c6319ff7ab23063ddaa431df48cc4000719e9a66b198be
+          recupere_le: '2026-10-11T16:41:53'
+        - fichier: data/raw/pvgis/bilbao/series_CIS_2005_2009.csv.gz
+          octets: 498252
+          sha256: 3b79aa35ac8c725ffe017705e03d1c190e60f83a7a865e84b48cbf45fea907eb
+          recupere_le: '2026-10-11T16:41:07'
+        - fichier: data/raw/pvgis/bilbao/series_CIS_2010_2014.csv.gz
+          octets: 500006
+          sha256: bfa70b659fe64022c34ef1aa70308ad14c5680cc113a3bd04319df6792e446d3
+          recupere_le: '2026-10-11T16:41:12'
+        - fichier: data/raw/pvgis/bilbao/series_CIS_2015_2019.csv.gz
+          octets: 500428
+          sha256: 3c8a55f8a3e6b6ff28c38abf08a37a036f004880eb52a8327042ff9bc60db84e
+          recupere_le: '2026-10-11T16:41:15'
+        - fichier: data/raw/pvgis/bilbao/series_CIS_2020_2023.csv.gz
+          octets: 401158
+          sha256: e067029366349190c5816cc3c2df4707f736795dfb2ff059a28cd6d4700579ae
+          recupere_le: '2026-10-11T16:41:19'
+        - fichier: data/raw/pvgis/bilbao/series_crystSi_2005_2009.csv.gz
+          octets: 497556
+          sha256: 970df18d95d53088758b06b9efe92161ab7e2fad64029a9e014b89dc196e4209
+          recupere_le: '2026-10-11T16:40:43'
+        - fichier: data/raw/pvgis/bilbao/series_crystSi_2010_2014.csv.gz
+          octets: 499407
+          sha256: cb70e2a3ca2d85ed676b04da57c69bec4a4f7295f41d69af6a8065f56feefc71
+          recupere_le: '2026-10-11T16:40:56'
+        - fichier: data/raw/pvgis/bilbao/series_crystSi_2015_2019.csv.gz
+          octets: 499482
+          sha256: 20df89f39069334a0e4f789ea1726cd613469acba8ec28d65b1ef459ed96ff92
+          recupere_le: '2026-10-11T16:40:59'
+        - fichier: data/raw/pvgis/bilbao/series_crystSi_2020_2023.csv.gz
+          octets: 400409
+          sha256: 69c9bad9aa17f1122d2a3a8511b0fa338618091e7bbd0cba8ad5cf7b48d97fc4
+          recupere_le: '2026-10-11T16:40:58'
+        - fichier: data/raw/pvgis/bilbao/series_horizontal_2005_2009.csv.gz
+          octets: 403535
+          sha256: 6750d1c540edb5415a6684f9a475dacc568b1a88d851655dba43481498446469
+          recupere_le: '2026-10-11T16:42:04'
+        - fichier: data/raw/pvgis/bilbao/series_horizontal_2010_2014.csv.gz
+          octets: 404616
+          sha256: cc50cfbba8a408a8a6238bc71b74b8565ce5681ec44e96639d13e0e86c85fee2
+          recupere_le: '2026-10-11T16:41:53'
+        - fichier: data/raw/pvgis/bilbao/series_horizontal_2015_2019.csv.gz
+          octets: 404505
+          sha256: 305c2f4bc675fcc6e93cda221c998a321401e4511a82cf85d3203c4d17d36359
+          recupere_le: '2026-10-11T16:42:11'
+        - fichier: data/raw/pvgis/bilbao/series_horizontal_2020_2023.csv.gz
+          octets: 324103
+          sha256: 7fee3dee13ce06aa96b1d06860edc488af8127bda7c496d669ab83fda4043f7c
+          recupere_le: '2026-10-11T16:42:08'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/bilbao/daily_2005_2023.json
+          octets: 479297
+          sha256: 1d48e61bd38dde88e36f603953a595332c4011a525cff9ccbc21a577b40dd58c
+          recupere_le: '2026-10-11T17:22:57'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/bilbao/daily_2005_2023.json
+          octets: 1058653
+          sha256: 651e59b357c95ee9d56cc347c6c062e5975782e6d4448bbbc88fc94bd6645b55
+          recupere_le: '2026-10-11T16:15:39'
+    table_traitee:
+      fichier: data/processed/bilbao.csv
+      octets: 284573
+      sha256: 9f1b07fd64061437b4cd4865ea0086a32721b893785e583d18354c61c77bf5cc
+      recupere_le: '2026-10-11T17:33:42'
+  murcie:
+    coordonnees:
+      lat: 37.9922
+      lon: -1.1307
+      altitude_m: 53.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 35.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/murcie/pvcalc.json
+          octets: 5219
+          sha256: 9f5acbe8e6898f8e4aa96f3a1fa527a7528424f3f8d18475ede726e04ab55e85
+          recupere_le: '2026-10-11T16:13:10'
+        - fichier: data/raw/pvgis/murcie/series_CdTe_2005_2009.csv.gz
+          octets: 498643
+          sha256: c65c4e5f477655e8d6df8709a70e72a9a4914ef0ab89e65572427923e4a6bb26
+          recupere_le: '2026-10-11T16:42:57'
+        - fichier: data/raw/pvgis/murcie/series_CdTe_2010_2014.csv.gz
+          octets: 501335
+          sha256: 88da0edc54ad9a4cee654a96d78915e0a4bd4e431ddd1e57d941fcc63b642b0b
+          recupere_le: '2026-10-11T16:43:00'
+        - fichier: data/raw/pvgis/murcie/series_CdTe_2015_2019.csv.gz
+          octets: 500552
+          sha256: e91b27090f81603144144f5b97e03636f5f9755d83ce8146e78506ecc807ebf5
+          recupere_le: '2026-10-11T16:43:00'
+        - fichier: data/raw/pvgis/murcie/series_CdTe_2020_2023.csv.gz
+          octets: 400235
+          sha256: eb83f50dad0bfa4d1789b3cd8074ec1eea2a9a57d1d1357906b5de9d4950ddc1
+          recupere_le: '2026-10-11T16:43:06'
+        - fichier: data/raw/pvgis/murcie/series_CIS_2005_2009.csv.gz
+          octets: 500378
+          sha256: 466e085abf3cbe636edc066c010e10f2637e27552a0534f0daaa2db65829ee54
+          recupere_le: '2026-10-11T16:42:38'
+        - fichier: data/raw/pvgis/murcie/series_CIS_2010_2014.csv.gz
+          octets: 503205
+          sha256: 11e59f73876fab556dcc3564a3efb9af4082ee1c7fafaed86f13fb3bfbe32d6e
+          recupere_le: '2026-10-11T16:42:45'
+        - fichier: data/raw/pvgis/murcie/series_CIS_2015_2019.csv.gz
+          octets: 502497
+          sha256: dd6d0cc8110c8bd354efb974d158f7dcb67feaf3a1bc44e8b46ab5c960af8f03
+          recupere_le: '2026-10-11T16:42:49'
+        - fichier: data/raw/pvgis/murcie/series_CIS_2020_2023.csv.gz
+          octets: 401828
+          sha256: 58d6ec40f3d117b9741480f2e0bc08412905a2e08de3276e2332a4974bbbfdad
+          recupere_le: '2026-10-11T16:42:49'
+        - fichier: data/raw/pvgis/murcie/series_crystSi_2005_2009.csv.gz
+          octets: 500145
+          sha256: f9a916c6a38b52c51f1e994613e61377c882f97dd6eb1808756f360db3c6a40a
+          recupere_le: '2026-10-11T16:42:21'
+        - fichier: data/raw/pvgis/murcie/series_crystSi_2010_2014.csv.gz
+          octets: 503083
+          sha256: 4b003fdb1f2cc7d70b67992696e9c09cb170402e2b284b2a43f8dd218ed191b1
+          recupere_le: '2026-10-11T16:42:24'
+        - fichier: data/raw/pvgis/murcie/series_crystSi_2015_2019.csv.gz
+          octets: 501951
+          sha256: 688c732c6df0e2007b8fe6976a529150f1644a6f13cd7b446167cbeb56d2eb0e
+          recupere_le: '2026-10-11T16:42:41'
+        - fichier: data/raw/pvgis/murcie/series_crystSi_2020_2023.csv.gz
+          octets: 401560
+          sha256: be174a41b7c5aa3b2fd5fabbbed6fedef2404f8f425848f4905c2423e1411ec8
+          recupere_le: '2026-10-11T16:42:39'
+        - fichier: data/raw/pvgis/murcie/series_horizontal_2005_2009.csv.gz
+          octets: 402787
+          sha256: a55ed037846be47c46f0ff5c1710e043f3c7cc3d4496b9b4398da681ecac3b9c
+          recupere_le: '2026-10-11T16:43:07'
+        - fichier: data/raw/pvgis/murcie/series_horizontal_2010_2014.csv.gz
+          octets: 404505
+          sha256: 657d7f506e035bb899d918fc99e8a029d42d7020677c498bf2f1261684b3705e
+          recupere_le: '2026-10-11T16:43:15'
+        - fichier: data/raw/pvgis/murcie/series_horizontal_2015_2019.csv.gz
+          octets: 403104
+          sha256: 0aec1b45ffc47947d4734623e2cbf32d088263a9b6a4cff48941a9b7856298e9
+          recupere_le: '2026-10-11T16:43:14'
+        - fichier: data/raw/pvgis/murcie/series_horizontal_2020_2023.csv.gz
+          octets: 322776
+          sha256: ec24db494eed093d48bc8796f61e34365c801c68bcc255c3fbaafe9f442a1f7c
+          recupere_le: '2026-10-11T16:43:17'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/murcie/daily_2005_2023.json
+          octets: 480472
+          sha256: a7fc787dca6417e12ccda0a4cf9ec30edde4eca47b34912c584d19845289faca
+          recupere_le: '2026-10-11T17:26:03'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/murcie/daily_2005_2023.json
+          octets: 1057897
+          sha256: 73523c36fa64a9b7e01b00090c0f46015393c127a42e02b74855fc075afa276e
+          recupere_le: '2026-10-11T16:15:46'
+    table_traitee:
+      fichier: data/processed/murcie.csv
+      octets: 284573
+      sha256: cf0c34348a4aaafe1612df0c411eb09503d5ae1818931bb64063bb07809bcd51
+      recupere_le: '2026-10-11T17:33:44'
+  grenade:
+    coordonnees:
+      lat: 37.1773
+      lon: -3.5986
+      altitude_m: 689.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 34.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/grenade/pvcalc.json
+          octets: 5221
+          sha256: adea0d034417ab167a2304c31d02b9a39c080362b73045b720cf426706f0962a
+          recupere_le: '2026-10-11T16:13:11'
+        - fichier: data/raw/pvgis/grenade/series_CdTe_2005_2009.csv.gz
+          octets: 490727
+          sha256: 06869b2b696aa489c03e0b7033c971d8994b93953bea98b9fe9625b38801963f
+          recupere_le: '2026-10-11T16:43:53'
+        - fichier: data/raw/pvgis/grenade/series_CdTe_2010_2014.csv.gz
+          octets: 491889
+          sha256: eb64bad64dc4b4744319231b0b36708a338152b2edb10b8fc4be13311494770c
+          recupere_le: '2026-10-11T16:43:53'
+        - fichier: data/raw/pvgis/grenade/series_CdTe_2015_2019.csv.gz
+          octets: 492229
+          sha256: f6548195cf589aa2f23085d5f7c06527019d42cc05d9b36cfad08178325ca666
+          recupere_le: '2026-10-11T16:44:00'
+        - fichier: data/raw/pvgis/grenade/series_CdTe_2020_2023.csv.gz
+          octets: 395430
+          sha256: ec8ecbc68999f7d23db54eb3eba2c14c84b80f6fa54facb6f4a1a8f3c536e34b
+          recupere_le: '2026-10-11T16:44:04'
+        - fichier: data/raw/pvgis/grenade/series_CIS_2005_2009.csv.gz
+          octets: 492444
+          sha256: b5ade9ce4c54f202928972b0d70ae0af20364212958530365435c5394ce7a0b5
+          recupere_le: '2026-10-11T16:43:37'
+        - fichier: data/raw/pvgis/grenade/series_CIS_2010_2014.csv.gz
+          octets: 494009
+          sha256: 55cd134b8bc6d06c5338c1549a83a4a2ad3399d1869a8c646f5edd0fd88919b4
+          recupere_le: '2026-10-11T16:43:39'
+        - fichier: data/raw/pvgis/grenade/series_CIS_2015_2019.csv.gz
+          octets: 494111
+          sha256: 96f638f390aa1127e83e79b4ac5a9c3be6aed22b43d4f1aae04a37dc197116b2
+          recupere_le: '2026-10-11T16:43:43'
+        - fichier: data/raw/pvgis/grenade/series_CIS_2020_2023.csv.gz
+          octets: 396870
+          sha256: f85ee1a120aa1f25bc1b5b75c7b2bc6256e3f45823cc15debc51287f0e701aba
+          recupere_le: '2026-10-11T16:43:47'
+        - fichier: data/raw/pvgis/grenade/series_crystSi_2005_2009.csv.gz
+          octets: 491773
+          sha256: efb8dee5e9f9f44a2ebe601fd72961870ab2179ca992acaa03ea6dc850485291
+          recupere_le: '2026-10-11T16:43:24'
+        - fichier: data/raw/pvgis/grenade/series_crystSi_2010_2014.csv.gz
+          octets: 493539
+          sha256: 88c205113af40388d9b608007f60ad6b3812142d5103f18a8e7628cd24298db5
+          recupere_le: '2026-10-11T16:43:31'
+        - fichier: data/raw/pvgis/grenade/series_crystSi_2015_2019.csv.gz
+          octets: 493765
+          sha256: 24ee9ecbeecbb7797743c767a3ced490a2dc694a3115b9a0ae1bea31f2264a25
+          recupere_le: '2026-10-11T16:43:28'
+        - fichier: data/raw/pvgis/grenade/series_crystSi_2020_2023.csv.gz
+          octets: 396419
+          sha256: fe56435d96a41a20754c856622d2f5989d521ea160fe191f953d649933734f91
+          recupere_le: '2026-10-11T16:43:49'
+        - fichier: data/raw/pvgis/grenade/series_horizontal_2005_2009.csv.gz
+          octets: 394595
+          sha256: 06cc3d0060038ebdab2befb869b2b8e8b0fd6d45db6ed1bac2d3db7e449d4cc7
+          recupere_le: '2026-10-11T16:44:04'
+        - fichier: data/raw/pvgis/grenade/series_horizontal_2010_2014.csv.gz
+          octets: 395906
+          sha256: e8f590c055ba39f8db203f05c21c217bb5affb2ecbf39103e43939f3c5d9ff5e
+          recupere_le: '2026-10-11T16:44:07'
+        - fichier: data/raw/pvgis/grenade/series_horizontal_2015_2019.csv.gz
+          octets: 395390
+          sha256: d868a648053437f13bfce165a163aabf01cf9371fca3ec674f9ad1b51a737915
+          recupere_le: '2026-10-11T16:44:11'
+        - fichier: data/raw/pvgis/grenade/series_horizontal_2020_2023.csv.gz
+          octets: 317984
+          sha256: 04933b2acb51adc958c07dddb593623c58fcb113f47015bd44564ea91a03f3ec
+          recupere_le: '2026-10-11T16:44:28'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/grenade/daily_2005_2023.json
+          octets: 479087
+          sha256: aff09a907c5098c161ee8ebac1969a510d5f77d358b524c91759b45f8e9be0c1
+          recupere_le: '2026-10-11T17:29:08'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/grenade/daily_2005_2023.json
+          octets: 1056854
+          sha256: 7d2984b976f57bf5cc806355ef5c523bbc5002acda8878c4ff2a15f1286f7d5a
+          recupere_le: '2026-10-11T16:15:55'
+    table_traitee:
+      fichier: data/processed/grenade.csv
+      octets: 284573
+      sha256: d9b95029c3903e34e413bb5241d3425f26943a523ca2b962afa4956bce5da091
+      recupere_le: '2026-10-11T17:33:46'
+  palma:
+    coordonnees:
+      lat: 39.5696
+      lon: 2.6502
+      altitude_m: 34.0
+      fuseau: Europe/Madrid
+    pente_optimale_deg: 36.0
+    sources:
+      pvgis:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/pvgis/palma/pvcalc.json
+          octets: 5216
+          sha256: 9f8f894088f93afa8ab0bb9590042ab8ab08ddd9e3bd33049b236fc8f7c527c4
+          recupere_le: '2026-10-11T16:13:13'
+        - fichier: data/raw/pvgis/palma/series_CdTe_2005_2009.csv.gz
+          octets: 500725
+          sha256: 8ccf9c2784b2befe883ed1397a55938233b1ea48971d14c9bc97533562537080
+          recupere_le: '2026-10-11T16:44:48'
+        - fichier: data/raw/pvgis/palma/series_CdTe_2010_2014.csv.gz
+          octets: 502860
+          sha256: ca76ea68d121616775cb6f69257b00095d395e2906cdb8d4fe0437a8e93402ce
+          recupere_le: '2026-10-11T16:44:49'
+        - fichier: data/raw/pvgis/palma/series_CdTe_2015_2019.csv.gz
+          octets: 502315
+          sha256: 5b3b29b7d5dd40c6ab54ed559b9de38ecafe0362458e7159bec5f24d2eab493a
+          recupere_le: '2026-10-11T16:44:55'
+        - fichier: data/raw/pvgis/palma/series_CdTe_2020_2023.csv.gz
+          octets: 402360
+          sha256: d15e474517b6373d3e642eac7e78810bb58e6da95cd839da5b79eb1c5fb83a3c
+          recupere_le: '2026-10-11T16:44:58'
+        - fichier: data/raw/pvgis/palma/series_CIS_2005_2009.csv.gz
+          octets: 502311
+          sha256: 637b3526b334faaa5c33dff3201ab0963f4e84fef6e49e4d81186df995a0c8b9
+          recupere_le: '2026-10-11T16:44:35'
+        - fichier: data/raw/pvgis/palma/series_CIS_2010_2014.csv.gz
+          octets: 504263
+          sha256: f1bf7fcd440cea5d394fab0583b73cb8e2f819aa60d96f5e95728de08e8dc79d
+          recupere_le: '2026-10-11T16:44:39'
+        - fichier: data/raw/pvgis/palma/series_CIS_2015_2019.csv.gz
+          octets: 503827
+          sha256: 8a6c9236001b63f78b24381e2bde3b93887f379a50adc970220bcc968e768270
+          recupere_le: '2026-10-11T16:44:40'
+        - fichier: data/raw/pvgis/palma/series_CIS_2020_2023.csv.gz
+          octets: 403513
+          sha256: 0f9a483ae21856f6ddef69cb4426f2731a35ea20f6de5de2652bcbc93d1a0079
+          recupere_le: '2026-10-11T16:44:44'
+        - fichier: data/raw/pvgis/palma/series_crystSi_2005_2009.csv.gz
+          octets: 502316
+          sha256: bb5db85b4c86d9ceba5b1bb7dd0eb29617a24acb4355a9c1bcf754f30506e6eb
+          recupere_le: '2026-10-11T16:44:16'
+        - fichier: data/raw/pvgis/palma/series_crystSi_2010_2014.csv.gz
+          octets: 504246
+          sha256: 5d1e22b2a9a3ff54707ae8b580b5fef8543006ba3ec0e1099020269c853631c5
+          recupere_le: '2026-10-11T16:44:20'
+        - fichier: data/raw/pvgis/palma/series_crystSi_2015_2019.csv.gz
+          octets: 503556
+          sha256: 16a5c2896a5a826c872a0fddef6406943d99b661c04effcb7bd21c3cc815690d
+          recupere_le: '2026-10-11T16:44:26'
+        - fichier: data/raw/pvgis/palma/series_crystSi_2020_2023.csv.gz
+          octets: 403394
+          sha256: 4560cef06a3e9a8a3902a34ea3b8169557480f9ddee829a5989d5ab8d5bfcf8a
+          recupere_le: '2026-10-11T16:44:28'
+        - fichier: data/raw/pvgis/palma/series_horizontal_2005_2009.csv.gz
+          octets: 404188
+          sha256: 483d4dd6bee95039f8ff9d37fd036c8437b2f4aefa5ac77cf04017e2b5a522fe
+          recupere_le: '2026-10-11T16:45:00'
+        - fichier: data/raw/pvgis/palma/series_horizontal_2010_2014.csv.gz
+          octets: 405187
+          sha256: 71d4f124e8029e5adad45fa9c07f688df30b4d73923af062419722a051ea707c
+          recupere_le: '2026-10-11T16:45:03'
+        - fichier: data/raw/pvgis/palma/series_horizontal_2015_2019.csv.gz
+          octets: 404272
+          sha256: b777e960f287ca6a4c671be0de0ad5921e06ae26f46aa5e13ead1545af5835c8
+          recupere_le: '2026-10-11T16:45:07'
+        - fichier: data/raw/pvgis/palma/series_horizontal_2020_2023.csv.gz
+          octets: 324137
+          sha256: fe7a0df710c377a4f14abcf693193da95530268a7a158aabe81650e09f89ef15
+          recupere_le: '2026-10-11T16:45:07'
+      open_meteo:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/open_meteo/palma/daily_2005_2023.json
+          octets: 481330
+          sha256: c3d0703062e668151be20db132ea87beafd7f035cb4e05255d8959d788d09dad
+          recupere_le: '2026-10-11T17:32:12'
+      nasa_power:
+        origine: téléchargement v2
+        fichiers:
+        - fichier: data/raw/nasa_power/palma/daily_2005_2023.json
+          octets: 1058300
+          sha256: fe61d181703547f0d1f3f003efde5654999541670154392dac3c7ff899e76609
+          recupere_le: '2026-10-11T16:16:01'
+    table_traitee:
+      fichier: data/processed/palma.csv
+      octets: 284573
+      sha256: 7e95b52e32ad784565a799846f377f3656250193ba85cfaf7e2e0341d74d5798
+      recupere_le: '2026-10-11T17:33:48'

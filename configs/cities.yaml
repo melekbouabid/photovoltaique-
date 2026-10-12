@@ -1,0 +1,39 @@
+# Villes de l'étude : 10 par pays. Ajouter une ville = ajouter une entrée ici, sans changer le code.
+# lat / lon : centre-ville, en degrés décimaux (WGS84). Les 9 villes historiques gardent exactement
+# les coordonnées de la v1, pour que leur cache reste valable.
+# altitude : en mètres, vérifiée par scripts/verify_cities.py (voir reports/cities_verification.csv).
+# zone_climatique : classe de Köppen-Geiger, indicative.
+cities:
+  # ------------------------------------------------------------------ France
+  - {id: paris, nom: Paris, pays: France, code_pays: FR, lat: 48.8566, lon: 2.3522, altitude: 42, fuseau: Europe/Paris, zone_climatique: Cfb}
+  - {id: lyon, nom: Lyon, pays: France, code_pays: FR, lat: 45.7640, lon: 4.8357, altitude: 173, fuseau: Europe/Paris, zone_climatique: Cfb}
+  - {id: marseille, nom: Marseille, pays: France, code_pays: FR, lat: 43.2965, lon: 5.3698, altitude: 28, fuseau: Europe/Paris, zone_climatique: Csa}
+  - {id: toulouse, nom: Toulouse, pays: France, code_pays: FR, lat: 43.6047, lon: 1.4442, altitude: 150, fuseau: Europe/Paris, zone_climatique: Cfa}
+  - {id: bordeaux, nom: Bordeaux, pays: France, code_pays: FR, lat: 44.8378, lon: -0.5792, altitude: 20, fuseau: Europe/Paris, zone_climatique: Cfb}
+  - {id: nantes, nom: Nantes, pays: France, code_pays: FR, lat: 47.2184, lon: -1.5536, altitude: 19, fuseau: Europe/Paris, zone_climatique: Cfb}
+  - {id: lille, nom: Lille, pays: France, code_pays: FR, lat: 50.6292, lon: 3.0573, altitude: 20, fuseau: Europe/Paris, zone_climatique: Cfb}
+  - {id: strasbourg, nom: Strasbourg, pays: France, code_pays: FR, lat: 48.5734, lon: 7.7521, altitude: 147, fuseau: Europe/Paris, zone_climatique: Cfb}
+  - {id: nice, nom: Nice, pays: France, code_pays: FR, lat: 43.7102, lon: 7.2620, altitude: 25, fuseau: Europe/Paris, zone_climatique: Csa}
+  - {id: montpellier, nom: Montpellier, pays: France, code_pays: FR, lat: 43.6108, lon: 3.8767, altitude: 55, fuseau: Europe/Paris, zone_climatique: Csa}
+  # ------------------------------------------------------------------ Tunisie
+  - {id: tunis, nom: Tunis, pays: Tunisie, code_pays: TN, lat: 36.8065, lon: 10.1815, altitude: 23, fuseau: Africa/Tunis, zone_climatique: Csa}
+  - {id: sfax, nom: Sfax, pays: Tunisie, code_pays: TN, lat: 34.7406, lon: 10.7603, altitude: 8, fuseau: Africa/Tunis, zone_climatique: BSh}
+  - {id: tozeur, nom: Tozeur, pays: Tunisie, code_pays: TN, lat: 33.9197, lon: 8.1335, altitude: 51, fuseau: Africa/Tunis, zone_climatique: BWh}
+  - {id: sousse, nom: Sousse, pays: Tunisie, code_pays: TN, lat: 35.8256, lon: 10.6360, altitude: 24, fuseau: Africa/Tunis, zone_climatique: BSh}
+  - {id: bizerte, nom: Bizerte, pays: Tunisie, code_pays: TN, lat: 37.2744, lon: 9.8739, altitude: 5, fuseau: Africa/Tunis, zone_climatique: Csa}
+  - {id: gabes, nom: Gabès, pays: Tunisie, code_pays: TN, lat: 33.8815, lon: 10.0982, altitude: 9, fuseau: Africa/Tunis, zone_climatique: BWh}
+  - {id: kairouan, nom: Kairouan, pays: Tunisie, code_pays: TN, lat: 35.6781, lon: 10.0963, altitude: 65, fuseau: Africa/Tunis, zone_climatique: BSh}
+  - {id: gafsa, nom: Gafsa, pays: Tunisie, code_pays: TN, lat: 34.4250, lon: 8.7842, altitude: 295, fuseau: Africa/Tunis, zone_climatique: BWh}
+  - {id: medenine, nom: Médenine, pays: Tunisie, code_pays: TN, lat: 33.3549, lon: 10.5055, altitude: 90, fuseau: Africa/Tunis, zone_climatique: BWh}
+  - {id: tataouine, nom: Tataouine, pays: Tunisie, code_pays: TN, lat: 32.9297, lon: 10.4518, altitude: 238, fuseau: Africa/Tunis, zone_climatique: BWh}
+  # ------------------------------------------------------------------ Espagne
+  - {id: madrid, nom: Madrid, pays: Espagne, code_pays: ES, lat: 40.4168, lon: -3.7038, altitude: 665, fuseau: Europe/Madrid, zone_climatique: Csa}
+  - {id: seville, nom: Séville, pays: Espagne, code_pays: ES, lat: 37.3891, lon: -5.9845, altitude: 16, fuseau: Europe/Madrid, zone_climatique: Csa}
+  - {id: barcelone, nom: Barcelone, pays: Espagne, code_pays: ES, lat: 41.3874, lon: 2.1686, altitude: 15, fuseau: Europe/Madrid, zone_climatique: Csa}
+  - {id: valence, nom: Valence, pays: Espagne, code_pays: ES, lat: 39.4699, lon: -0.3763, altitude: 15, fuseau: Europe/Madrid, zone_climatique: BSk}
+  - {id: malaga, nom: Malaga, pays: Espagne, code_pays: ES, lat: 36.7213, lon: -4.4214, altitude: 22, fuseau: Europe/Madrid, zone_climatique: Csa}
+  - {id: saragosse, nom: Saragosse, pays: Espagne, code_pays: ES, lat: 41.6488, lon: -0.8891, altitude: 214, fuseau: Europe/Madrid, zone_climatique: BSk}
+  - {id: bilbao, nom: Bilbao, pays: Espagne, code_pays: ES, lat: 43.2630, lon: -2.9350, altitude: 20, fuseau: Europe/Madrid, zone_climatique: Cfb}
+  - {id: murcie, nom: Murcie, pays: Espagne, code_pays: ES, lat: 37.9922, lon: -1.1307, altitude: 53, fuseau: Europe/Madrid, zone_climatique: BSk}
+  - {id: grenade, nom: Grenade, pays: Espagne, code_pays: ES, lat: 37.1773, lon: -3.5986, altitude: 689, fuseau: Europe/Madrid, zone_climatique: Csa}
+  - {id: palma, nom: Palma, pays: Espagne, code_pays: ES, lat: 39.5696, lon: 2.6502, altitude: 34, fuseau: Europe/Madrid, zone_climatique: Csa}

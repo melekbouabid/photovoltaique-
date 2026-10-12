@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Technologies PV{% endblock %}
+{% block content %}
+<h1>Technologies photovoltaïques</h1>
+<p class="lead">Trois technologies de modules sont comparées dans chaque ville : silicium cristallin (crystSi), CIS et CdTe.
+Le score de fiabilité est calculé à partir de cinq critères ; quand l'écart entre les deux premières tient dans la marge
+d'incertitude, elles sont déclarées ex æquo.</p>
+<p class="notice">Les productions sont simulées par PVGIS : les écarts viennent des modèles de rendement, pas de mesures.
+La dégradation dans le temps et la fiabilité mécanique ne sont pas prises en compte.</p>
+{% if chart %}
+<h2>Production annuelle moyenne, toutes villes confondues</h2>
+<div class="card">{{ chart }}</div>
+{% endif %}
+<h2>Recommandation par ville</h2>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Ville</th><th>Pays</th><th>Technologie recommandée</th><th class="num">Score</th><th>Deuxième choix</th>
+  <th class="num">Écart de score</th><th class="num">Intervalle à 95 %</th><th class="num">Probabilité d'être la meilleure</th>
+  <th class="num">Robustesse aux poids</th><th>Verdict</th><th>Front de Pareto</th></tr></thead>
+  <tbody>
+  {% for r in reco %}
+  <tr><td>{{ r.ville }}</td><td>{{ r.pays }}</td><td><strong>{{ r.technologie_recommandee }}</strong></td><td class="num">{{ fmt(r.score, 3) }}</td>
+  <td>{{ r.deuxieme_choix }}</td><td class="num">{{ fmt(r.ecart_score, 3) }}</td>
+  <td class="num">{{ fmt(r.ecart_score_ic95_bas, 3) }} à {{ fmt(r.ecart_score_ic95_haut, 3) }}</td>
+  <td class="num">{{ fmt(100 * r.probabilite_meilleure, 0) }} %</td><td class="num">{{ fmt(100 * r.robustesse_poids, 0) }} %</td>
+  <td>{{ "ex æquo" if r.ex_aequo else "nette" }}</td><td>{{ r.front_pareto }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p class="note">Probabilité d'être la meilleure : part des rééchantillonnages d'années où la technologie garde la première place.
+Robustesse aux poids : part des tirages de poids où elle la garde. Front de Pareto : technologies qu'aucune autre ne domine sur les cinq critères.</p>
+{% if loco %}
+<h2>Peut-on deviner la technologie à partir du climat ?</h2>
+<div class="card">
+  <p>Un arbre de décision, entraîné sur les caractéristiques des villes et jugé ville par ville (chaque ville est prédite par un
+  modèle qui ne l'a pas vue), retrouve la technologie recommandée dans {{ fmt(loco.exactitude_arbre_pct, 0) }} % des
+  {{ loco.villes }} villes. La règle la plus simple, proposer partout la technologie la plus souvent gagnante, en retrouve
+  {{ fmt(loco.exactitude_majoritaire_pct, 0) }} %. {{ loco.villes_ex_aequo }} villes sont ex æquo.</p>
+</div>
+{% endif %}
+{% if orientations %}
+<h2>Orientation, pour la technologie recommandée</h2>
+<p class="lead">Trois orientations simulées par PVGIS : plein sud à la pente optimale, deux pans est et ouest à faible pente,
+et une orientation dont la pente et l'azimut sont optimisés ensemble.</p>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Ville</th><th>Technologie</th><th class="num">Plein sud (kWh/kWc/an)</th><th class="num">Est-ouest (kWh/kWc/an)</th>
+  <th class="num">Écart est-ouest</th><th class="num">Azimut optimal (°)</th><th class="num">Gain de l'optimum</th></tr></thead>
+  <tbody>
+  {% for r in orientations %}
+  <tr><td>{{ r.ville }}</td><td>{{ r.technologie }}</td><td class="num">{{ fmt(r.rendement_sud_kwh_kwc, 0) }}</td>
+  <td class="num">{{ fmt(r.rendement_est_ouest_kwh_kwc, 0) }}</td><td class="num">{{ fmt(r.ecart_est_ouest_pct, 1) }} %</td>
+  <td class="num">{{ fmt(r.azimut_optimal_deg, 0) }}</td><td class="num">{{ fmt(r.gain_optimal_pct, 2) }} %</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p class="note">Azimut : 0° = plein sud, négatif vers l'est, positif vers l'ouest.</p>
+{% endif %}
+<h2>Indicateurs par ville et par technologie</h2>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Ville</th><th>Technologie</th><th class="num">Production (kWh/kWc/an)</th><th class="num">Erreur de prévision (WAPE, %)</th>
+  <th class="num">Variabilité journalière (%)</th><th class="num">Variabilité mensuelle (%)</th><th class="num">Écart P10-P50 (%)</th>
+  <th class="num">Température (%/°C)</th><th class="num">Jours chauds (%)</th><th class="num">Faible irradiation</th></tr></thead>
+  <tbody>
+  {% for r in indicators %}
+  <tr><td>{{ r.ville }}</td><td>{{ r.technologie }}</td><td class="num">{{ fmt(r.rendement_annuel_kwh_kwc, 0) }}</td>
+  <td class="num">{{ fmt(r.wape_meilleur_ex_ante_pct, 1) }}</td><td class="num">{{ fmt(r.cv_journalier_pct, 1) }}</td>
+  <td class="num">{{ fmt(r.cv_mensuel_pct, 1) }}</td><td class="num">{{ fmt(r.ecart_p10_p50_pct, 1) }}</td>
+  <td class="num">{{ fmt(r.pente_temperature_pct_par_degre, 2) }}</td><td class="num">{{ fmt(r.perte_jours_chauds_pct, 1) }}</td>
+  <td class="num">{{ fmt(r.ratio_faible_irradiation, 3) }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

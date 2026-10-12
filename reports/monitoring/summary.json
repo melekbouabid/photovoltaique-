@@ -1,0 +1,103 @@
+{
+  "modele_suivi": "lstm_global",
+  "variables_suivies": [
+    "pv_crystSi_kwh_kwc",
+    "expost_nebulosite_pct",
+    "expost_t2m_moy_c",
+    "expost_humidite_pct",
+    "expost_precipitation_mm",
+    "expost_aerosols_aod",
+    "expost_ghi_nasa_kwh_m2"
+  ],
+  "seuils": {
+    "psi_warning": 0.1,
+    "psi_alert": 0.25,
+    "rolling_window_days": 30,
+    "error_ratio_alert": 1.2
+  },
+  "derive": {
+    "stable": 173,
+    "à surveiller": 22,
+    "alerte": 15
+  },
+  "variables_en_alerte": [
+    {
+      "ville": "barcelone",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.501
+    },
+    {
+      "ville": "grenade",
+      "variable": "expost_humidite_pct",
+      "psi": 0.46
+    },
+    {
+      "ville": "kairouan",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.28
+    },
+    {
+      "ville": "kairouan",
+      "variable": "expost_humidite_pct",
+      "psi": 0.261
+    },
+    {
+      "ville": "malaga",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.268
+    },
+    {
+      "ville": "malaga",
+      "variable": "expost_humidite_pct",
+      "psi": 0.406
+    },
+    {
+      "ville": "marseille",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.287
+    },
+    {
+      "ville": "montpellier",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.32
+    },
+    {
+      "ville": "murcie",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.287
+    },
+    {
+      "ville": "nice",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.408
+    },
+    {
+      "ville": "nice",
+      "variable": "expost_humidite_pct",
+      "psi": 0.496
+    },
+    {
+      "ville": "palma",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.325
+    },
+    {
+      "ville": "sousse",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.253
+    },
+    {
+      "ville": "toulouse",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.281
+    },
+    {
+      "ville": "tunis",
+      "variable": "expost_t2m_moy_c",
+      "psi": 0.314
+    }
+  ],
+  "part_des_jours_en_alerte_erreur_pct": 0.15174506828528073,
+  "villes_en_alerte_erreur_en_fin_de_periode": [],
+  "limites": "Suivi local, recalculé à la demande ; aucune alerte n'est envoyée et aucun réentraînement n'est automatique."
+}

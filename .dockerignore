@@ -1,0 +1,25 @@
+# Secrets et environnements locaux : jamais dans une image
+.env
+.venv
+.git
+**/__pycache__
+**/.pytest_cache
+**/node_modules
+app/frontend/dist
+
+# Fichiers que les images ne lisent pas (les services « etude » montent le projet en volume)
+data/brut
+figures
+rapport
+llm
+*.ipynb
+*.html
+*.Rmd
+*.zip
+# v2 : cache brut et artefacts inutiles à l'image
+data/raw
+data/interim
+data/fast
+mlruns
+reports/forecasts
+.git

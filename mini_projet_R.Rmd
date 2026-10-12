@@ -1,0 +1,540 @@
+---
+title: "Mini-projet Séries Temporelles - socle classique en R"
+subtitle: "Production photovoltaïque journalière à Tunis (PVGIS, liens du rapport SolarVision) - option B"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    number_sections: false
+    df_print: kable
+---
+
+```{r setup, include=FALSE}
+# Options communes à tous les blocs : code affiché (le document sert aussi de livrable de code), messages masqués.
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 10, fig.height = 4.5)
+```
+
+Ce document couvre en R les sections 1, 2, 3 et 6 de l'énoncé (préparation, exploration, ARIMA/SARIMA,
+VAR, cointégration, GARCH, prévision et évaluation). Les mêmes étapes sont codées en Python dans
+`mini_projet_python.ipynb`, qui contient aussi la modélisation avancée (section 4), le choix des variables
+et les extensions. Les deux langages lisent **les mêmes fichiers** (`data/datasets/`, produits par
+`python/collecte_donnees.py` à partir du lien PVGIS du rapport SolarVision), utilisent le même découpage
+et la même normale saisonnière : les résultats se comparent ligne à ligne.
+
+**Packages requis** (versions utilisées) : R 4.6.0, forecast 9.0.2, urca 1.3-4, vars 1.6-1,
+tseries 0.10-63, FinTS 0.4-9, rugarch 1.5-6, lmtest 0.9-40, jsonlite 2.0.0.
+
+```{r packages}
+# Chargement des packages et graine : rugarch utilise un optimiseur à départs aléatoires, la graine
+# garantit des résultats identiques d'une exécution à l'autre.
+library(forecast); library(urca); library(vars); library(tseries)
+library(FinTS); library(rugarch); library(lmtest); library(jsonlite)
+set.seed(42)
+for (d in c("figures", "resultats")) dir.create(d, showWarnings = FALSE)
+```
+
+# 1. Importation et préparation des données
+
+| Variable | Source | Détail |
+|---|---|---|
+| Production d'1 kWc (kWh/kWc) | PVGIS 5.3 (JRC), lien du rapport SolarVision | somme des puissances horaires simulées (SARAH3 + ERA5), pente optimale 33°, plein sud, pertes 14 % |
+| Nébulosité, pluie, humidité | Open-Meteo (réanalyse ERA5) | moyennes ou cumuls journaliers |
+| Température, amplitude thermique | PVGIS (ERA5) | agrégation des valeurs horaires |
+| Aérosols (AOD 550 nm) | NASA POWER (MERRA-2) | journalier |
+
+```{r donnees}
+# Lecture du jeu de données « photovoltaïque - Tunisie » (3 villes) et sélection de Tunis. Si le fichier
+# manque, il faut d'abord lancer la collecte Python (téléchargement des API, environ 20 minutes).
+f <- "data/datasets/tn_photovoltaique_journalier.csv"
+if (!file.exists(f)) stop("Lancer d'abord : python python/collecte_donnees.py")
+tn <- read.csv(f, stringsAsFactors = FALSE)
+df <- tn[tn$site == "tunis", ]
+df$date <- as.Date(df$date)
+df <- df[order(df$date), ]
+stopifnot(all(diff(df$date) == 1))                 # pas de jour manquant : la série est régulière
+n <- nrow(df); n_train <- floor(0.9 * n); H <- 7
+y_all <- df$pv_kwh_kwc
+# Objet série temporelle natif, fréquence annuelle déclarée (365,25 jours par cycle).
+y_ts <- ts(y_all, start = c(2005, 1), frequency = 365.25)
+y_train <- y_all[1:n_train]
+train <- df[1:n_train, ]
+cat("Période :", format(df$date[1]), "->", format(df$date[n]), "|", n, "jours | apprentissage jusqu'au",
+    format(df$date[n_train]), "(", n_train, "jours ) | test :", n - n_train, "jours\n")
+cat("Jours dont le rayonnement PVGIS a été imputé (trous de la base SARAH3) :", sum(df$jour_impute_pvgis), "\n")
+```
+
+**Lecture.** La série couvre `r n` jours, du 1er janvier 2005 au 31 décembre 2023, sans trou de date.
+Le découpage est chronologique : `r n_train` jours d'apprentissage (jusqu'au `r format(df$date[n_train], "%d/%m/%Y")`)
+et `r n - n_train` jours de test, soit près de deux années complètes. `r sum(df$jour_impute_pvgis)` jours ont
+une valeur imputée à la collecte : PVGIS y renvoyait un rayonnement nul alors que le soleil était levé
+(trous de la base satellitaire), voir la section 2.5 du notebook Python.
+
+# 2. Analyse exploratoire
+
+```{r graphique, fig.height=6}
+# Production, nébulosité et température : trois échelles différentes, donc trois panneaux.
+par(mfrow = c(3, 1), mar = c(2, 4.5, 1.5, 1))
+plot(df$date, y_all, type = "l", lwd = 0.4, col = "#1f3a5f", xlab = "", ylab = "kWh/kWc",
+     main = "Production journalière d'1 kWc à Tunis")
+lines(df$date, stats::filter(y_all, rep(1 / 365, 365), sides = 2), col = "black", lwd = 1.5)
+abline(v = df$date[n_train + 1], lty = 2)
+plot(df$date, df$nebulosite_pct, type = "l", lwd = 0.4, col = "#6b7b8c", xlab = "", ylab = "nébulosité (%)")
+plot(df$date, df$t2m_moy_c, type = "l", lwd = 0.4, col = "#d03b3b", xlab = "", ylab = "température (°C)")
+```
+
+```{r descriptives}
+# Statistiques descriptives sur l'apprentissage (moments d'ordre 3 et 4 compris).
+desc <- function(v) c(moyenne = mean(v), ecart_type = sd(v), min = min(v), max = max(v),
+                      skewness = mean((v - mean(v))^3) / sd(v)^3, kurtosis_exces = mean((v - mean(v))^4) / sd(v)^4 - 3)
+round(t(sapply(train[, c("pv_kwh_kwc", "nebulosite_pct", "t2m_moy_c", "precipitation_mm", "aerosols_aod")], desc)), 3)
+mois <- as.integer(format(train$date, "%m"))
+round(rbind(moyenne = tapply(y_train, mois, mean), ecart_type = tapply(y_train, mois, sd)), 2)
+```
+
+**Lecture.** La production moyenne vaut `r round(mean(y_train), 2)` kWh/kWc par jour, de
+`r round(min(tapply(y_train, mois, mean)), 2)` en décembre à `r round(max(tapply(y_train, mois, mean)), 2)` en juillet.
+La distribution est asymétrique à gauche (skewness `r round(desc(y_train)["skewness"], 2)`) : la plupart des
+jours sont proches du maximum permis par la saison, quelques jours couverts sont très bas. L'écart-type
+mensuel varie en sens inverse du niveau (`r round(max(tapply(y_train, mois, sd)), 2)` en mars contre
+`r round(min(tapply(y_train, mois, sd)), 2)` en juillet) : un logarithme amplifierait cette hétérogénéité au lieu
+de la corriger. La série est modélisée en niveau.
+
+```{r acf, fig.height=7}
+# Termes de Fourier construits comme en Python (t = 0, 1, ... depuis le 1er janvier 2005) :
+# ils représentent le cycle annuel déterministe.
+fourier_k <- function(K, t = 0:(n - 1)) {
+  M <- do.call(cbind, lapply(1:K, function(k) cbind(sin(2 * pi * k * t / 365.25), cos(2 * pi * k * t / 365.25))))
+  colnames(M) <- paste0(rep(c("S", "C"), K), rep(1:K, each = 2)); M
+}
+F4 <- fourier_k(4)
+anomalie <- y_all - cbind(1, F4) %*% coef(lm(y_train ~ F4[1:n_train, ]))
+par(mfrow = c(3, 2), mar = c(4, 4, 2.5, 1))
+Acf(y_train, lag.max = 40, main = "ACF - série brute"); Pacf(y_train, lag.max = 40, main = "PACF - série brute")
+Acf(diff(y_train), lag.max = 40, main = "ACF - différence d'ordre 1"); Pacf(diff(y_train), lag.max = 40, main = "PACF - différence d'ordre 1")
+Acf(anomalie[1:n_train], lag.max = 40, main = "ACF - désaisonnalisée (Fourier)"); Pacf(anomalie[1:n_train], lag.max = 40, main = "PACF - désaisonnalisée (Fourier)")
+a_acf <- acf(anomalie[1:n_train], plot = FALSE, lag.max = 7)$acf[-1]
+a_pacf <- pacf(anomalie[1:n_train], plot = FALSE, lag.max = 7)$acf
+round(rbind(ACF = a_acf, PACF = a_pacf), 3)
+```
+
+**Lecture.** L'ACF de la série brute décroît lentement et oscille avec une période d'un an : c'est le cycle
+annuel. La différence d'ordre 1 crée une forte autocorrélation négative au retard 1
+(`r round(acf(diff(y_train), plot = FALSE)$acf[2], 2)`), signature d'une sur-différenciation. Une fois le cycle
+retiré par les termes de Fourier, l'ACF au retard 1 vaut `r round(a_acf[1], 3)` puis devient négligeable, et la
+PACF se coupe après le retard 1 : la série désaisonnalisée se comporte comme un AR(1). La météo d'un jour
+ne renseigne que faiblement sur celle du lendemain.
+
+```{r stl, fig.height=6}
+# Décomposition STL robuste (période 365 jours) sur l'apprentissage.
+dec <- stl(ts(y_train, frequency = 365), s.window = 7, robust = TRUE)
+plot(dec, main = "Décomposition STL de la production de Tunis")
+comp <- dec$time.series
+round(c(tendance = var(comp[, "trend"]), saison = var(comp[, "seasonal"]), residu = var(comp[, "remainder"])) / var(y_train), 3)
+```
+
+**Lecture.** La composante saisonnière porte l'essentiel de la variance expliquée ; la tendance est presque
+plate (`r round(min(comp[, "trend"]), 2)` à `r round(max(comp[, "trend"]), 2)` kWh/kWc), ce qui est attendu pour une
+installation de puissance constante ; le résidu, très variable l'hiver et presque nul l'été, contient la
+météo. Les parts de variance ne s'additionnent pas exactement à 1 car les composantes sont corrélées.
+
+```{r aberrants}
+# Boxplot glissant sur le résidu STL (quartiles sur 61 jours centrés) : la dispersion change avec la
+# saison, une règle de l'IQR globale signalerait surtout les jours d'hiver.
+r_stl <- as.numeric(comp[, "remainder"])
+q_gl <- t(vapply(seq_along(r_stl), function(i) {
+  w <- r_stl[max(1, i - 30):min(length(r_stl), i + 30)]; quantile(w, c(0.25, 0.75))
+}, numeric(2)))
+iqr <- q_gl[, 2] - q_gl[, 1]
+ab <- r_stl < q_gl[, 1] - 1.5 * iqr | r_stl > q_gl[, 2] + 1.5 * iqr
+bas <- ab & r_stl < 0
+expl <- bas & (train$precipitation_mm >= 5 | train$nebulosite_pct >= 80 | train$aerosols_aod >= 0.8)
+cat("Jours signalés :", sum(ab), "(", round(100 * mean(ab), 1), "% ) dont", sum(bas), "bas ;",
+    sum(expl), "jours bas expliqués par la pluie, un ciel couvert ou des poussières\n")
+```
+
+**Lecture et traitement.** Les jours signalés sont presque tous des journées basses expliquées par la météo
+observée (pluie, ciel couvert, poussières sahariennes) : ce sont des valeurs vraies, conservées. Les seules
+valeurs corrigées sont les erreurs de données (trous satellitaires), traitées à la collecte.
+
+```{r stationnarite}
+# ADF (H0 : racine unitaire) et KPSS (H0 : stationnarité). Attention : tseries::adf.test inclut une
+# tendance et fixe le nombre de retards, alors que statsmodels le choisit par AIC.
+tests <- function(v, nom) {
+  a <- adf.test(v); k <- kpss.test(v, null = "Level")
+  data.frame(serie = nom, ADF_stat = round(a$statistic, 3), ADF_p = round(a$p.value, 4),
+             KPSS_stat = round(k$statistic, 3), KPSS_p = round(k$p.value, 4))
+}
+tab_stat <- rbind(tests(y_train, "production"), tests(diff(y_train), "production - diff. ordre 1"),
+                  tests(anomalie[1:n_train], "production - désaisonnalisée"),
+                  tests(train$nebulosite_pct, "nébulosité"), tests(train$t2m_moy_c, "température"))
+rownames(tab_stat) <- NULL
+write.csv(tab_stat, "resultats/R_stationnarite.csv", row.names = FALSE)
+tab_stat
+```
+
+**Lecture.** L'ADF rejette la racine unitaire pour toutes les séries (p < 0,01) et le KPSS ne rejette pas
+la stationnarité de la production (p > 0,05) : les deux tests concluent à une série stationnaire autour de
+son cycle annuel. **Ordre de différenciation retenu : d = 0**, le cycle annuel étant représenté par des
+termes de Fourier (saisonnalité déterministe), comme en Python.
+
+# 3. Modélisation classique
+
+## 3.1 ARIMA à termes de Fourier (régression harmonique dynamique)
+
+```{r grille}
+# Grille guidée par l'ACF/PACF : p et q faibles, d = 0, K harmoniques de 2 à 4 ; choix par BIC.
+ordres <- list(c(1, 0, 0), c(2, 0, 0), c(3, 0, 0), c(1, 0, 1), c(2, 0, 1), c(1, 0, 2), c(2, 0, 2))
+res_g <- do.call(rbind, lapply(2:4, function(K) do.call(rbind, lapply(ordres, function(o) {
+  m <- tryCatch(Arima(y_train, order = o, xreg = fourier_k(K)[1:n_train, ], include.constant = TRUE),
+                error = function(e) NULL)     # un candidat qui ne converge pas est ignoré
+  if (is.null(m)) return(NULL)
+  data.frame(ordre = paste(o, collapse = ","), K = K, AIC = AIC(m), BIC = BIC(m))
+}))))
+res_g <- res_g[order(res_g$BIC), ]; rownames(res_g) <- NULL
+write.csv(res_g, "resultats/R_grille_arima.csv", row.names = FALSE)
+head(res_g, 8)
+ORDRE <- as.integer(strsplit(res_g$ordre[1], ",")[[1]]); K_F <- res_g$K[1]
+FK <- fourier_k(K_F)
+```
+
+```{r auto-arima}
+# Confirmation par recherche automatique : auto.arima choisit d et les ordres, mêmes termes de Fourier.
+m_auto <- auto.arima(y_train, xreg = FK[1:n_train, ], seasonal = FALSE)
+m_auto
+```
+
+```{r ajustements}
+# Trois modèles : manuel, automatique, et manuel enrichi de la météo du jour (« ex post »).
+meteo <- cbind(nebulosite = df$nebulosite_pct, neb_x_potentiel = df$nebulosite_pct / 100 * df$irr_extraterrestre_kwh_m2,
+               precipitation = df$precipitation_mm, humidite = df$humidite_pct,
+               amplitude = df$amplitude_thermique_c, aod = df$aerosols_aod)
+X_meteo <- cbind(FK, meteo)
+m_man <- Arima(y_train, order = ORDRE, xreg = FK[1:n_train, ], include.constant = TRUE)
+m_meteo <- Arima(y_train, order = ORDRE, xreg = X_meteo[1:n_train, ], include.constant = TRUE)
+modeles <- list("ARIMA-Fourier manuel" = m_man, "ARIMA-Fourier auto" = m_auto, "SARIMAX météo" = m_meteo)
+data.frame(AIC = sapply(modeles, AIC), BIC = sapply(modeles, BIC), sigma = sqrt(sapply(modeles, function(m) m$sigma2)))
+coeftest(m_meteo)
+```
+
+**Lecture.** La grille retient ARIMA(`r paste(ORDRE, collapse = ",")`) avec K = `r K_F` harmoniques (BIC minimal).
+`auto.arima` retient `r as.character(m_auto)`. Avec la météo du jour, l'écart-type de l'erreur à un jour passe de
+`r round(sqrt(m_man$sigma2), 3)` à `r round(sqrt(m_meteo$sigma2), 3)` kWh/kWc. Les signes sont physiques : la
+nébulosité (`r round(10 * coef(m_meteo)["nebulosite"], 3)` kWh/kWc pour 10 points), la pluie
+(`r round(coef(m_meteo)["precipitation"], 3)` par mm) et les aérosols (`r round(coef(m_meteo)["aod"], 2)` par unité
+d'épaisseur optique) réduisent la production ; l'amplitude thermique, signe d'un ciel clair, l'augmente.
+
+```{r diagnostics}
+# Diagnostic des résidus : bruit blanc (Ljung-Box), normalité (Jarque-Bera), variance constante (ARCH-LM).
+diagnostic <- function(m) {
+  r <- as.numeric(residuals(m))[-(1:7)]
+  k <- sum(grepl("^(ar|ma)", names(m$coef)))
+  c(LB10_p = Box.test(r, lag = 10, type = "Ljung-Box", fitdf = k)$p.value,
+    LB30_p = Box.test(r, lag = 30, type = "Ljung-Box", fitdf = k)$p.value,
+    JB_p = jarque.bera.test(r)$p.value, skewness = mean((r - mean(r))^3) / sd(r)^3,
+    kurtosis = mean((r - mean(r))^4) / sd(r)^4, ARCH_LM7_p = ArchTest(r, lags = 7)$p.value)
+}
+tab_diag <- t(sapply(modeles, diagnostic))
+write.csv(tab_diag, "resultats/R_diagnostics_arima.csv")
+round(tab_diag, 4)
+```
+
+```{r diag-graph, fig.height=6}
+# Les quatre vues qui accompagnent les tests : résidus dans le temps (variance saisonnière), ACF (indépendance),
+# histogramme (normalité) et ACF des carrés (effets ARCH). Les 7 premiers résidus, phase de mise en route, sont écartés.
+r_man <- as.numeric(residuals(m_man))[-(1:7)]
+par(mfrow = c(2, 2), mar = c(4, 4, 2.5, 1))
+plot(train$date[-(1:7)], r_man, type = "l", lwd = 0.4, xlab = "", ylab = "", main = "Résidus de l'ARIMA-Fourier")
+Acf(r_man, lag.max = 40, main = "ACF des résidus")
+hist(r_man, breaks = 80, freq = FALSE, col = "#1f3a5f", border = NA, main = "Histogramme et loi normale", xlab = "")
+curve(dnorm(x, mean(r_man), sd(r_man)), add = TRUE, col = "#e0a030", lwd = 2)
+Acf(r_man^2, lag.max = 40, main = "ACF des résidus au carré (effets ARCH)")
+```
+
+**Lecture du diagnostic.** Les résidus de l'ARIMA-Fourier manuel passent le test de Ljung-Box
+(p = `r round(tab_diag[1, "LB10_p"], 3)` à 10 retards) : la structure d'autocorrélation est captée. La normalité
+est rejetée (asymétrie `r round(tab_diag[1, "skewness"], 2)`, kurtosis `r round(tab_diag[1, "kurtosis"], 2)`) : les
+mauvaises surprises (jours couverts) sont plus fortes que les bonnes, la production étant bornée par le ciel
+clair. L'homoscédasticité est massivement rejetée (ARCH-LM p < 0,001) : la variance des erreurs suit les
+saisons et les épisodes nuageux. C'est l'objet de la section 3.3.
+
+## 3.1 bis SARIMA saisonnier sur la série mensuelle (s = 12)
+
+```{r mensuel}
+# Série mensuelle (somme des productions journalières) : période 12, SARIMA au sens strict.
+mm <- tapply(y_all, format(df$date, "%Y-%m"), sum)
+ym <- ts(as.numeric(mm), start = c(2005, 1), frequency = 12)
+nm <- length(ym); nm_train <- floor(0.9 * nm)
+ym_train <- window(ym, end = time(ym)[nm_train])
+# Canova-Hansen demande le package uroot : on utilise le test de force saisonnière (« seas », défaut de forecast).
+cat("D suggéré : OCSB =", nsdiffs(ym_train, test = "ocsb"), "| force saisonnière =", nsdiffs(ym_train, test = "seas"), "\n")
+par(mfrow = c(1, 2)); Acf(diff(ym_train, 12), lag.max = 36, main = "ACF - diff. saisonnière (12)")
+Pacf(diff(ym_train, 12), lag.max = 36, main = "PACF - diff. saisonnière (12)")
+grille_m <- do.call(rbind, lapply(list(c(0, 0, 0), c(1, 0, 0), c(0, 0, 1), c(1, 0, 1)), function(o)
+  do.call(rbind, lapply(list(c(0, 1, 1), c(1, 1, 0), c(1, 1, 1), c(2, 1, 0)), function(s) {
+    m <- tryCatch(Arima(ym_train, order = o, seasonal = s), error = function(e) NULL)
+    if (is.null(m)) return(NULL)
+    data.frame(ordre = paste(o, collapse = ","), saisonnier = paste(s, collapse = ","), AIC = AIC(m), BIC = BIC(m))
+  }))))
+grille_m <- grille_m[order(grille_m$BIC), ]; rownames(grille_m) <- NULL
+head(grille_m, 5)
+OM <- as.integer(strsplit(grille_m$ordre[1], ",")[[1]]); SM <- as.integer(strsplit(grille_m$saisonnier[1], ",")[[1]])
+m_mens <- Arima(ym_train, order = OM, seasonal = SM)
+m_mens_auto <- auto.arima(ym_train)
+m_mens; m_mens_auto
+rm_ <- as.numeric(residuals(m_mens))[-(1:13)]
+cat("Diagnostic : LB(12) p =", round(Box.test(rm_, 12, "Ljung-Box", fitdf = length(coef(m_mens)))$p.value, 4),
+    "| JB p =", round(jarque.bera.test(rm_)$p.value, 4), "| ARCH-LM(4) p =", round(ArchTest(rm_, lags = 4)$p.value, 4), "\n")
+# Évaluation à 6 mois depuis chaque origine du test.
+HM <- 6; orig_m <- nm_train:(nm - HM)
+Ym <- t(sapply(orig_m, function(t) ym[(t + 1):(t + HM)]))
+clim_m <- tapply(as.numeric(ym_train), cycle(ym_train), mean)
+pm_ <- list("Naïf saisonnier (même mois N-1)" = t(sapply(orig_m, function(t) ym[(t + 1 - 12):(t + HM - 12)])),
+            "Moyenne mensuelle" = t(sapply(orig_m, function(t) clim_m[cycle(ym)[(t + 1):(t + HM)]])),
+            "SARIMA manuel" = t(sapply(orig_m, function(t) forecast(Arima(ym[1:t], order = OM, seasonal = list(order = SM, period = 12),
+                                                                       fixed = coef(m_mens), transform.pars = FALSE), h = HM)$mean)),
+            "SARIMA auto" = t(sapply(orig_m, function(t) forecast(Arima(ts(ym[1:t], frequency = 12, start = c(2005, 1)), model = m_mens_auto), h = HM)$mean)))
+tab_mens <- t(sapply(pm_, function(P) c(RMSE = sqrt(mean((Ym - P)^2)), MAE = mean(abs(Ym - P)), MAPE = 100 * mean(abs(Ym - P) / Ym))))
+write.csv(tab_mens, "resultats/R_metriques_mensuel.csv")
+round(tab_mens, 2)
+```
+
+**Lecture.** Les deux tests divergent : OCSB ne demande pas de différence saisonnière, le test de force
+saisonnière en demande une. L'ACF de la différence saisonnière présente le pic négatif au retard 12 typique
+d'une moyenne mobile saisonnière, et le BIC retient SARIMA(`r paste(OM, collapse = ",")`)(`r paste(SM, collapse = ",")`)[12],
+dont le coefficient saisonnier vaut `r round(coef(m_mens)[length(coef(m_mens))], 2)`. Proche de -1, il annule presque
+la différence saisonnière : le modèle revient à une saisonnalité quasi déterministe, ce qui donne raison à OCSB.
+`auto.arima` retient un autre modèle que `pmdarima` en Python (voir ci-dessus). À 6 mois, le SARIMA manuel fait
+jeu égal avec la simple moyenne mensuelle (`r round(tab_mens["SARIMA manuel", "RMSE"], 1)` contre
+`r round(tab_mens["Moyenne mensuelle", "RMSE"], 1)` kWh/kWc par mois) et bat nettement le naïf saisonnier
+(`r round(tab_mens[1, "RMSE"], 1)`) ; le modèle d'`auto.arima` fait un peu mieux
+(`r round(tab_mens["SARIMA auto", "RMSE"], 1)`), un écart qui reste à confirmer, l'évaluation ne portant que sur
+18 origines. À cette échelle, il n'y a guère que le cycle annuel à prévoir.
+
+## 3.2 VAR, causalité de Granger et cointégration
+
+```{r var}
+# VAR en niveaux sur (production, nébulosité, température), cycle annuel en variables exogènes.
+F3 <- fourier_k(3)
+endog <- cbind(pv = df$pv_kwh_kwc, neb = df$nebulosite_pct, temp = df$t2m_moy_c)
+sel <- VARselect(endog[1:n_train, ], lag.max = 14, type = "const", exogen = F3[1:n_train, ])
+sel$selection
+P_VAR <- as.integer(sel$selection["SC(n)"])
+var_fit <- VAR(endog[1:n_train, ], p = P_VAR, type = "const", exogen = F3[1:n_train, ])
+pt <- serial.test(var_fit, lags.pt = 20, type = "PT.asymptotic")
+rv <- residuals(var_fit)
+cat("VAR(", P_VAR, ") - Portmanteau(20) : p =", signif(pt$serial$p.value, 3), "| module max des racines :",
+    round(max(roots(var_fit)), 3), "\n")
+cat("Ljung-Box(10) par équation :", round(apply(rv, 2, function(v) Box.test(v, 10, "Ljung-Box")$p.value), 4), "\n")
+cat("ARCH-LM(7) par équation :", signif(apply(rv, 2, function(v) ArchTest(v, lags = 7)$p.value), 3), "\n")
+```
+
+```{r granger}
+# Causalité de Granger deux à deux : test de Wald (forme F) de la nullité des retards de la variable
+# « cause » dans l'équation de la variable « effet », à partir de la matrice de covariance des coefficients.
+granger <- do.call(rbind, lapply(colnames(endog), function(cause) do.call(rbind, lapply(setdiff(colnames(endog), cause), function(effet) {
+  eq <- var_fit$varresult[[effet]]
+  noms <- grep(paste0("^", cause, "\\.l"), names(coef(eq)), value = TRUE)
+  b <- coef(eq)[noms]; V <- vcov(eq)[noms, noms]
+  Fst <- as.numeric(t(b) %*% solve(V) %*% b) / length(noms)
+  data.frame(cause = cause, effet = effet, F = Fst, p = pf(Fst, length(noms), df.residual(eq), lower.tail = FALSE))
+}))))
+write.csv(granger, "resultats/R_granger.csv", row.names = FALSE)
+granger
+```
+
+**Lecture.** Le passé de la nébulosité aide fortement à prévoir la production (F = `r round(granger$F[granger$cause == "neb" & granger$effet == "pv"], 1)`),
+et le passé de la production aide aussi à prévoir la nébulosité et la température : les trois séries
+décrivent le même état de l'atmosphère, et la causalité de Granger ne mesure que la prévisibilité. Le lien
+production vers température du lendemain a une explication physique (le rayonnement reçu réchauffe le sol
+et l'air). Ces statistiques se comparent à celles de `statsmodels`.
+
+```{r cointegration}
+# Cointégration sur le VAR de Tunis : séries stationnaires, le test de Johansen doit trouver le rang plein.
+jo <- ca.jo(endog[1:n_train, ], type = "trace", ecdet = "const", K = max(P_VAR, 2), spec = "transitory")
+tab_jo <- data.frame(H0 = rev(paste("r <=", 0:2)), trace = round(jo@teststat, 2), crit_5pct = jo@cval[, "5pct"])
+tab_jo
+
+# Cas réellement non stationnaire : production solaire nationale mesurée, France (RTE) et Espagne (REE),
+# mensuelle, en log, avec indicatrices saisonnières et tendance dans la relation de long terme.
+rte <- read.csv("data/datasets/fr_solaire_national_rte_journalier.csv"); rte$date <- as.Date(rte$date)
+ree <- read.csv("data/datasets/es_fotovoltaica_ree_journalier.csv"); ree$date <- as.Date(ree$date)
+mensuel <- function(d, col) { m <- tapply(d[[col]], format(d$date, "%Y-%m"), function(v) if (length(v) >= 25) sum(v) else NA); m }
+nat <- merge(data.frame(mois = names(mensuel(rte, "production_gwh")), fr = as.numeric(mensuel(rte, "production_gwh"))),
+             data.frame(mois = names(mensuel(ree, "produccion_gwh")), es = as.numeric(mensuel(ree, "produccion_gwh"))))
+nat <- na.omit(nat[nat$mois <= "2026-08", ])
+lnat <- log(as.matrix(nat[, c("fr", "es")]))
+cat("Période :", nat$mois[1], "->", nat$mois[nrow(nat)], "(", nrow(nat), "mois )\n")
+# Comme en Python, les tests portent sur les séries désaisonnalisées (régression sur les mois) : sur la série
+# brute, le cycle annuel fait passer pour un retour à la moyenne ce qui n'est qu'une saisonnalité.
+mois_f <- factor(substr(nat$mois, 6, 7))
+ldes <- apply(lnat, 2, function(v) residuals(lm(v ~ mois_f)) + mean(v))
+adf_nat <- t(sapply(1:2, function(j) {
+  t1 <- ur.df(ldes[, j], type = "trend", lags = 6, selectlags = "AIC")
+  t2 <- ur.df(diff(ldes[, j]), type = "drift", lags = 6, selectlags = "AIC")
+  c(tau_niveau = t1@teststat[1], seuil_5pct = t1@cval[1, 2], tau_difference = t2@teststat[1], seuil_5pct_diff = t2@cval[1, 2])
+}))
+rownames(adf_nat) <- c("log France (désaisonnalisé)", "log Espagne (désaisonnalisé)")
+round(adf_nat, 2)
+jo_n <- ca.jo(lnat, type = "trace", ecdet = "trend", K = 4, season = 12, spec = "transitory")
+tab_jo_n <- data.frame(H0 = rev(c("r = 0", "r <= 1")), trace = round(jo_n@teststat, 2), crit_5pct = jo_n@cval[, "5pct"])
+write.csv(rbind(cbind(systeme = "Tunis", tab_jo), cbind(systeme = "France-Espagne", tab_jo_n)),
+          "resultats/R_johansen.csv", row.names = FALSE)
+tab_jo_n
+# Rang par la procédure séquentielle : premier r dont l'hypothèse « rang <= r » n'est pas rejetée.
+stat_croiss <- rev(jo_n@teststat); crit_croiss <- rev(jo_n@cval[, "5pct"])
+RANG_N <- which(stat_croiss <= crit_croiss)[1] - 1; if (is.na(RANG_N)) RANG_N <- 2
+cat("Rang de cointégration France-Espagne :", RANG_N, "\n")
+vecm <- cajorls(jo_n, r = 1)
+cat("VECM de rang 1 (vérification) - beta :", round(vecm$beta[, 1], 4), "\n")
+print(round(coef(summary(vecm$rlm))[[1]]["ect1", ], 4)); print(round(coef(summary(vecm$rlm))[[2]]["ect1", ], 4))
+```
+
+**Lecture.** Pour Tunis, le test de Johansen rejette toutes les hypothèses : le rang est plein, le système
+est stationnaire en niveaux et la cointégration ne s'applique pas (le VAR en niveaux est la bonne
+représentation). Les productions nationales mesurées, désaisonnalisées, ne rejettent pas la racine unitaire en
+niveau (tau de `r round(adf_nat[1, 1], 2)` et `r round(adf_nat[2, 1], 2)` pour un seuil de `r adf_nat[1, 2]`) mais la
+rejettent en différence (tau de `r round(adf_nat[1, 3], 2)` et `r round(adf_nat[2, 3], 2)`) : elles sont intégrées d'ordre 1,
+comme en Python, et la question de la cointégration se pose. Le test de la trace conclut à un rang de `r RANG_N`
+pour la France et l'Espagne. Le VECM de rang 1, estimé
+à titre de vérification, donne des coefficients d'ajustement très faibles : les deux parcs ne se rapprochent
+pas d'une relation d'équilibre, ce qui est cohérent avec le décollage espagnol de 2019-2023, que la France n'a
+pas suivi au même rythme.
+
+## 3.3 Volatilité conditionnelle : ARCH et GARCH
+
+```{r garch}
+# Variance conditionnelle des erreurs à un jour de l'ARIMA-Fourier manuel (kWh/kWc).
+e <- r_man
+cat("ARCH-LM(7) : p =", signif(ArchTest(e, lags = 7)$p.value, 3), "| ACF des carrés (1 à 7) :",
+    round(acf(e^2, plot = FALSE, lag.max = 7)$acf[-1], 3), "\n")
+spec <- function(modele, ordre, loi) ugarchspec(variance.model = list(model = modele, garchOrder = ordre),
+                                                mean.model = list(armaOrder = c(0, 0), include.mean = FALSE),
+                                                distribution.model = loi)
+candidats <- list("GARCH(1,1) normale" = spec("sGARCH", c(1, 1), "norm"),
+                  "GARCH(1,1) Student" = spec("sGARCH", c(1, 1), "std"),
+                  "GARCH(1,1) Student asym." = spec("sGARCH", c(1, 1), "sstd"),
+                  "GARCH(2,1) Student asym." = spec("sGARCH", c(2, 1), "sstd"),
+                  "GJR-GARCH(1,1) Student asym." = spec("gjrGARCH", c(1, 1), "sstd"),
+                  "EGARCH(1,1) Student asym." = spec("eGARCH", c(1, 1), "sstd"))
+# Plusieurs solveurs, meilleure vraisemblance retenue : un optimum local fausserait la comparaison.
+ajuster_garch <- function(sp) {
+  essais <- lapply(c("hybrid", "solnp", "nlminb"), function(sv) tryCatch(ugarchfit(sp, e, solver = sv), error = function(err) NULL))
+  essais <- Filter(function(g) !is.null(g) && convergence(g) == 0, essais)
+  if (length(essais) == 0) return(NULL)
+  essais[[which.max(sapply(essais, likelihood))]]
+}
+ajust <- Filter(Negate(is.null), lapply(candidats, ajuster_garch))
+tab_g <- t(sapply(ajust, function(g) { zz <- as.numeric(residuals(g, standardize = TRUE))
+  c(logLik = likelihood(g), AIC = infocriteria(g)[1] * length(e), BIC = infocriteria(g)[2] * length(e),
+    LB10_z2_p = Box.test(zz^2, 10, "Ljung-Box")$p.value, ARCH_LM7_z_p = ArchTest(zz, lags = 7)$p.value) }))
+write.csv(tab_g, "resultats/R_garch_comparaison.csv")
+round(tab_g, 4)
+g11 <- ajust[["GARCH(1,1) Student asym."]]
+round(coef(g11), 4)
+cat("Persistance alpha + beta :", round(sum(coef(g11)[c("alpha1", "beta1")]), 3), "\n")
+```
+
+```{r garch-vol, fig.height=3.8}
+# Volatilité conditionnelle dans le temps puis sa moyenne par mois : si elle suit le calendrier, le GARCH ne fait
+# que reproduire une saisonnalité de la variance (hiver nuageux, été stable), pas des chocs persistants.
+vol <- as.numeric(sigma(g11))
+plot(train$date[-(1:7)], vol, type = "l", col = "#1f3a5f", xlab = "", ylab = "écart-type conditionnel",
+     main = "Volatilité conditionnelle GARCH(1,1) des erreurs de l'ARIMA-Fourier")
+round(tapply(vol, format(train$date[-(1:7)], "%m"), mean), 3)
+```
+
+**Lecture.** L'effet ARCH est massif. Le GARCH(1,1) capte une volatilité très persistante
+(alpha + beta = `r round(sum(coef(g11)[c("alpha1", "beta1")]), 3)`), qui suit en fait les saisons : elle est
+environ trois fois plus forte en hiver qu'en été. La loi de Student asymétrique est nettement préférée à la
+loi normale (BIC), conformément à l'asymétrie des erreurs. Le diagnostic des résidus standardisés de chaque
+candidat figure dans le tableau ; la comparaison détaillée (dont la variante à variance saisonnière) est
+dans le notebook Python.
+
+# 6. Prévision et évaluation
+
+```{r normale}
+# Normale saisonnière calculée exactement comme en Python : moyenne par jour de l'année sur
+# l'apprentissage, lissée par une moyenne mobile circulaire de 31 jours.
+jour <- pmin(as.integer(format(df$date, "%j")), 365)
+lisser <- function(a) as.numeric(stats::filter(c(a, a, a), rep(1 / 31, 31), sides = 2))[366:730]
+CLIM_M <- lisser(as.numeric(tapply(y_train, jour[1:n_train], mean)))[jour]
+```
+
+```{r previsions}
+# Origines glissantes sur tout le test ; paramètres figés à leur valeur estimée sur l'apprentissage.
+# Le filtre est appliqué aux 500 derniers jours avant chaque origine : avec un AR(1) de coefficient
+# voisin de 0,26, l'état filtré ne dépend pas des observations plus anciennes.
+origines <- n_train:(n - H)
+Y <- t(sapply(origines, function(t) y_all[(t + 1):(t + H)]))
+prev_arima <- function(fit, X) {
+  P <- B <- U <- matrix(NA, length(origines), H)
+  for (i in seq_along(origines)) {
+    t <- origines[i]; w <- (t - 499):t
+    fc <- forecast(Arima(y_all[w], model = fit, xreg = X[w, , drop = FALSE]), h = H, level = 95,
+                   xreg = X[(t + 1):(t + H), , drop = FALSE])
+    P[i, ] <- fc$mean; B[i, ] <- fc$lower; U[i, ] <- fc$upper
+  }
+  list(moy = pmax(P, 0), bas = B, haut = U)
+}
+# VAR : prévision récursive depuis chaque origine avec les coefficients estimés sur l'apprentissage.
+Bv <- Bcoef(var_fit)
+prev_var <- t(sapply(origines, function(t) {
+  hist <- endog[(t - P_VAR + 1):t, , drop = FALSE]; out <- numeric(H)
+  for (h in 1:H) {
+    z <- c(as.vector(t(hist[nrow(hist):(nrow(hist) - P_VAR + 1), , drop = FALSE])), 1, F3[t + h, ])
+    yh <- as.numeric(Bv %*% z); out[h] <- yh[1]; hist <- rbind(hist, yh)
+  }
+  out
+}))
+prev <- list("Persistance (J)" = list(moy = t(sapply(origines, function(t) rep(y_all[t], H)))),
+             "Climatologie" = list(moy = t(sapply(origines, function(t) CLIM_M[(t + 1):(t + H)]))),
+             "ARIMA-Fourier manuel" = prev_arima(m_man, FK), "ARIMA-Fourier auto" = prev_arima(m_auto, FK),
+             "VAR" = list(moy = prev_var), "SARIMAX météo (ex post)" = prev_arima(m_meteo, X_meteo))
+```
+
+```{r metriques}
+# Les quatre métriques de l'énoncé, calculées sur les mêmes origines et horizons pour tous les modèles (tableau
+# unique), puis le RMSE par horizon : c'est lui qui montre où chaque modèle gagne ou perd.
+metriques <- function(P) { e <- Y - P
+  c(MSE = mean(e^2), RMSE = sqrt(mean(e^2)), MAE = mean(abs(e)), MAPE = 100 * mean(abs(e) / Y)) }
+tab_m <- t(sapply(prev, function(p) metriques(p$moy)))
+rmse_h <- t(sapply(prev, function(p) sqrt(colMeans((Y - p$moy)^2)))); colnames(rmse_h) <- paste0("RMSE_h", 1:H)
+couv <- sapply(prev, function(p) if (is.null(p$bas)) NA else 100 * mean(Y >= p$bas & Y <= p$haut))
+tab_m <- cbind(tab_m, couverture_IC95 = couv)
+write.csv(cbind(tab_m, rmse_h), "resultats/R_metriques.csv")
+round(tab_m, 4)
+round(rmse_h, 3)
+```
+
+**Lecture.** Sans météo future, le meilleur modèle classique est
+`r rownames(tab_m)[which.min(tab_m[1:5, "RMSE"])]` (RMSE `r round(min(tab_m[1:5, "RMSE"]), 3)` kWh/kWc), devant la
+persistance (`r round(tab_m["Persistance (J)", "RMSE"], 3)`). L'ARIMA-Fourier ne bat la climatologie qu'aux tout
+premiers horizons : dès 2 ou 3 jours, sa prévision rejoint la normale saisonnière, conformément à la faible
+persistance (AR(1) de coefficient 0,26) vue en section 2. Avec la météo observée, le SARIMAX descend à
+`r round(tab_m["SARIMAX météo (ex post)", "RMSE"], 3)` : c'est la valeur d'une bonne prévision météo, et une borne
+optimiste. La couverture des intervalles à 95 % est donnée dans la dernière colonne.
+
+```{r dm}
+# Diebold-Mariano (HLN) contre la climatologie et contre la persistance, horizons 1 et 7,
+# pertes quadratique et absolue. Statistique positive = le modèle fait mieux que la référence.
+dm <- do.call(rbind, lapply(c("Persistance (J)", "Climatologie"), function(ref)
+  do.call(rbind, lapply(setdiff(names(prev), ref), function(nm) do.call(rbind, lapply(c(1, 7), function(h) {
+    e_ref <- Y[, h] - prev[[ref]]$moy[, h]; e_mod <- Y[, h] - prev[[nm]]$moy[, h]
+    d <- dm.test(e_ref, e_mod, h = h, power = 2); da <- dm.test(e_ref, e_mod, h = h, power = 1)
+    data.frame(reference = ref, modele = nm, horizon = h, DM = as.numeric(d$statistic), p = d$p.value,
+               DM_abs = as.numeric(da$statistic), p_abs = da$p.value)
+  }))))))
+write.csv(dm, "resultats/R_diebold_mariano.csv", row.names = FALSE)
+dm[, 3:7] <- round(dm[, 3:7], 4)
+dm
+```
+
+**Lecture.** Les tests de Diebold-Mariano disent si les écarts du tableau sont significatifs : à un jour,
+l'ARIMA-Fourier bat la persistance et la climatologie ; à sept jours, il ne se distingue plus de la
+climatologie, et seul le modèle qui connaît la météo observée fait significativement mieux que les deux
+références. Les statistiques coïncident avec celles du notebook Python (même protocole, mêmes origines).
+
+```{r session}
+# Versions exactes des packages, pour la reproductibilité.
+sessionInfo()
+```

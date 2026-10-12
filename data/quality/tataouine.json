@@ -1,0 +1,39 @@
+{
+  "ville": "tataouine",
+  "pays": "Tunisie",
+  "lignes": 6939,
+  "debut": "2005-01-01",
+  "fin": "2023-12-31",
+  "jours_imputes": 15,
+  "dates_imputees": [
+    "2005-04-18",
+    "2008-01-23",
+    "2008-03-01",
+    "2008-03-06",
+    "2008-05-17",
+    "2008-05-18",
+    "2008-05-20",
+    "2009-04-18",
+    "2009-04-19",
+    "2009-08-15",
+    "2009-08-16",
+    "2014-12-02",
+    "2016-10-16",
+    "2016-10-17",
+    "2017-06-13"
+  ],
+  "manquants_pct": 0.0,
+  "manquants_par_colonne_pct": {},
+  "aberrants_iqr": {
+    "pv_crystSi_kwh_kwc": 261,
+    "pv_CIS_kwh_kwc": 269,
+    "pv_CdTe_kwh_kwc": 301
+  },
+  "production_annuelle_kwh_kwc": {
+    "pv_crystSi_kwh_kwc": 1839.2,
+    "pv_CIS_kwh_kwc": 1820.7,
+    "pv_CdTe_kwh_kwc": 1890.8
+  },
+  "statut": "ok",
+  "raisons": []
+}

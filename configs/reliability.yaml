@@ -1,0 +1,53 @@
+# Score de fiabilité d'une technologie photovoltaïque dans une ville.
+# Le score est CALCULÉ à partir des données : aucun avis subjectif n'entre dans une note.
+# Les poids, eux, sont un choix : ils sont écrits ici, et leur influence est mesurée (weight_sensitivity).
+
+criteria:
+  previsibilite:
+    weight: 0.25
+    better: lower          # WAPE du meilleur modèle ex ante commun aux trois technologies
+    description: Erreur de prévision à 1-7 jours rapportée à la production (WAPE, %)
+  stabilite:
+    weight: 0.25
+    better: lower          # moyenne de trois indicateurs de variabilité, chacun normalisé
+    description: Variabilité journalière, mensuelle et interannuelle de la production
+  sensibilite_temperature:
+    weight: 0.15
+    better: lower          # perte de rendement par degré, en valeur absolue
+    description: Baisse du ratio de performance quand la température monte (% par °C)
+  faible_irradiation:
+    weight: 0.15
+    better: higher         # rendement des jours sombres rapporté à celui des jours clairs
+    description: Ratio de performance des jours peu ensoleillés rapporté à celui des jours très ensoleillés
+  rendement_annuel:
+    weight: 0.20
+    better: higher
+    description: Production annuelle moyenne (kWh/kWc/an)
+
+normalisation: par_pays      # chaque critère est ramené entre 0 et 1 parmi les villes et technologies d'un même pays
+
+indicators:
+  clear_day_min_irradiation_kwh_m2: 3.0   # régression sur la température : jours assez ensoleillés pour un ratio fiable
+  hot_day_threshold_c: 35                 # journée chaude : température maximale au-dessus de ce seuil
+  hot_day_reference_range_c: [20, 25]     # journées de référence pour mesurer la perte des jours chauds
+  min_hot_days: 30                        # en dessous, la perte des jours chauds n'est pas calculée
+  low_irradiation_quantile: 0.2
+  high_irradiation_quantile: 0.8
+  min_irradiation_kwh_m2: 0.5             # en dessous, le ratio de performance est numériquement instable
+
+uncertainty:
+  bootstrap_replicates: 400               # rééchantillonnage d'années entières (la saison reste intacte)
+  level: 0.95
+  tie_probability: 0.90                   # en dessous, le gagnant n'est pas déclaré seul : « ex æquo »
+
+weight_sensitivity:
+  draws: 2000                             # tirages de poids autour des poids ci-dessus (loi de Dirichlet)
+  concentration: 20                       # plus grand = tirages plus proches des poids de référence
+
+recommender:
+  features: [lat, altitude, irradiation_moyenne_kwh_m2, temperature_moyenne_c, temperature_max_c,
+             nebulosite_moyenne_pct, variabilite_journaliere]
+  tree_max_depth: 2
+
+orientations:
+  east_west_tilt_deg: 10                  # pente des deux pans est et ouest (toiture plate ou à faible pente)

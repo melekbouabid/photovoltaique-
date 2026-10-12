@@ -1,0 +1,106 @@
+# Pipeline reproductible : chaque étape est une commande de python -m solarvision.cli.
+# `dvc repro` ne relance que les étapes dont une dépendance a changé.
+# État au 11 octobre 2026 : DVC n'est pas installé sur la machine de travail, ce fichier n'a donc pas été
+# exécuté par DVC. L'enchaînement lui-même est testé par `python -m solarvision.cli pipeline --fast`.
+stages:
+  ingest:
+    cmd: python -m solarvision.cli ingest
+    deps:
+      - configs/cities.yaml
+      - configs/params.yaml
+      - src/solarvision/data
+    outs:
+      - data/interim
+      - data/quality
+      - data/manifest.yaml:
+          cache: false
+  features:
+    cmd: python -m solarvision.cli features --allow-partial
+    deps:
+      - data/interim
+      - src/solarvision/features
+      - configs/params.yaml
+    outs:
+      - data/processed/panel_journalier.parquet
+      - data/processed/splits_90_10.yaml:
+          cache: false
+      - data/processed/panel_meta.yaml:
+          cache: false
+  train:
+    cmd: python -m solarvision.cli train --sensitivity
+    deps:
+      - data/processed/panel_journalier.parquet
+      - data/processed/splits_90_10.yaml
+      - src/solarvision/models
+      - configs/params.yaml
+    outs:
+      - reports/forecasts
+      - reports/sensitivity_imputed.csv:
+          cache: false
+  deep:
+    cmd: python -m solarvision.cli deep --walk-forward tunis
+    deps:
+      - data/processed/panel_journalier.parquet
+      - src/solarvision/models/deep.py
+      - configs/params.yaml
+    outs:
+      - reports/forecasts_deep
+      - reports/deep
+  evaluate:
+    cmd: python -m solarvision.cli evaluate
+    deps:
+      - reports/forecasts
+      - reports/forecasts_deep
+      - src/solarvision/evaluation
+    metrics:
+      - reports/synthese_ville.csv:
+          cache: false
+    outs:
+      - reports/metrics_tidy.csv:
+          cache: false
+      - reports/metrics_wide.csv:
+          cache: false
+      - reports/dm_tests.csv:
+          cache: false
+  recommend:
+    cmd: python -m solarvision.cli recommend
+    deps:
+      - reports/metrics_wide.csv
+      - configs/reliability.yaml
+      - src/solarvision/recommender
+    outs:
+      - reports/tech_recommendation.csv:
+          cache: false
+      - reports/tech_indicators.csv:
+          cache: false
+  economics:
+    cmd: python -m solarvision.cli economics
+    deps:
+      - data/processed/panel_journalier.parquet
+      - configs/economics.yaml
+      - src/solarvision/economics
+    outs:
+      - reports/economics_by_city.csv:
+          cache: false
+      - reports/economics_ranking.csv:
+          cache: false
+  register:
+    cmd: python -m solarvision.cli register
+    deps:
+      - reports/metrics_wide.csv
+      - reports/forecasts_deep
+      - src/solarvision/mlops
+    outs:
+      - models/registry:
+          persist: true
+  monitor:
+    cmd: python -m solarvision.cli monitor
+    deps:
+      - reports/forecasts
+      - data/processed/panel_journalier.parquet
+      - src/solarvision/monitoring
+    outs:
+      - reports/monitoring/drift.csv:
+          cache: false
+      - reports/monitoring/summary.json:
+          cache: false

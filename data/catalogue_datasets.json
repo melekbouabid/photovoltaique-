@@ -1,0 +1,3917 @@
+[
+  {
+    "fichier": "data/datasets/fr_photovoltaique_journalier.csv",
+    "description": "Photovoltaïque - France : production journalière d'1 kWc et 35 variables explicatives, 3 villes",
+    "theme": "photovoltaïque",
+    "pays": "France",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)",
+      "NASA Langley Research Center, projet POWER (MERRA-2, CERES) - https://power.larc.nasa.gov"
+    ],
+    "lignes": 20817,
+    "colonnes": 43,
+    "variables_explicatives": 36,
+    "conforme": true,
+    "periode": [
+      "2005-01-01",
+      "2023-12-31"
+    ],
+    "taille_ko": 6025.6,
+    "valeurs_manquantes_pct": 0.008,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc"
+      },
+      {
+        "unite": "W/kWc",
+        "description": "Puissance horaire maximale de la journée",
+        "source": "PVGIS",
+        "nom": "pv_pic_w_kwc"
+      },
+      {
+        "unite": "h",
+        "description": "Nombre d'heures avec une production non nulle",
+        "source": "PVGIS",
+        "nom": "heures_production"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale reçue sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante directe sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_direct_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante diffuse sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_diffus_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante réfléchie par le sol sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_reflechi_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Part du diffus dans l'irradiation du plan des modules (indicateur de couverture nuageuse)",
+        "source": "PVGIS, calculé",
+        "nom": "fraction_diffuse_poa"
+      },
+      {
+        "unite": "-",
+        "description": "Énergie produite / irradiation reçue (pertes thermiques et système)",
+        "source": "PVGIS, calculé",
+        "nom": "ratio_performance"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température maximale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_max_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température minimale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_min_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne pendant les heures de jour (influe sur le rendement des modules)",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_jour_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Écart entre maximum et minimum de température (ciel clair = forte amplitude)",
+        "source": "PVGIS, calculé",
+        "nom": "amplitude_thermique_c"
+      },
+      {
+        "unite": "m/s",
+        "description": "Vitesse moyenne du vent à 10 m (refroidit les modules)",
+        "source": "PVGIS (ERA5)",
+        "nom": "vent_moy_ms"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct"
+      },
+      {
+        "unite": "h",
+        "description": "Durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h"
+      },
+      {
+        "unite": "mm",
+        "description": "Cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm"
+      },
+      {
+        "unite": "%",
+        "description": "Humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct"
+      },
+      {
+        "unite": "km/h",
+        "description": "Rafale maximale à 10 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "rafales_max_kmh"
+      },
+      {
+        "unite": "-",
+        "description": "Épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod"
+      },
+      {
+        "unite": "-",
+        "description": "Indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale par ciel clair (sans nuages)",
+        "source": "NASA POWER",
+        "nom": "ghi_ciel_clair_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation extraterrestre sur plan horizontal, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "irr_extraterrestre_kwh_m2"
+      },
+      {
+        "unite": "h",
+        "description": "Durée astronomique du jour, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "duree_jour_astro_h"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur du soleil à midi solaire, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "hauteur_soleil_midi_deg"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "h",
+        "description": "Heures dont le rayonnement a été reconstruit par PVGIS (indicateur de qualité)",
+        "source": "PVGIS",
+        "nom": "heures_reconstruites"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si le rayonnement PVGIS manque ce jour-là (trou de la base SARAH3) : valeurs PVGIS imputées",
+        "source": "calculé",
+        "nom": "jour_impute_pvgis"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production de la veille (t-1)",
+        "source": "calculé",
+        "nom": "pv_veille"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production à t-7",
+        "source": "calculé",
+        "nom": "pv_j7"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Moyenne de la production sur les 7 jours précédents",
+        "source": "calculé",
+        "nom": "pv_moy7_passe"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Écart-type de la production sur les 7 jours précédents (volatilité récente)",
+        "source": "calculé",
+        "nom": "pv_ecart_type7_passe"
+      },
+      {
+        "unite": "%",
+        "description": "Nébulosité de la veille",
+        "source": "calculé",
+        "nom": "nebulosite_veille"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/fr_eclairement_journalier.csv",
+    "description": "Éclairement et éclairage naturel - France : irradiation horizontale, éclairement lumineux et 36 variables explicatives, 3 villes",
+    "theme": "éclairement",
+    "pays": "France",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)",
+      "NASA Langley Research Center, projet POWER (MERRA-2, CERES) - https://power.larc.nasa.gov"
+    ],
+    "lignes": 20817,
+    "colonnes": 44,
+    "variables_explicatives": 37,
+    "conforme": true,
+    "periode": [
+      "2005-01-01",
+      "2023-12-31"
+    ],
+    "taille_ko": 6265.4,
+    "valeurs_manquantes_pct": 0.003,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale (éclairement énergétique cumulé) - CIBLE éclairement",
+        "source": "PVGIS",
+        "nom": "ghi_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation directe horizontale",
+        "source": "PVGIS",
+        "nom": "bhi_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation diffuse horizontale",
+        "source": "PVGIS",
+        "nom": "dhi_kwh_m2"
+      },
+      {
+        "unite": "klux",
+        "description": "Éclairement lumineux horizontal maximal de la journée (100 lm/W direct, 125 lm/W diffus)",
+        "source": "PVGIS, calculé",
+        "nom": "eclairement_max_klux"
+      },
+      {
+        "unite": "h",
+        "description": "Heures où l'éclairement lumineux horizontal dépasse 10 000 lux (éclairage naturel suffisant)",
+        "source": "PVGIS, calculé",
+        "nom": "heures_lumiere_10klux"
+      },
+      {
+        "unite": "klux·h",
+        "description": "Exposition lumineuse cumulée de la journée",
+        "source": "PVGIS, calculé",
+        "nom": "dose_lumineuse_klux_h"
+      },
+      {
+        "unite": "h",
+        "description": "Heures où la lumière naturelle est insuffisante (24 - heures au-dessus de 10 000 lux)",
+        "source": "PVGIS, calculé",
+        "nom": "besoin_eclairage_h"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale selon la réanalyse ERA5 (seconde source)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ghi_era5_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale selon NASA POWER (troisième source)",
+        "source": "NASA POWER",
+        "nom": "ghi_nasa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale par ciel clair (sans nuages)",
+        "source": "NASA POWER",
+        "nom": "ghi_ciel_clair_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation au sommet de l'atmosphère",
+        "source": "NASA POWER",
+        "nom": "rayonnement_toa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Rayonnement photosynthétiquement actif (lumière visible utile aux plantes)",
+        "source": "NASA POWER",
+        "nom": "par_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Indice UV par tout ciel",
+        "source": "NASA POWER",
+        "nom": "indice_uv"
+      },
+      {
+        "unite": "-",
+        "description": "Albédo de surface (part du rayonnement réfléchi par le sol)",
+        "source": "NASA POWER",
+        "nom": "albedo"
+      },
+      {
+        "unite": "-",
+        "description": "Épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse (satellite)",
+        "source": "NASA POWER",
+        "nom": "nebulosite_nasa_pct"
+      },
+      {
+        "unite": "h",
+        "description": "Durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h"
+      },
+      {
+        "unite": "h",
+        "description": "Durée du jour (lever au coucher du soleil)",
+        "source": "Open-Meteo",
+        "nom": "duree_jour_h"
+      },
+      {
+        "unite": "h",
+        "description": "Durée astronomique du jour, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "duree_jour_astro_h"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur maximale du soleil sur l'horizon (pas horaire)",
+        "source": "PVGIS",
+        "nom": "hauteur_soleil_max_deg"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur du soleil à midi solaire, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "hauteur_soleil_midi_deg"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation extraterrestre sur plan horizontal, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "irr_extraterrestre_kwh_m2"
+      },
+      {
+        "unite": "%",
+        "description": "Humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct"
+      },
+      {
+        "unite": "°C",
+        "description": "Point de rosée moyen à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "point_rosee_c"
+      },
+      {
+        "unite": "hPa",
+        "description": "Pression moyenne ramenée au niveau de la mer",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "pression_hpa"
+      },
+      {
+        "unite": "mm",
+        "description": "Cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm"
+      },
+      {
+        "unite": "mm",
+        "description": "Évapotranspiration de référence FAO-56",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "et0_mm"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si le rayonnement PVGIS manque ce jour-là (trou de la base SARAH3) : valeurs PVGIS imputées",
+        "source": "calculé",
+        "nom": "jour_impute_pvgis"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale de la veille",
+        "source": "calculé",
+        "nom": "ghi_veille"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Moyenne de l'irradiation horizontale sur les 7 jours précédents",
+        "source": "calculé",
+        "nom": "ghi_moy7_passe"
+      },
+      {
+        "unite": "%",
+        "description": "Nébulosité de la veille",
+        "source": "calculé",
+        "nom": "nebulosite_veille"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/tn_photovoltaique_journalier.csv",
+    "description": "Photovoltaïque - Tunisie : production journalière d'1 kWc et 35 variables explicatives, 3 villes",
+    "theme": "photovoltaïque",
+    "pays": "Tunisie",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)",
+      "NASA Langley Research Center, projet POWER (MERRA-2, CERES) - https://power.larc.nasa.gov"
+    ],
+    "lignes": 20817,
+    "colonnes": 43,
+    "variables_explicatives": 36,
+    "conforme": true,
+    "periode": [
+      "2005-01-01",
+      "2023-12-31"
+    ],
+    "taille_ko": 6041.5,
+    "valeurs_manquantes_pct": 0.008,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc"
+      },
+      {
+        "unite": "W/kWc",
+        "description": "Puissance horaire maximale de la journée",
+        "source": "PVGIS",
+        "nom": "pv_pic_w_kwc"
+      },
+      {
+        "unite": "h",
+        "description": "Nombre d'heures avec une production non nulle",
+        "source": "PVGIS",
+        "nom": "heures_production"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale reçue sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante directe sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_direct_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante diffuse sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_diffus_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante réfléchie par le sol sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_reflechi_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Part du diffus dans l'irradiation du plan des modules (indicateur de couverture nuageuse)",
+        "source": "PVGIS, calculé",
+        "nom": "fraction_diffuse_poa"
+      },
+      {
+        "unite": "-",
+        "description": "Énergie produite / irradiation reçue (pertes thermiques et système)",
+        "source": "PVGIS, calculé",
+        "nom": "ratio_performance"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température maximale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_max_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température minimale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_min_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne pendant les heures de jour (influe sur le rendement des modules)",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_jour_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Écart entre maximum et minimum de température (ciel clair = forte amplitude)",
+        "source": "PVGIS, calculé",
+        "nom": "amplitude_thermique_c"
+      },
+      {
+        "unite": "m/s",
+        "description": "Vitesse moyenne du vent à 10 m (refroidit les modules)",
+        "source": "PVGIS (ERA5)",
+        "nom": "vent_moy_ms"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct"
+      },
+      {
+        "unite": "h",
+        "description": "Durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h"
+      },
+      {
+        "unite": "mm",
+        "description": "Cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm"
+      },
+      {
+        "unite": "%",
+        "description": "Humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct"
+      },
+      {
+        "unite": "km/h",
+        "description": "Rafale maximale à 10 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "rafales_max_kmh"
+      },
+      {
+        "unite": "-",
+        "description": "Épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod"
+      },
+      {
+        "unite": "-",
+        "description": "Indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale par ciel clair (sans nuages)",
+        "source": "NASA POWER",
+        "nom": "ghi_ciel_clair_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation extraterrestre sur plan horizontal, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "irr_extraterrestre_kwh_m2"
+      },
+      {
+        "unite": "h",
+        "description": "Durée astronomique du jour, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "duree_jour_astro_h"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur du soleil à midi solaire, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "hauteur_soleil_midi_deg"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "h",
+        "description": "Heures dont le rayonnement a été reconstruit par PVGIS (indicateur de qualité)",
+        "source": "PVGIS",
+        "nom": "heures_reconstruites"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si le rayonnement PVGIS manque ce jour-là (trou de la base SARAH3) : valeurs PVGIS imputées",
+        "source": "calculé",
+        "nom": "jour_impute_pvgis"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production de la veille (t-1)",
+        "source": "calculé",
+        "nom": "pv_veille"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production à t-7",
+        "source": "calculé",
+        "nom": "pv_j7"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Moyenne de la production sur les 7 jours précédents",
+        "source": "calculé",
+        "nom": "pv_moy7_passe"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Écart-type de la production sur les 7 jours précédents (volatilité récente)",
+        "source": "calculé",
+        "nom": "pv_ecart_type7_passe"
+      },
+      {
+        "unite": "%",
+        "description": "Nébulosité de la veille",
+        "source": "calculé",
+        "nom": "nebulosite_veille"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/tn_eclairement_journalier.csv",
+    "description": "Éclairement et éclairage naturel - Tunisie : irradiation horizontale, éclairement lumineux et 36 variables explicatives, 3 villes",
+    "theme": "éclairement",
+    "pays": "Tunisie",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)",
+      "NASA Langley Research Center, projet POWER (MERRA-2, CERES) - https://power.larc.nasa.gov"
+    ],
+    "lignes": 20817,
+    "colonnes": 44,
+    "variables_explicatives": 37,
+    "conforme": true,
+    "periode": [
+      "2005-01-01",
+      "2023-12-31"
+    ],
+    "taille_ko": 6276.0,
+    "valeurs_manquantes_pct": 0.003,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale (éclairement énergétique cumulé) - CIBLE éclairement",
+        "source": "PVGIS",
+        "nom": "ghi_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation directe horizontale",
+        "source": "PVGIS",
+        "nom": "bhi_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation diffuse horizontale",
+        "source": "PVGIS",
+        "nom": "dhi_kwh_m2"
+      },
+      {
+        "unite": "klux",
+        "description": "Éclairement lumineux horizontal maximal de la journée (100 lm/W direct, 125 lm/W diffus)",
+        "source": "PVGIS, calculé",
+        "nom": "eclairement_max_klux"
+      },
+      {
+        "unite": "h",
+        "description": "Heures où l'éclairement lumineux horizontal dépasse 10 000 lux (éclairage naturel suffisant)",
+        "source": "PVGIS, calculé",
+        "nom": "heures_lumiere_10klux"
+      },
+      {
+        "unite": "klux·h",
+        "description": "Exposition lumineuse cumulée de la journée",
+        "source": "PVGIS, calculé",
+        "nom": "dose_lumineuse_klux_h"
+      },
+      {
+        "unite": "h",
+        "description": "Heures où la lumière naturelle est insuffisante (24 - heures au-dessus de 10 000 lux)",
+        "source": "PVGIS, calculé",
+        "nom": "besoin_eclairage_h"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale selon la réanalyse ERA5 (seconde source)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ghi_era5_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale selon NASA POWER (troisième source)",
+        "source": "NASA POWER",
+        "nom": "ghi_nasa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale par ciel clair (sans nuages)",
+        "source": "NASA POWER",
+        "nom": "ghi_ciel_clair_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation au sommet de l'atmosphère",
+        "source": "NASA POWER",
+        "nom": "rayonnement_toa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Rayonnement photosynthétiquement actif (lumière visible utile aux plantes)",
+        "source": "NASA POWER",
+        "nom": "par_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Indice UV par tout ciel",
+        "source": "NASA POWER",
+        "nom": "indice_uv"
+      },
+      {
+        "unite": "-",
+        "description": "Albédo de surface (part du rayonnement réfléchi par le sol)",
+        "source": "NASA POWER",
+        "nom": "albedo"
+      },
+      {
+        "unite": "-",
+        "description": "Épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse (satellite)",
+        "source": "NASA POWER",
+        "nom": "nebulosite_nasa_pct"
+      },
+      {
+        "unite": "h",
+        "description": "Durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h"
+      },
+      {
+        "unite": "h",
+        "description": "Durée du jour (lever au coucher du soleil)",
+        "source": "Open-Meteo",
+        "nom": "duree_jour_h"
+      },
+      {
+        "unite": "h",
+        "description": "Durée astronomique du jour, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "duree_jour_astro_h"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur maximale du soleil sur l'horizon (pas horaire)",
+        "source": "PVGIS",
+        "nom": "hauteur_soleil_max_deg"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur du soleil à midi solaire, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "hauteur_soleil_midi_deg"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation extraterrestre sur plan horizontal, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "irr_extraterrestre_kwh_m2"
+      },
+      {
+        "unite": "%",
+        "description": "Humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct"
+      },
+      {
+        "unite": "°C",
+        "description": "Point de rosée moyen à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "point_rosee_c"
+      },
+      {
+        "unite": "hPa",
+        "description": "Pression moyenne ramenée au niveau de la mer",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "pression_hpa"
+      },
+      {
+        "unite": "mm",
+        "description": "Cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm"
+      },
+      {
+        "unite": "mm",
+        "description": "Évapotranspiration de référence FAO-56",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "et0_mm"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si le rayonnement PVGIS manque ce jour-là (trou de la base SARAH3) : valeurs PVGIS imputées",
+        "source": "calculé",
+        "nom": "jour_impute_pvgis"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale de la veille",
+        "source": "calculé",
+        "nom": "ghi_veille"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Moyenne de l'irradiation horizontale sur les 7 jours précédents",
+        "source": "calculé",
+        "nom": "ghi_moy7_passe"
+      },
+      {
+        "unite": "%",
+        "description": "Nébulosité de la veille",
+        "source": "calculé",
+        "nom": "nebulosite_veille"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/es_photovoltaique_journalier.csv",
+    "description": "Photovoltaïque - Espagne : production journalière d'1 kWc et 35 variables explicatives, 3 villes",
+    "theme": "photovoltaïque",
+    "pays": "Espagne",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)",
+      "NASA Langley Research Center, projet POWER (MERRA-2, CERES) - https://power.larc.nasa.gov"
+    ],
+    "lignes": 20817,
+    "colonnes": 43,
+    "variables_explicatives": 36,
+    "conforme": true,
+    "periode": [
+      "2005-01-01",
+      "2023-12-31"
+    ],
+    "taille_ko": 6136.5,
+    "valeurs_manquantes_pct": 0.008,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc"
+      },
+      {
+        "unite": "W/kWc",
+        "description": "Puissance horaire maximale de la journée",
+        "source": "PVGIS",
+        "nom": "pv_pic_w_kwc"
+      },
+      {
+        "unite": "h",
+        "description": "Nombre d'heures avec une production non nulle",
+        "source": "PVGIS",
+        "nom": "heures_production"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale reçue sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante directe sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_direct_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante diffuse sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_diffus_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante réfléchie par le sol sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_reflechi_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Part du diffus dans l'irradiation du plan des modules (indicateur de couverture nuageuse)",
+        "source": "PVGIS, calculé",
+        "nom": "fraction_diffuse_poa"
+      },
+      {
+        "unite": "-",
+        "description": "Énergie produite / irradiation reçue (pertes thermiques et système)",
+        "source": "PVGIS, calculé",
+        "nom": "ratio_performance"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température maximale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_max_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température minimale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_min_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne pendant les heures de jour (influe sur le rendement des modules)",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_jour_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Écart entre maximum et minimum de température (ciel clair = forte amplitude)",
+        "source": "PVGIS, calculé",
+        "nom": "amplitude_thermique_c"
+      },
+      {
+        "unite": "m/s",
+        "description": "Vitesse moyenne du vent à 10 m (refroidit les modules)",
+        "source": "PVGIS (ERA5)",
+        "nom": "vent_moy_ms"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct"
+      },
+      {
+        "unite": "h",
+        "description": "Durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h"
+      },
+      {
+        "unite": "mm",
+        "description": "Cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm"
+      },
+      {
+        "unite": "%",
+        "description": "Humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct"
+      },
+      {
+        "unite": "km/h",
+        "description": "Rafale maximale à 10 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "rafales_max_kmh"
+      },
+      {
+        "unite": "-",
+        "description": "Épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod"
+      },
+      {
+        "unite": "-",
+        "description": "Indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale par ciel clair (sans nuages)",
+        "source": "NASA POWER",
+        "nom": "ghi_ciel_clair_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation extraterrestre sur plan horizontal, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "irr_extraterrestre_kwh_m2"
+      },
+      {
+        "unite": "h",
+        "description": "Durée astronomique du jour, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "duree_jour_astro_h"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur du soleil à midi solaire, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "hauteur_soleil_midi_deg"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "h",
+        "description": "Heures dont le rayonnement a été reconstruit par PVGIS (indicateur de qualité)",
+        "source": "PVGIS",
+        "nom": "heures_reconstruites"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si le rayonnement PVGIS manque ce jour-là (trou de la base SARAH3) : valeurs PVGIS imputées",
+        "source": "calculé",
+        "nom": "jour_impute_pvgis"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production de la veille (t-1)",
+        "source": "calculé",
+        "nom": "pv_veille"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production à t-7",
+        "source": "calculé",
+        "nom": "pv_j7"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Moyenne de la production sur les 7 jours précédents",
+        "source": "calculé",
+        "nom": "pv_moy7_passe"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Écart-type de la production sur les 7 jours précédents (volatilité récente)",
+        "source": "calculé",
+        "nom": "pv_ecart_type7_passe"
+      },
+      {
+        "unite": "%",
+        "description": "Nébulosité de la veille",
+        "source": "calculé",
+        "nom": "nebulosite_veille"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/es_eclairement_journalier.csv",
+    "description": "Éclairement et éclairage naturel - Espagne : irradiation horizontale, éclairement lumineux et 36 variables explicatives, 3 villes",
+    "theme": "éclairement",
+    "pays": "Espagne",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)",
+      "NASA Langley Research Center, projet POWER (MERRA-2, CERES) - https://power.larc.nasa.gov"
+    ],
+    "lignes": 20817,
+    "colonnes": 44,
+    "variables_explicatives": 37,
+    "conforme": true,
+    "periode": [
+      "2005-01-01",
+      "2023-12-31"
+    ],
+    "taille_ko": 6368.5,
+    "valeurs_manquantes_pct": 0.003,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale (éclairement énergétique cumulé) - CIBLE éclairement",
+        "source": "PVGIS",
+        "nom": "ghi_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation directe horizontale",
+        "source": "PVGIS",
+        "nom": "bhi_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation diffuse horizontale",
+        "source": "PVGIS",
+        "nom": "dhi_kwh_m2"
+      },
+      {
+        "unite": "klux",
+        "description": "Éclairement lumineux horizontal maximal de la journée (100 lm/W direct, 125 lm/W diffus)",
+        "source": "PVGIS, calculé",
+        "nom": "eclairement_max_klux"
+      },
+      {
+        "unite": "h",
+        "description": "Heures où l'éclairement lumineux horizontal dépasse 10 000 lux (éclairage naturel suffisant)",
+        "source": "PVGIS, calculé",
+        "nom": "heures_lumiere_10klux"
+      },
+      {
+        "unite": "klux·h",
+        "description": "Exposition lumineuse cumulée de la journée",
+        "source": "PVGIS, calculé",
+        "nom": "dose_lumineuse_klux_h"
+      },
+      {
+        "unite": "h",
+        "description": "Heures où la lumière naturelle est insuffisante (24 - heures au-dessus de 10 000 lux)",
+        "source": "PVGIS, calculé",
+        "nom": "besoin_eclairage_h"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale selon la réanalyse ERA5 (seconde source)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ghi_era5_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale selon NASA POWER (troisième source)",
+        "source": "NASA POWER",
+        "nom": "ghi_nasa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale par ciel clair (sans nuages)",
+        "source": "NASA POWER",
+        "nom": "ghi_ciel_clair_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation au sommet de l'atmosphère",
+        "source": "NASA POWER",
+        "nom": "rayonnement_toa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Rayonnement photosynthétiquement actif (lumière visible utile aux plantes)",
+        "source": "NASA POWER",
+        "nom": "par_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Indice UV par tout ciel",
+        "source": "NASA POWER",
+        "nom": "indice_uv"
+      },
+      {
+        "unite": "-",
+        "description": "Albédo de surface (part du rayonnement réfléchi par le sol)",
+        "source": "NASA POWER",
+        "nom": "albedo"
+      },
+      {
+        "unite": "-",
+        "description": "Épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse (satellite)",
+        "source": "NASA POWER",
+        "nom": "nebulosite_nasa_pct"
+      },
+      {
+        "unite": "h",
+        "description": "Durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h"
+      },
+      {
+        "unite": "h",
+        "description": "Durée du jour (lever au coucher du soleil)",
+        "source": "Open-Meteo",
+        "nom": "duree_jour_h"
+      },
+      {
+        "unite": "h",
+        "description": "Durée astronomique du jour, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "duree_jour_astro_h"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur maximale du soleil sur l'horizon (pas horaire)",
+        "source": "PVGIS",
+        "nom": "hauteur_soleil_max_deg"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur du soleil à midi solaire, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "hauteur_soleil_midi_deg"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation extraterrestre sur plan horizontal, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "irr_extraterrestre_kwh_m2"
+      },
+      {
+        "unite": "%",
+        "description": "Humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct"
+      },
+      {
+        "unite": "°C",
+        "description": "Point de rosée moyen à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "point_rosee_c"
+      },
+      {
+        "unite": "hPa",
+        "description": "Pression moyenne ramenée au niveau de la mer",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "pression_hpa"
+      },
+      {
+        "unite": "mm",
+        "description": "Cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm"
+      },
+      {
+        "unite": "mm",
+        "description": "Évapotranspiration de référence FAO-56",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "et0_mm"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si le rayonnement PVGIS manque ce jour-là (trou de la base SARAH3) : valeurs PVGIS imputées",
+        "source": "calculé",
+        "nom": "jour_impute_pvgis"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale de la veille",
+        "source": "calculé",
+        "nom": "ghi_veille"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Moyenne de l'irradiation horizontale sur les 7 jours précédents",
+        "source": "calculé",
+        "nom": "ghi_moy7_passe"
+      },
+      {
+        "unite": "%",
+        "description": "Nébulosité de la veille",
+        "source": "calculé",
+        "nom": "nebulosite_veille"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/panel_9_villes_journalier.csv",
+    "description": "Panel complet : 9 villes x 6 939 jours, toutes les variables (table de modélisation)",
+    "theme": "photovoltaïque et éclairement",
+    "pays": "France, Tunisie, Espagne",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)",
+      "NASA Langley Research Center, projet POWER (MERRA-2, CERES) - https://power.larc.nasa.gov"
+    ],
+    "lignes": 62451,
+    "colonnes": 65,
+    "variables_explicatives": 57,
+    "conforme": true,
+    "periode": [
+      "2005-01-01",
+      "2023-12-31"
+    ],
+    "taille_ko": 28075.8,
+    "valeurs_manquantes_pct": 0.007,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc"
+      },
+      {
+        "unite": "W/kWc",
+        "description": "Puissance horaire maximale de la journée",
+        "source": "PVGIS",
+        "nom": "pv_pic_w_kwc"
+      },
+      {
+        "unite": "h",
+        "description": "Nombre d'heures avec une production non nulle",
+        "source": "PVGIS",
+        "nom": "heures_production"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale reçue sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante directe sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_direct_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante diffuse sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_diffus_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Composante réfléchie par le sol sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_reflechi_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale (éclairement énergétique cumulé) - CIBLE éclairement",
+        "source": "PVGIS",
+        "nom": "ghi_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation directe horizontale",
+        "source": "PVGIS",
+        "nom": "bhi_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation diffuse horizontale",
+        "source": "PVGIS",
+        "nom": "dhi_kwh_m2"
+      },
+      {
+        "unite": "klux",
+        "description": "Éclairement lumineux horizontal maximal de la journée (100 lm/W direct, 125 lm/W diffus)",
+        "source": "PVGIS, calculé",
+        "nom": "eclairement_max_klux"
+      },
+      {
+        "unite": "h",
+        "description": "Heures où l'éclairement lumineux horizontal dépasse 10 000 lux (éclairage naturel suffisant)",
+        "source": "PVGIS, calculé",
+        "nom": "heures_lumiere_10klux"
+      },
+      {
+        "unite": "klux·h",
+        "description": "Exposition lumineuse cumulée de la journée",
+        "source": "PVGIS, calculé",
+        "nom": "dose_lumineuse_klux_h"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur maximale du soleil sur l'horizon (pas horaire)",
+        "source": "PVGIS",
+        "nom": "hauteur_soleil_max_deg"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température maximale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_max_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température minimale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_min_c"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne pendant les heures de jour (influe sur le rendement des modules)",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_jour_c"
+      },
+      {
+        "unite": "m/s",
+        "description": "Vitesse moyenne du vent à 10 m (refroidit les modules)",
+        "source": "PVGIS (ERA5)",
+        "nom": "vent_moy_ms"
+      },
+      {
+        "unite": "h",
+        "description": "Heures dont le rayonnement a été reconstruit par PVGIS (indicateur de qualité)",
+        "source": "PVGIS",
+        "nom": "heures_reconstruites"
+      },
+      {
+        "unite": "-",
+        "description": "Part du diffus dans l'irradiation du plan des modules (indicateur de couverture nuageuse)",
+        "source": "PVGIS, calculé",
+        "nom": "fraction_diffuse_poa"
+      },
+      {
+        "unite": "-",
+        "description": "Énergie produite / irradiation reçue (pertes thermiques et système)",
+        "source": "PVGIS, calculé",
+        "nom": "ratio_performance"
+      },
+      {
+        "unite": "°C",
+        "description": "Écart entre maximum et minimum de température (ciel clair = forte amplitude)",
+        "source": "PVGIS, calculé",
+        "nom": "amplitude_thermique_c"
+      },
+      {
+        "unite": "h",
+        "description": "Heures où la lumière naturelle est insuffisante (24 - heures au-dessus de 10 000 lux)",
+        "source": "PVGIS, calculé",
+        "nom": "besoin_eclairage_h"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct"
+      },
+      {
+        "unite": "h",
+        "description": "Durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h"
+      },
+      {
+        "unite": "h",
+        "description": "Durée du jour (lever au coucher du soleil)",
+        "source": "Open-Meteo",
+        "nom": "duree_jour_h"
+      },
+      {
+        "unite": "mm",
+        "description": "Cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm"
+      },
+      {
+        "unite": "%",
+        "description": "Humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct"
+      },
+      {
+        "unite": "°C",
+        "description": "Point de rosée moyen à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "point_rosee_c"
+      },
+      {
+        "unite": "hPa",
+        "description": "Pression moyenne ramenée au niveau de la mer",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "pression_hpa"
+      },
+      {
+        "unite": "km/h",
+        "description": "Rafale maximale à 10 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "rafales_max_kmh"
+      },
+      {
+        "unite": "mm",
+        "description": "Évapotranspiration de référence FAO-56",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "et0_mm"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale selon la réanalyse ERA5 (seconde source)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ghi_era5_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation globale horizontale selon NASA POWER (troisième source)",
+        "source": "NASA POWER",
+        "nom": "ghi_nasa_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale par ciel clair (sans nuages)",
+        "source": "NASA POWER",
+        "nom": "ghi_ciel_clair_kwh_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation au sommet de l'atmosphère",
+        "source": "NASA POWER",
+        "nom": "rayonnement_toa_kwh_m2"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse (satellite)",
+        "source": "NASA POWER",
+        "nom": "nebulosite_nasa_pct"
+      },
+      {
+        "unite": "-",
+        "description": "Épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod"
+      },
+      {
+        "unite": "-",
+        "description": "Indice UV par tout ciel",
+        "source": "NASA POWER",
+        "nom": "indice_uv"
+      },
+      {
+        "unite": "-",
+        "description": "Albédo de surface (part du rayonnement réfléchi par le sol)",
+        "source": "NASA POWER",
+        "nom": "albedo"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Rayonnement photosynthétiquement actif (lumière visible utile aux plantes)",
+        "source": "NASA POWER",
+        "nom": "par_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation extraterrestre sur plan horizontal, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "irr_extraterrestre_kwh_m2"
+      },
+      {
+        "unite": "h",
+        "description": "Durée astronomique du jour, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "duree_jour_astro_h"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur du soleil à midi solaire, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "hauteur_soleil_midi_deg"
+      },
+      {
+        "unite": "-",
+        "description": "Rang du jour dans l'année",
+        "source": "calendrier",
+        "nom": "jour_annee"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si le rayonnement PVGIS manque ce jour-là (trou de la base SARAH3) : valeurs PVGIS imputées",
+        "source": "calculé",
+        "nom": "jour_impute_pvgis"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production de la veille (t-1)",
+        "source": "calculé",
+        "nom": "pv_veille"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production à t-7",
+        "source": "calculé",
+        "nom": "pv_j7"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Moyenne de la production sur les 7 jours précédents",
+        "source": "calculé",
+        "nom": "pv_moy7_passe"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Écart-type de la production sur les 7 jours précédents (volatilité récente)",
+        "source": "calculé",
+        "nom": "pv_ecart_type7_passe"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale de la veille",
+        "source": "calculé",
+        "nom": "ghi_veille"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Moyenne de l'irradiation horizontale sur les 7 jours précédents",
+        "source": "calculé",
+        "nom": "ghi_moy7_passe"
+      },
+      {
+        "unite": "%",
+        "description": "Nébulosité de la veille",
+        "source": "calculé",
+        "nom": "nebulosite_veille"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/mensuel_9_villes.csv",
+    "description": "Mensuel : totaux, moyennes, extrêmes et nombre de jours de pluie, de ciel couvert ou de poussières par ville (2005-2023)",
+    "theme": "photovoltaïque et éclairement",
+    "pays": "France, Tunisie, Espagne",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)",
+      "NASA Langley Research Center, projet POWER (MERRA-2, CERES) - https://power.larc.nasa.gov"
+    ],
+    "lignes": 2052,
+    "colonnes": 47,
+    "variables_explicatives": 40,
+    "conforme": true,
+    "periode": [
+      "2005-01-01",
+      "2023-12-01"
+    ],
+    "taille_ko": 678.9,
+    "valeurs_manquantes_pct": 0.0,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Somme mensuelle de : énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc_somme"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Somme mensuelle de : irradiation globale reçue sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_kwh_m2_somme"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Somme mensuelle de : composante directe sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_direct_kwh_m2_somme"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Somme mensuelle de : composante diffuse sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_diffus_kwh_m2_somme"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Somme mensuelle de : irradiation globale horizontale (éclairement énergétique cumulé) - CIBLE éclairement",
+        "source": "PVGIS",
+        "nom": "ghi_kwh_m2_somme"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Somme mensuelle de : irradiation directe horizontale",
+        "source": "PVGIS",
+        "nom": "bhi_kwh_m2_somme"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Somme mensuelle de : irradiation diffuse horizontale",
+        "source": "PVGIS",
+        "nom": "dhi_kwh_m2_somme"
+      },
+      {
+        "unite": "h",
+        "description": "Somme mensuelle de : durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h_somme"
+      },
+      {
+        "unite": "mm",
+        "description": "Somme mensuelle de : cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm_somme"
+      },
+      {
+        "unite": "klux·h",
+        "description": "Somme mensuelle de : exposition lumineuse cumulée de la journée",
+        "source": "PVGIS, calculé",
+        "nom": "dose_lumineuse_klux_h_somme"
+      },
+      {
+        "unite": "h",
+        "description": "Somme mensuelle de : heures où l'éclairement lumineux horizontal dépasse 10 000 lux (éclairage naturel suffisant)",
+        "source": "PVGIS, calculé",
+        "nom": "heures_lumiere_10klux_somme"
+      },
+      {
+        "unite": "h",
+        "description": "Somme mensuelle de : heures où la lumière naturelle est insuffisante (24 - heures au-dessus de 10 000 lux)",
+        "source": "PVGIS, calculé",
+        "nom": "besoin_eclairage_h_somme"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Somme mensuelle de : irradiation extraterrestre sur plan horizontal, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "irr_extraterrestre_kwh_m2_somme"
+      },
+      {
+        "unite": "mm",
+        "description": "Somme mensuelle de : évapotranspiration de référence FAO-56",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "et0_mm_somme"
+      },
+      {
+        "unite": "h",
+        "description": "Somme mensuelle de : nombre d'heures avec une production non nulle",
+        "source": "PVGIS",
+        "nom": "heures_production_somme"
+      },
+      {
+        "unite": "°C",
+        "description": "Moyenne mensuelle de : température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c_moy"
+      },
+      {
+        "unite": "°C",
+        "description": "Moyenne mensuelle de : température maximale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_max_c_moy"
+      },
+      {
+        "unite": "°C",
+        "description": "Moyenne mensuelle de : température minimale",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_min_c_moy"
+      },
+      {
+        "unite": "%",
+        "description": "Moyenne mensuelle de : couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct_moy"
+      },
+      {
+        "unite": "%",
+        "description": "Moyenne mensuelle de : humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct_moy"
+      },
+      {
+        "unite": "hPa",
+        "description": "Moyenne mensuelle de : pression moyenne ramenée au niveau de la mer",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "pression_hpa_moy"
+      },
+      {
+        "unite": "m/s",
+        "description": "Moyenne mensuelle de : vitesse moyenne du vent à 10 m (refroidit les modules)",
+        "source": "PVGIS (ERA5)",
+        "nom": "vent_moy_ms_moy"
+      },
+      {
+        "unite": "-",
+        "description": "Moyenne mensuelle de : épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod_moy"
+      },
+      {
+        "unite": "-",
+        "description": "Moyenne mensuelle de : indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte_moy"
+      },
+      {
+        "unite": "-",
+        "description": "Moyenne mensuelle de : part du diffus dans l'irradiation du plan des modules (indicateur de couverture nuageuse)",
+        "source": "PVGIS, calculé",
+        "nom": "fraction_diffuse_poa_moy"
+      },
+      {
+        "unite": "-",
+        "description": "Moyenne mensuelle de : énergie produite / irradiation reçue (pertes thermiques et système)",
+        "source": "PVGIS, calculé",
+        "nom": "ratio_performance_moy"
+      },
+      {
+        "unite": "h",
+        "description": "Moyenne mensuelle de : durée astronomique du jour, calculée (connue à l'avance)",
+        "source": "calcul astronomique",
+        "nom": "duree_jour_astro_h_moy"
+      },
+      {
+        "unite": "klux",
+        "description": "Moyenne mensuelle de : éclairement lumineux horizontal maximal de la journée (100 lm/W direct, 125 lm/W diffus)",
+        "source": "PVGIS, calculé",
+        "nom": "eclairement_max_klux_moy"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Minimum mensuel de : énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc_min"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Maximum mensuel de : énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc_max"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Écart-type mensuel de : énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc_et"
+      },
+      {
+        "unite": "-",
+        "description": "Maximum mensuel de : épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod_max"
+      },
+      {
+        "unite": "km/h",
+        "description": "Maximum mensuel de : rafale maximale à 10 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "rafales_max_kmh_max"
+      },
+      {
+        "unite": "jours",
+        "description": "Jours du mois avec au moins 1 mm de pluie",
+        "source": "Open-Meteo, calculé",
+        "nom": "jours_pluie"
+      },
+      {
+        "unite": "jours",
+        "description": "Jours du mois avec une nébulosité d'au moins 80 %",
+        "source": "Open-Meteo, calculé",
+        "nom": "jours_couverts"
+      },
+      {
+        "unite": "jours",
+        "description": "Jours du mois avec un indice de clarté d'au moins 0,65",
+        "source": "NASA POWER, calculé",
+        "nom": "jours_clairs"
+      },
+      {
+        "unite": "jours",
+        "description": "Jours du mois avec une épaisseur optique des aérosols d'au moins 0,8",
+        "source": "NASA POWER, calculé",
+        "nom": "jours_poussiere"
+      },
+      {
+        "unite": "jours",
+        "description": "Jours du mois dont le rayonnement PVGIS a été imputé",
+        "source": "calculé",
+        "nom": "jours_imputes"
+      },
+      {
+        "unite": "-",
+        "description": "Année",
+        "source": "calendrier",
+        "nom": "annee"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/climatologie_9_villes.csv",
+    "description": "Normales par jour de l'année (2005-2020) : moyennes, écarts-types, centiles et probabilités de pluie ou de ciel couvert",
+    "theme": "photovoltaïque et éclairement",
+    "pays": "France, Tunisie, Espagne",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)",
+      "NASA Langley Research Center, projet POWER (MERRA-2, CERES) - https://power.larc.nasa.gov"
+    ],
+    "lignes": 3294,
+    "colonnes": 39,
+    "variables_explicatives": 32,
+    "conforme": true,
+    "periode": null,
+    "taille_ko": 873.6,
+    "valeurs_manquantes_pct": 0.0,
+    "variables": [
+      {
+        "unite": "-",
+        "description": "Rang du jour dans l'année",
+        "source": "calendrier",
+        "nom": "jour_annee"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc_moyenne"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc_ecart_type"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : irradiation globale horizontale (éclairement énergétique cumulé) - CIBLE éclairement",
+        "source": "PVGIS",
+        "nom": "ghi_kwh_m2_moyenne"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : irradiation globale horizontale (éclairement énergétique cumulé) - CIBLE éclairement",
+        "source": "PVGIS",
+        "nom": "ghi_kwh_m2_ecart_type"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : irradiation globale reçue sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_kwh_m2_moyenne"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : irradiation globale reçue sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "irr_poa_kwh_m2_ecart_type"
+      },
+      {
+        "unite": "%",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct_moyenne"
+      },
+      {
+        "unite": "%",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct_ecart_type"
+      },
+      {
+        "unite": "°C",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c_moyenne"
+      },
+      {
+        "unite": "°C",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : température moyenne de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moy_c_ecart_type"
+      },
+      {
+        "unite": "h",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : heures où l'éclairement lumineux horizontal dépasse 10 000 lux (éclairage naturel suffisant)",
+        "source": "PVGIS, calculé",
+        "nom": "heures_lumiere_10klux_moyenne"
+      },
+      {
+        "unite": "h",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : heures où l'éclairement lumineux horizontal dépasse 10 000 lux (éclairage naturel suffisant)",
+        "source": "PVGIS, calculé",
+        "nom": "heures_lumiere_10klux_ecart_type"
+      },
+      {
+        "unite": "h",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h_moyenne"
+      },
+      {
+        "unite": "h",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : durée d'ensoleillement (rayonnement direct > 120 W/m²)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ensoleillement_h_ecart_type"
+      },
+      {
+        "unite": "mm",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm_moyenne"
+      },
+      {
+        "unite": "mm",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm_ecart_type"
+      },
+      {
+        "unite": "-",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod_moyenne"
+      },
+      {
+        "unite": "-",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : épaisseur optique des aérosols à 550 nm (poussières sahariennes, pollution)",
+        "source": "NASA POWER (MERRA-2)",
+        "nom": "aerosols_aod_ecart_type"
+      },
+      {
+        "unite": "-",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte_moyenne"
+      },
+      {
+        "unite": "-",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : indice de clarté (irradiation au sol / irradiation au sommet de l'atmosphère)",
+        "source": "NASA POWER",
+        "nom": "indice_clarte_ecart_type"
+      },
+      {
+        "unite": "klux",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : éclairement lumineux horizontal maximal de la journée (100 lm/W direct, 125 lm/W diffus)",
+        "source": "PVGIS, calculé",
+        "nom": "eclairement_max_klux_moyenne"
+      },
+      {
+        "unite": "klux",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : éclairement lumineux horizontal maximal de la journée (100 lm/W direct, 125 lm/W diffus)",
+        "source": "PVGIS, calculé",
+        "nom": "eclairement_max_klux_ecart_type"
+      },
+      {
+        "unite": "h",
+        "description": "Moyenne (jour de l'année, 2005-2020) de : durée du jour (lever au coucher du soleil)",
+        "source": "Open-Meteo",
+        "nom": "duree_jour_h_moyenne"
+      },
+      {
+        "unite": "h",
+        "description": "Écart-type (jour de l'année, 2005-2020) de : durée du jour (lever au coucher du soleil)",
+        "source": "Open-Meteo",
+        "nom": "duree_jour_h_ecart_type"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "10e centile (jour de l'année) de : énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc_p10"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Médiane (jour de l'année) de : énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc_p50"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "90e centile (jour de l'année) de : énergie produite dans la journée par 1 kWc (pente optimale, plein sud, pertes 14 %) - CIBLE photovoltaïque",
+        "source": "PVGIS",
+        "nom": "pv_kwh_kwc_p90"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "10e centile (jour de l'année) de : irradiation globale horizontale (éclairement énergétique cumulé) - CIBLE éclairement",
+        "source": "PVGIS",
+        "nom": "ghi_kwh_m2_p10"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "90e centile (jour de l'année) de : irradiation globale horizontale (éclairement énergétique cumulé) - CIBLE éclairement",
+        "source": "PVGIS",
+        "nom": "ghi_kwh_m2_p90"
+      },
+      {
+        "unite": "-",
+        "description": "Probabilité d'au moins 1 mm de pluie ce jour de l'année (2005-2020)",
+        "source": "Open-Meteo, calculé",
+        "nom": "proba_pluie"
+      },
+      {
+        "unite": "-",
+        "description": "Probabilité d'une nébulosité d'au moins 80 % ce jour de l'année (2005-2020)",
+        "source": "Open-Meteo, calculé",
+        "nom": "proba_ciel_couvert"
+      },
+      {
+        "unite": "-",
+        "description": "Nombre d'années ayant servi au calcul",
+        "source": "calculé",
+        "nom": "n_annees"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/horaire_9_villes_2023.csv.gz",
+    "description": "Horaire 2023 : puissance PV, éclairement (plan incliné, horizontal, lux), nuages par étage et météo ERA5, grandeurs dérivées",
+    "theme": "photovoltaïque et éclairement",
+    "pays": "France, Tunisie, Espagne",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)",
+      "Open-Meteo Historical Weather API (réanalyse ERA5 de Copernicus/ECMWF) - https://open-meteo.com (CC BY 4.0)"
+    ],
+    "lignes": 78840,
+    "colonnes": 48,
+    "variables_explicatives": 40,
+    "conforme": true,
+    "periode": [
+      "2023-01-01",
+      "2023-12-31"
+    ],
+    "taille_ko": 4640.3,
+    "valeurs_manquantes_pct": 4.512,
+    "variables": [
+      {
+        "unite": "-",
+        "description": "heure_utc",
+        "source": "-",
+        "nom": "heure_utc"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "W/kWc",
+        "description": "Puissance photovoltaïque d'1 kWc pendant l'heure",
+        "source": "PVGIS",
+        "nom": "p_w_kwc"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement direct sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "gb_poa_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement diffus sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "gd_poa_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement réfléchi sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "gr_poa_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement direct horizontal",
+        "source": "PVGIS",
+        "nom": "gb_h_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement diffus horizontal",
+        "source": "PVGIS",
+        "nom": "gd_h_w_m2"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur du soleil sur l'horizon",
+        "source": "PVGIS ou calcul astronomique",
+        "nom": "hauteur_soleil_deg"
+      },
+      {
+        "unite": "°C",
+        "description": "Température de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_c"
+      },
+      {
+        "unite": "m/s",
+        "description": "Vitesse du vent à 10 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "vent_ms"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si le rayonnement de l'heure a été reconstruit par PVGIS",
+        "source": "PVGIS",
+        "nom": "reconstruit"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement global horizontal",
+        "source": "PVGIS",
+        "nom": "ghi_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement global sur le plan des modules",
+        "source": "PVGIS, calculé",
+        "nom": "poa_w_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Part du diffus dans l'éclairement horizontal",
+        "source": "PVGIS, calculé",
+        "nom": "fraction_diffuse_h"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement extraterrestre sur plan horizontal (calcul astronomique)",
+        "source": "calculé",
+        "nom": "g0_horizontal_w_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Indice de clarté horaire (éclairement au sol / extraterrestre)",
+        "source": "calculé",
+        "nom": "indice_clarte_h"
+      },
+      {
+        "unite": "-",
+        "description": "Masse d'air traversée par le rayonnement (1 / sin de la hauteur du soleil)",
+        "source": "calculé",
+        "nom": "masse_air"
+      },
+      {
+        "unite": "lux",
+        "description": "Éclairement lumineux horizontal (100 lm/W direct, 125 lm/W diffus)",
+        "source": "calculé",
+        "nom": "eclairement_lux"
+      },
+      {
+        "unite": "lux",
+        "description": "Part directe de l'éclairement lumineux horizontal",
+        "source": "calculé",
+        "nom": "eclairement_direct_lux"
+      },
+      {
+        "unite": "lux",
+        "description": "Part diffuse de l'éclairement lumineux horizontal",
+        "source": "calculé",
+        "nom": "eclairement_diffus_lux"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si l'éclairement lumineux dépasse 10 000 lux (éclairage naturel suffisant)",
+        "source": "calculé",
+        "nom": "lumiere_suffisante"
+      },
+      {
+        "unite": "°C",
+        "description": "Température estimée des modules (modèle NOCT : T air + éclairement / 800 x 25 °C)",
+        "source": "calculé",
+        "nom": "t_module_c"
+      },
+      {
+        "unite": "-",
+        "description": "Puissance produite / éclairement reçu pendant l'heure",
+        "source": "calculé",
+        "nom": "ratio_performance_h"
+      },
+      {
+        "unite": "h",
+        "description": "Heure solaire locale (heure UTC + longitude / 15)",
+        "source": "calculé",
+        "nom": "heure_solaire"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π heure/24)",
+        "source": "calendrier",
+        "nom": "h_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π heure/24)",
+        "source": "calendrier",
+        "nom": "h_cos"
+      },
+      {
+        "unite": "-",
+        "description": "Rang du jour dans l'année",
+        "source": "calendrier",
+        "nom": "jour_annee"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse moyenne",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse basse (sous 2 km)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_basse_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse moyenne (2 à 6 km)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_moyenne_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Couverture nuageuse haute (au-dessus de 6 km)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_haute_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct"
+      },
+      {
+        "unite": "mm",
+        "description": "Cumul de précipitations",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "precipitation_mm"
+      },
+      {
+        "unite": "°",
+        "description": "Direction d'où vient le vent",
+        "source": "Open-Meteo (ERA5) ou PVGIS",
+        "nom": "direction_vent_deg"
+      },
+      {
+        "unite": "hPa",
+        "description": "Pression au niveau du sol",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "pression_surface_hpa"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement global horizontal selon ERA5 (seconde source)",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "ghi_era5_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement direct normal selon ERA5",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "dni_era5_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement diffus horizontal selon ERA5",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "dhi_era5_w_m2"
+      },
+      {
+        "unite": "°C",
+        "description": "Température ressentie",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "temperature_ressentie_c"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/tmy_9_villes.csv",
+    "description": "Année météorologique type PVGIS (8 760 h par ville) enrichie : géométrie solaire, éclairage, point de rosée, vent, modules",
+    "theme": "éclairement",
+    "pays": "France, Tunisie, Espagne",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)"
+    ],
+    "lignes": 78840,
+    "colonnes": 36,
+    "variables_explicatives": 28,
+    "conforme": true,
+    "periode": [
+      "2023-01-01",
+      "2023-12-31"
+    ],
+    "taille_ko": 20117.5,
+    "valeurs_manquantes_pct": 2.943,
+    "variables": [
+      {
+        "unite": "-",
+        "description": "heure_utc",
+        "source": "-",
+        "nom": "heure_utc"
+      },
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "°C",
+        "description": "Température de l'air à 2 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_c"
+      },
+      {
+        "unite": "%",
+        "description": "Humidité relative moyenne à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "humidite_pct"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement global horizontal",
+        "source": "PVGIS",
+        "nom": "ghi_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement direct normal",
+        "source": "PVGIS",
+        "nom": "dni_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement diffus horizontal",
+        "source": "PVGIS",
+        "nom": "dhi_w_m2"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Rayonnement infrarouge descendant",
+        "source": "PVGIS",
+        "nom": "infrarouge_w_m2"
+      },
+      {
+        "unite": "m/s",
+        "description": "Vitesse du vent à 10 m",
+        "source": "PVGIS (ERA5)",
+        "nom": "vent_ms"
+      },
+      {
+        "unite": "°",
+        "description": "Direction d'où vient le vent",
+        "source": "Open-Meteo (ERA5) ou PVGIS",
+        "nom": "direction_vent_deg"
+      },
+      {
+        "unite": "Pa",
+        "description": "Pression au sol",
+        "source": "PVGIS",
+        "nom": "pression_pa"
+      },
+      {
+        "unite": "-",
+        "description": "Année d'où provient le mois retenu dans l'année type",
+        "source": "PVGIS",
+        "nom": "annee_source"
+      },
+      {
+        "unite": "h",
+        "description": "Heure UTC",
+        "source": "PVGIS",
+        "nom": "heure"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "-",
+        "description": "Rang du jour dans l'année",
+        "source": "calendrier",
+        "nom": "jour_annee"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π heure/24)",
+        "source": "calendrier",
+        "nom": "h_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π heure/24)",
+        "source": "calendrier",
+        "nom": "h_cos"
+      },
+      {
+        "unite": "°",
+        "description": "Hauteur du soleil sur l'horizon",
+        "source": "PVGIS ou calcul astronomique",
+        "nom": "hauteur_soleil_deg"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement direct horizontal (direct normal x sin de la hauteur du soleil)",
+        "source": "calculé",
+        "nom": "bhi_w_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Part du diffus dans l'éclairement horizontal",
+        "source": "PVGIS, calculé",
+        "nom": "fraction_diffuse_h"
+      },
+      {
+        "unite": "W/m²",
+        "description": "Éclairement extraterrestre sur plan horizontal (calcul astronomique)",
+        "source": "calculé",
+        "nom": "g0_horizontal_w_m2"
+      },
+      {
+        "unite": "-",
+        "description": "Indice de clarté horaire (éclairement au sol / extraterrestre)",
+        "source": "calculé",
+        "nom": "indice_clarte_h"
+      },
+      {
+        "unite": "lux",
+        "description": "Éclairement lumineux horizontal (100 lm/W direct, 125 lm/W diffus)",
+        "source": "calculé",
+        "nom": "eclairement_lux"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 si l'éclairement lumineux dépasse 10 000 lux (éclairage naturel suffisant)",
+        "source": "calculé",
+        "nom": "lumiere_suffisante"
+      },
+      {
+        "unite": "°C",
+        "description": "Point de rosée moyen à 2 m",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "point_rosee_c"
+      },
+      {
+        "unite": "m/s",
+        "description": "Composante est-ouest du vent",
+        "source": "calculé",
+        "nom": "vent_u_ms"
+      },
+      {
+        "unite": "m/s",
+        "description": "Composante nord-sud du vent",
+        "source": "calculé",
+        "nom": "vent_v_ms"
+      },
+      {
+        "unite": "°C",
+        "description": "Température estimée des modules (modèle NOCT : T air + éclairement / 800 x 25 °C)",
+        "source": "calculé",
+        "nom": "t_module_c"
+      },
+      {
+        "unite": "W/kWc",
+        "description": "Puissance estimée d'1 kWc posé à plat (pertes 14 %, -0,4 %/°C au-delà de 25 °C)",
+        "source": "calculé",
+        "nom": "pv_horizontale_estimee_w_kwc"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/pvgis_orientations_9_villes.csv",
+    "description": "Scénarios d'installation PVGIS : production mensuelle d'1 kWc pour 27 inclinaisons et orientations par ville",
+    "theme": "photovoltaïque",
+    "pays": "France, Tunisie, Espagne",
+    "sources": [
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)"
+    ],
+    "lignes": 2916,
+    "colonnes": 29,
+    "variables_explicatives": 23,
+    "conforme": true,
+    "periode": null,
+    "taille_ko": 563.4,
+    "valeurs_manquantes_pct": 0.0,
+    "variables": [
+      {
+        "unite": "-",
+        "description": "Identifiant du site",
+        "source": "-",
+        "nom": "site"
+      },
+      {
+        "unite": "-",
+        "description": "Ville",
+        "source": "-",
+        "nom": "ville"
+      },
+      {
+        "unite": "-",
+        "description": "Pays",
+        "source": "-",
+        "nom": "pays"
+      },
+      {
+        "unite": "-",
+        "description": "Code ISO du pays",
+        "source": "-",
+        "nom": "code_pays"
+      },
+      {
+        "unite": "°",
+        "description": "Latitude",
+        "source": "-",
+        "nom": "latitude"
+      },
+      {
+        "unite": "°",
+        "description": "Longitude",
+        "source": "-",
+        "nom": "longitude"
+      },
+      {
+        "unite": "°",
+        "description": "Inclinaison des modules (0 = à plat, 90 = façade verticale)",
+        "source": "PVGIS",
+        "nom": "inclinaison_deg"
+      },
+      {
+        "unite": "°",
+        "description": "Orientation des modules (0 = sud, -90 = est, 90 = ouest)",
+        "source": "PVGIS",
+        "nom": "azimut_deg"
+      },
+      {
+        "unite": "-",
+        "description": "Orientation en clair",
+        "source": "PVGIS",
+        "nom": "orientation"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 pour la pente optimale plein sud du site",
+        "source": "PVGIS",
+        "nom": "est_optimal"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π mois/12)",
+        "source": "calendrier",
+        "nom": "mois_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π mois/12)",
+        "source": "calendrier",
+        "nom": "mois_cos"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production journalière moyenne du mois",
+        "source": "PVGIS",
+        "nom": "e_jour_kwh_kwc"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production mensuelle moyenne",
+        "source": "PVGIS",
+        "nom": "e_mois_kwh_kwc"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation journalière moyenne du mois sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "h_jour_kwh_m2"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation mensuelle moyenne sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "h_mois_kwh_m2"
+      },
+      {
+        "unite": "kWh",
+        "description": "Écart-type de la production mensuelle d'une année à l'autre",
+        "source": "PVGIS",
+        "nom": "ecart_type_mois_kwh"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production annuelle moyenne de ce scénario",
+        "source": "PVGIS",
+        "nom": "e_an_kwh_kwc"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation annuelle sur le plan des modules",
+        "source": "PVGIS",
+        "nom": "h_an_kwh_m2"
+      },
+      {
+        "unite": "kWh",
+        "description": "Écart-type de la production annuelle",
+        "source": "PVGIS",
+        "nom": "ecart_type_an_kwh"
+      },
+      {
+        "unite": "%",
+        "description": "Pertes par angle d'incidence (réflexion)",
+        "source": "PVGIS",
+        "nom": "perte_incidence_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Effet spectral",
+        "source": "PVGIS",
+        "nom": "perte_spectrale_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Pertes dues à la température et au faible éclairement",
+        "source": "PVGIS",
+        "nom": "perte_temperature_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Pertes totales (y compris 14 % de pertes système)",
+        "source": "PVGIS",
+        "nom": "perte_totale_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Production annuelle du scénario rapportée à celle de la pente optimale plein sud",
+        "source": "calculé",
+        "nom": "part_productible_optimal_pct"
+      },
+      {
+        "unite": "-",
+        "description": "Production du mois rapportée à celle de la pente optimale plein sud le même mois",
+        "source": "calculé",
+        "nom": "ratio_mensuel_vs_optimal"
+      },
+      {
+        "unite": "°",
+        "description": "Pente optimale du site (plein sud)",
+        "source": "PVGIS",
+        "nom": "pente_optimale_site_deg"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production annuelle à la pente optimale plein sud",
+        "source": "PVGIS",
+        "nom": "productible_optimal_kwh_kwc"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/fr_solaire_national_rte_journalier.csv",
+    "description": "Production solaire nationale mesurée et mix électrique français (journalier, 2012-2026), avec la météo des 3 villes",
+    "theme": "photovoltaïque (mesuré)",
+    "pays": "France",
+    "sources": [
+      "RTE éCO2mix via le portail ODRÉ, jeu eco2mix-national-cons-def - https://odre.opendatasoft.com (Licence Ouverte v2.0)",
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)"
+    ],
+    "lignes": 5357,
+    "colonnes": 39,
+    "variables_explicatives": 38,
+    "conforme": true,
+    "periode": [
+      "2012-01-01",
+      "2026-08-31"
+    ],
+    "taille_ko": 1578.3,
+    "valeurs_manquantes_pct": 2.819,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "GWh",
+        "description": "Production solaire photovoltaïque nationale de la journée",
+        "source": "RTE",
+        "nom": "production_gwh"
+      },
+      {
+        "unite": "MW",
+        "description": "Puissance solaire moyenne de la journée (points à 30 min)",
+        "source": "RTE",
+        "nom": "puissance_moyenne_mw"
+      },
+      {
+        "unite": "MW",
+        "description": "Puissance solaire maximale de la journée",
+        "source": "RTE",
+        "nom": "puissance_max_mw"
+      },
+      {
+        "unite": "-",
+        "description": "Puissance solaire moyenne / maximale (journée régulière ou hachée par les nuages)",
+        "source": "RTE, calculé",
+        "nom": "facteur_forme_solaire"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « consommation » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "consommation_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « nucleaire » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "nucleaire_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « eolien » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "eolien_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « hydraulique » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "hydraulique_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « gaz » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "gaz_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « charbon » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "charbon_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « fioul » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "fioul_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « bioenergies » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "bioenergies_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « pompage » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "pompage_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « ech physiques » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "ech_physiques_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « ech comm espagne » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "ech_comm_espagne_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « ech comm italie » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "ech_comm_italie_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « ech comm angleterre » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "ech_comm_angleterre_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « ech comm suisse » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "ech_comm_suisse_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « gaz ccg » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "gaz_ccg_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « hydraulique fil eau eclusee » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "hydraulique_fil_eau_eclusee_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « hydraulique lacs » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "hydraulique_lacs_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « hydraulique step turbinage » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "hydraulique_step_turbinage_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière de la filière ou du poste « bioenergies biomasse » (puissance moyenne x 24 h)",
+        "source": "RTE",
+        "nom": "bioenergies_biomasse_gwh"
+      },
+      {
+        "unite": "g/kWh",
+        "description": "Intensité carbone moyenne de l'électricité produite",
+        "source": "RTE",
+        "nom": "taux_co2_g_kwh"
+      },
+      {
+        "unite": "%",
+        "description": "Part de la consommation couverte par le solaire",
+        "source": "RTE, calculé",
+        "nom": "part_solaire_conso_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Part de la consommation couverte par solaire, éolien, hydraulique et bioénergies",
+        "source": "RTE, calculé",
+        "nom": "part_renouvelable_conso_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Écart entre la prévision de consommation de RTE à J-1 et la consommation réalisée",
+        "source": "RTE, calculé",
+        "nom": "erreur_prevision_j1_pct"
+      },
+      {
+        "unite": "-",
+        "description": "Nombre de points à 30 min agrégés dans la journée (48 attendus)",
+        "source": "RTE",
+        "nom": "n_points"
+      },
+      {
+        "unite": "-",
+        "description": "Statut des données RTE (définitives ou consolidées)",
+        "source": "RTE",
+        "nom": "nature"
+      },
+      {
+        "unite": "-",
+        "description": "Jour de la semaine (0 = lundi)",
+        "source": "calendrier",
+        "nom": "jour_semaine"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 le samedi et le dimanche",
+        "source": "calendrier",
+        "nom": "week_end"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production PVGIS moyenne des 3 villes du pays le même jour (lien avec la météo, jusqu'en 2023)",
+        "source": "PVGIS",
+        "nom": "pvgis_pv_moyen_kwh_kwc"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale PVGIS moyenne des 3 villes du pays le même jour",
+        "source": "PVGIS",
+        "nom": "pvgis_ghi_moyen_kwh_m2"
+      },
+      {
+        "unite": "%",
+        "description": "Nébulosité moyenne des 3 villes du pays le même jour",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_moyenne_pays_pct"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne des 3 villes du pays le même jour",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moyenne_pays_c"
+      }
+    ]
+  },
+  {
+    "fichier": "data/datasets/es_fotovoltaica_ree_journalier.csv",
+    "description": "Production photovoltaïque mesurée et bilan électrique espagnol péninsulaire (journalier, 2014-2026), avec la météo des 3 villes",
+    "theme": "photovoltaïque (mesuré)",
+    "pays": "Espagne",
+    "sources": [
+      "Red Eléctrica (REData API, bilan électrique) - https://apidatos.ree.es (réutilisation avec mention « Fuente: Red Eléctrica »)",
+      "PVGIS 5.3, Commission européenne, Centre commun de recherche (JRC) - https://re.jrc.ec.europa.eu/pvg_tools/ (rayonnement PVGIS-SARAH3, météo ERA5 ; réutilisation autorisée avec mention de la source)"
+    ],
+    "lignes": 4666,
+    "colonnes": 37,
+    "variables_explicatives": 36,
+    "conforme": true,
+    "periode": [
+      "2014-01-01",
+      "2026-10-10"
+    ],
+    "taille_ko": 1148.7,
+    "valeurs_manquantes_pct": 11.485,
+    "variables": [
+      {
+        "unite": "jour",
+        "description": "Date (jour UTC pour PVGIS, jour local pour Open-Meteo, heure solaire locale pour NASA POWER)",
+        "source": "-",
+        "nom": "date"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « hidraulica »",
+        "source": "REE",
+        "nom": "hidraulica_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « eolica »",
+        "source": "REE",
+        "nom": "eolica_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « solar fotovoltaica »",
+        "source": "REE",
+        "nom": "solar_fotovoltaica_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « solar termica »",
+        "source": "REE",
+        "nom": "solar_termica_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « otras renovables »",
+        "source": "REE",
+        "nom": "otras_renovables_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « residuos renovables »",
+        "source": "REE",
+        "nom": "residuos_renovables_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « generacion renovable »",
+        "source": "REE",
+        "nom": "generacion_renovable_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « nuclear »",
+        "source": "REE",
+        "nom": "nuclear_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « ciclo combinado »",
+        "source": "REE",
+        "nom": "ciclo_combinado_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « carbon »",
+        "source": "REE",
+        "nom": "carbon_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « fuel gas »",
+        "source": "REE",
+        "nom": "fuel_gas_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « cogeneracion »",
+        "source": "REE",
+        "nom": "cogeneracion_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « residuos no renovables »",
+        "source": "REE",
+        "nom": "residuos_no_renovables_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « generacion no renovable »",
+        "source": "REE",
+        "nom": "generacion_no_renovable_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « turbinacion bombeo »",
+        "source": "REE",
+        "nom": "turbinacion_bombeo_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « consumo bombeo »",
+        "source": "REE",
+        "nom": "consumo_bombeo_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « saldo almacenamiento »",
+        "source": "REE",
+        "nom": "saldo_almacenamiento_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « enlace peninsula baleares »",
+        "source": "REE",
+        "nom": "enlace_peninsula_baleares_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « saldo i internacionales »",
+        "source": "REE",
+        "nom": "saldo_i_internacionales_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « demanda en b c »",
+        "source": "REE",
+        "nom": "demanda_en_b_c_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « carga bateria »",
+        "source": "REE",
+        "nom": "carga_bateria_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « entrega bateria »",
+        "source": "REE",
+        "nom": "entrega_bateria_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Énergie journalière du bilan électrique : « turbina de vapor »",
+        "source": "REE",
+        "nom": "turbina_de_vapor_gwh"
+      },
+      {
+        "unite": "GWh",
+        "description": "Production photovoltaïque de la journée, système péninsulaire (copie de solar_fotovoltaica_gwh)",
+        "source": "REE",
+        "nom": "produccion_gwh"
+      },
+      {
+        "unite": "%",
+        "description": "Part du photovoltaïque dans la production totale",
+        "source": "REE, calculé",
+        "nom": "part_fotovoltaica_generacion_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Part des renouvelables dans la production totale",
+        "source": "REE, calculé",
+        "nom": "part_renovable_generacion_pct"
+      },
+      {
+        "unite": "%",
+        "description": "Part de la demande couverte par le photovoltaïque",
+        "source": "REE, calculé",
+        "nom": "part_fotovoltaica_demanda_pct"
+      },
+      {
+        "unite": "-",
+        "description": "Jour de la semaine (0 = lundi)",
+        "source": "calendrier",
+        "nom": "jour_semaine"
+      },
+      {
+        "unite": "0/1",
+        "description": "1 le samedi et le dimanche",
+        "source": "calendrier",
+        "nom": "week_end"
+      },
+      {
+        "unite": "-",
+        "description": "Mois (1 à 12)",
+        "source": "calendrier",
+        "nom": "mois"
+      },
+      {
+        "unite": "-",
+        "description": "sin(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_sin"
+      },
+      {
+        "unite": "-",
+        "description": "cos(2π jour/365,25)",
+        "source": "calendrier",
+        "nom": "jds_cos"
+      },
+      {
+        "unite": "kWh/kWc",
+        "description": "Production PVGIS moyenne des 3 villes du pays le même jour (lien avec la météo, jusqu'en 2023)",
+        "source": "PVGIS",
+        "nom": "pvgis_pv_moyen_kwh_kwc"
+      },
+      {
+        "unite": "kWh/m²",
+        "description": "Irradiation horizontale PVGIS moyenne des 3 villes du pays le même jour",
+        "source": "PVGIS",
+        "nom": "pvgis_ghi_moyen_kwh_m2"
+      },
+      {
+        "unite": "%",
+        "description": "Nébulosité moyenne des 3 villes du pays le même jour",
+        "source": "Open-Meteo (ERA5)",
+        "nom": "nebulosite_moyenne_pays_pct"
+      },
+      {
+        "unite": "°C",
+        "description": "Température moyenne des 3 villes du pays le même jour",
+        "source": "PVGIS (ERA5)",
+        "nom": "t2m_moyenne_pays_c"
+      }
+    ]
+  }
+]

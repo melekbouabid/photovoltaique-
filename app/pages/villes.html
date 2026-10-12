@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Villes{% endblock %}
+{% block content %}
+<h1>Villes</h1>
+<p class="lead">Coordonnées, altitude et production annuelle moyenne d'1 kWc (2005-2023) pour chaque technologie.
+Les jours imputés sont ceux où le rayonnement PVGIS manquait.</p>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Ville</th><th>Pays</th><th class="num">Latitude</th><th class="num">Longitude</th><th class="num">Altitude (m)</th>
+  <th>Climat</th><th class="num">crystSi</th><th class="num">CIS</th><th class="num">CdTe</th><th class="num">Jours imputés</th>
+  <th>Meilleur modèle ex ante</th><th class="num">Gain sur la climatologie</th></tr></thead>
+  <tbody>
+  {% for c in cities %}
+  {% set b = best.get(c.id) %}
+  <tr><td><a href="/previsions?ville={{ c.id }}">{{ c.nom }}</a></td><td>{{ c.pays }}</td><td class="num">{{ fmt(c.lat, 3) }}</td>
+  <td class="num">{{ fmt(c.lon, 3) }}</td><td class="num">{{ fmt(c.altitude, 0) }}</td><td>{{ c.zone_climatique }}</td>
+  <td class="num">{{ fmt(c.productible_crystSi, 0) }}</td><td class="num">{{ fmt(c.productible_CIS, 0) }}</td>
+  <td class="num">{{ fmt(c.productible_CdTe, 0) }}</td><td class="num">{{ c.jours_imputes }}</td>
+  <td>{{ model_labels.get(b.meilleur_modele_ex_ante, b.meilleur_modele_ex_ante) if b else "—" }}</td>
+  <td class="num">{{ (fmt(b.gain_vs_climatologie_pct, 1) ~ " %") if b else "—" }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p class="note">Production en kWh/kWc/an. Installation simulée : plein sud, pente optimale du site, 14 % de pertes.</p>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Accueil{% endblock %}
+{% block content %}
+<h1>Prévoir la production solaire à sept jours</h1>
+<p class="lead">Production journalière d'une installation photovoltaïque de 1 kWc dans des villes de France, de Tunisie et
+d'Espagne, pour trois technologies de modules. Les prévisions sont comparées à la normale saisonnière.</p>
+<div class="kpis">
+  {% for label, value, note in kpis %}
+  <div class="kpi"><div class="kpi-label">{{ label }}</div><div class="kpi-value">{{ value }}</div><div class="kpi-note">{{ note }}</div></div>
+  {% endfor %}
+</div>
+<h2>Les villes de l'étude</h2>
+<div class="card">
+  {{ legend }}
+  {{ map }}
+  <p class="note">Survoler une ville pour lire la technologie recommandée. Le tableau complet est dans la page Villes.</p>
+</div>
+<h2>Modèle en production</h2>
+<div class="card">
+  {% if model %}
+  <p><strong>{{ model_labels.get(model.nom, model.nom) }}</strong>, version {{ model.version }}, entraîné le {{ model.entraine_le[:10] }}.
+  RMSE moyen {{ fmt(model.metriques.rmse_moyen, 4) }} kWh/kWc contre {{ fmt(model.metriques.rmse_climatologie_moyen, 4) }} pour la climatologie.
+  Empreinte du fichier {% if model.sha256_verifie %}vérifiée{% else %}<strong>non conforme</strong>{% endif %}.</p>
+  {% else %}
+  <p>Aucun modèle en production. Lancer <code>python -m solarvision.cli register</code>.</p>
+  {% endif %}
+</div>
+{% endblock %}

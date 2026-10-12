@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Modèles{% endblock %}
+{% block content %}
+<h1>Modèles et métriques</h1>
+<p class="lead">Tous les modèles sont évalués sur les mêmes dates de test et les mêmes horizons. Les valeurs sont des moyennes sur
+{{ n_cities }} villes, pour la technologie de référence.</p>
+{% if chart %}
+<h2>RMSE moyen des modèles ex ante (kWh/kWc)</h2>
+<div class="card">{{ chart }}</div>
+{% endif %}
+<h2>Tableau unique</h2>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Modèle</th><th>Scénario</th><th class="num">MSE</th><th class="num">RMSE</th><th class="num">MAE</th><th class="num">MAPE (%)</th>
+  <th class="num">WAPE (%)</th><th class="num">RMSE J+1</th><th class="num">RMSE J+7</th><th class="num">Couverture IC 95 % (%)</th>
+  <th class="num">Bat la climatologie à J+1</th><th class="num">à J+7</th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+  <tr><td>{{ model_labels.get(r.modele, r.modele) }}</td>
+  <td><span class="tag {{ 'ex-post' if r.scenario == 'ex_post' else 'ex-ante' }}">{{ scenario_labels[r.scenario] }}</span></td>
+  <td class="num">{{ fmt(r.MSE, 4) }}</td><td class="num">{{ fmt(r.RMSE, 4) }}</td><td class="num">{{ fmt(r.MAE, 4) }}</td>
+  <td class="num">{{ fmt(r.MAPE, 1) }}</td><td class="num">{{ fmt(r.WAPE, 1) }}</td><td class="num">{{ fmt(r.rmse_h1, 4) }}</td>
+  <td class="num">{{ fmt(r.rmse_h7, 4) }}</td><td class="num">{{ fmt(r.couverture, 1) }}</td>
+  <td class="num">{% if r.dm_h1 %}{{ r.dm_h1['sum'] }} / {{ r.dm_h1['count'] }} villes{% else %}—{% endif %}</td>
+  <td class="num">{% if r.dm_h7 %}{{ r.dm_h7['sum'] }} / {{ r.dm_h7['count'] }} villes{% else %}—{% endif %}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p class="note">« Bat la climatologie » : nombre de villes où le test de Diebold-Mariano conclut que le modèle fait mieux que la
+climatologie. Hypothèse nulle : même erreur quadratique moyenne. Test unilatéral, correction de Harvey-Leybourne-Newbold,
+variance de long terme sur h - 1 retards, correction de Holm au seuil de 5 % sur la famille des modèles comparés à la
+climatologie pour une ville, une technologie et un horizon. Le MAPE est gonflé par les journées très couvertes ; le WAPE est plus représentatif.</p>
+{% endblock %}

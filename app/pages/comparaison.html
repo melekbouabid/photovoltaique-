@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Comparaison{% endblock %}
+{% block content %}
+<h1>Comparaison des villes</h1>
+<p class="lead">Où la prévision apporte-t-elle le plus ? Le gain est la baisse du RMSE du meilleur modèle
+<span class="tag ex-ante">ex ante</span> par rapport à la normale saisonnière, de J+1 à J+7, sur l'échantillon de test.</p>
+{% if chart %}
+<h2>Gain sur la climatologie, par ville (%)</h2>
+<div class="card">{{ legend }}{{ chart }}</div>
+{% endif %}
+{% if by_country %}
+<h2>Moyennes par pays</h2>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Pays</th><th class="num">RMSE du meilleur modèle</th><th class="num">RMSE de la climatologie</th><th class="num">Gain moyen</th></tr></thead>
+  <tbody>
+  {% for r in by_country %}
+  <tr><td>{{ r.pays }}</td><td class="num">{{ fmt(r.rmse_meilleur, 4) }}</td><td class="num">{{ fmt(r.rmse_climatologie, 4) }}</td>
+  <td class="num">{{ fmt(r.gain_vs_climatologie_pct, 2) }} %</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+<h2>Détail par ville</h2>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Ville</th><th>Pays</th><th class="num">Production (kWh/kWc/an)</th><th>Meilleur modèle ex ante</th><th class="num">RMSE</th>
+  <th class="num">RMSE climatologie</th><th class="num">Gain</th><th class="num">Gain à J+1</th><th class="num">Gain à J+7</th>
+  <th class="num">RMSE hiver</th><th class="num">RMSE été</th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+  <tr><td>{{ r.nom }}</td><td>{{ r.pays }}</td><td class="num">{{ fmt(r.productible, 0) }}</td>
+  <td>{{ model_labels.get(r.meilleur_modele_ex_ante, r.meilleur_modele_ex_ante) }}</td><td class="num">{{ fmt(r.rmse_meilleur, 4) }}</td>
+  <td class="num">{{ fmt(r.rmse_climatologie, 4) }}</td><td class="num">{{ fmt(r.gain_vs_climatologie_pct, 2) }} %</td>
+  <td class="num">{{ fmt(r.gain_h1_pct, 1) }} %</td><td class="num">{{ fmt(r.gain_h7_pct, 1) }} %</td>
+  <td class="num">{{ fmt(r.rmse_hiver, 3) }}</td><td class="num">{{ fmt(r['rmse_été'], 3) }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p class="note">RMSE en kWh/kWc par jour, technologie de référence (silicium cristallin).</p>
+{% endblock %}

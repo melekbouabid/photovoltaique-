@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Architecture MLOps{% endblock %}
+{% block content %}
+<h1>Architecture et registre</h1>
+<p class="lead">D'où viennent les données, quels modèles existent, lequel est en production et comment il se comporte.
+Tout est lu dans le manifeste des données, le registre de modèles et les rapports de suivi.</p>
+
+<h2>Chaîne de traitement</h2>
+<div class="card">
+  <p>sources → ingestion → imputation et contrôles → variables → entraînement → évaluation → registre → API et application → suivi</p>
+  <p class="note">Chaque étape est une commande de <code>python -m solarvision.cli</code>. Le schéma détaillé est dans <code>docs/architecture.md</code>.</p>
+</div>
+
+<h2>Données</h2>
+<div class="card table-wrap">
+  {% if manifest %}
+  <p>Période : {{ manifest.periode }}. {{ manifest.villes_presentes|length }} villes présentes,
+  {{ manifest.villes_manquantes|length }} manquantes{% if manifest.villes_manquantes %} ({{ manifest.villes_manquantes|join(", ") }}){% endif %}.
+  Manifeste généré le {{ manifest.genere_le[:10] }}.</p>
+  <table>
+    <thead><tr><th>Source</th><th class="num">Villes</th><th class="num">Fichiers</th><th class="num">Volume (Mo)</th><th>Licence</th></tr></thead>
+    <tbody>
+    {% for r in per_source %}
+    <tr><td>{{ r.source }}</td><td class="num">{{ r.villes }}</td><td class="num">{{ r.fichiers }}</td>
+    <td class="num">{{ fmt(r.octets / 1000000, 1) }}</td><td class="wrap">{{ manifest.licences[r.source] }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+
+<h2>Modèles enregistrés</h2>
+<div class="card table-wrap">
+  {% if registry %}
+  <table>
+    <thead><tr><th>Modèle</th><th>Version</th><th>Enregistré le</th><th class="num">RMSE moyen</th><th class="num">RMSE climatologie</th>
+    <th class="num">Villes où il bat la climatologie</th><th>Empreinte</th><th>Statut</th></tr></thead>
+    <tbody>
+    {% for r in registry %}
+    <tr><td>{{ model_labels.get(r.nom, r.nom) }}</td><td>{{ r.version }}</td><td>{{ r.cree_le[:16] }}</td><td class="num">{{ fmt(r.rmse_moyen, 4) }}</td>
+    <td class="num">{{ fmt(r.rmse_climatologie_moyen, 4) }}</td><td class="num">{{ r.villes_ou_il_bat_la_climatologie }}</td>
+    <td><code>{{ r.sha256[:12] }}…</code></td><td>{% if r.statut == "production" %}<strong>production</strong>{% else %}{{ r.statut }}{% endif %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>Registre vide : lancer <code>python -m solarvision.cli register</code>.</p>
+  {% endif %}
+  <p class="note">Règle de promotion : un modèle ne passe en production que s'il bat la climatologie et la version en place, sur les mêmes
+  dates de test. Retour arrière : <code>python -m solarvision.cli rollback</code>. L'empreinte SHA256 est vérifiée à chaque chargement.</p>
+</div>
+
+<h2>Suivi</h2>
+<div class="card">
+  {% if monitoring %}
+  <p>Modèle suivi : {{ model_labels.get(monitoring.modele_suivi, monitoring.modele_suivi) }}.
+  Dérive des variables entre l'apprentissage et le test :
+  {% for level, n in monitoring.derive.items() %}{{ n }} « {{ level }} »{% if not loop.last %}, {% endif %}{% endfor %}.
+  L'erreur du modèle dépasse de plus de {{ fmt((monitoring.seuils.error_ratio_alert - 1) * 100, 0) }} % celle de la climatologie pendant
+  {{ fmt(monitoring.part_des_jours_en_alerte_erreur_pct, 1) }} % des jours.</p>
+  {% if monitoring.variables_en_alerte %}
+  <div class="table-wrap"><table>
+    <thead><tr><th>Ville</th><th>Variable en alerte</th><th class="num">PSI</th></tr></thead>
+    <tbody>{% for r in monitoring.variables_en_alerte %}<tr><td>{{ r.ville }}</td><td>{{ r.variable }}</td><td class="num">{{ fmt(r.psi, 3) }}</td></tr>{% endfor %}</tbody>
+  </table></div>
+  {% endif %}
+  <p class="note">{{ monitoring.limites }}</p>
+  {% else %}
+  <p>Suivi absent : lancer <code>python -m solarvision.cli monitor</code>.</p>
+  {% endif %}
+</div>
+
+<h2>Ce qui n'est pas fait</h2>
+<div class="card">
+  <ul>
+    <li>Tout tourne sur une machine locale : pas de stockage distant ni de déploiement dans le nuage.</li>
+    <li>Pas de réentraînement automatique : une dérive est signalée, la décision reste humaine.</li>
+    <li>Le suivi est recalculé à la demande, il n'envoie aucune alerte.</li>
+  </ul>
+</div>
+{% endblock %}
