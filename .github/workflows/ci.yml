@@ -1,5 +1,4 @@
 # Intégration continue : style, tests, parcours rapide de bout en bout, notebook, image Docker.
-# État au 11 octobre 2026 : ce fichier n'a pas encore tourné, le dépôt n'étant pas publié sur GitHub.
 name: ci
 
 on:
@@ -31,10 +30,37 @@ jobs:
         run: python -m pytest tests -q -m "not data and not slow"
       - name: Notebook en mode rapide
         run: python -m nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output-dir /tmp notebooks/solarvision_v2.ipynb
+      - name: Préparer les artefacts minimaux pour l'image Docker
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-runtime-fixture
+          path: |
+            data/fast/manifest.yaml
+            data/fast/processed/panel_journalier.parquet
+            data/fast/processed/splits_90_10.yaml
+            data/fast/processed/panel_meta.yaml
+            reports/fast/
+            models/registry_fast/
+          if-no-files-found: error
+          retention-days: 1
   image:
     runs-on: ubuntu-latest
     needs: qualite
     steps:
       - uses: actions/checkout@v4
+      - name: Récupérer les artefacts rapides
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-runtime-fixture
+          path: .
+      - name: Placer les données rapides aux chemins attendus par l'image
+        run: |
+          mkdir -p data/processed models/registry
+          cp data/fast/manifest.yaml data/manifest.yaml
+          cp data/fast/processed/panel_journalier.parquet data/processed/
+          cp data/fast/processed/splits_90_10.yaml data/processed/
+          cp data/fast/processed/panel_meta.yaml data/processed/
+          cp -a reports/fast/. reports/
+          cp -a models/registry_fast/. models/registry/
       - name: Construction de l'image de l'API
         run: docker build -f infra/Dockerfile -t solarvision-v2:ci .
