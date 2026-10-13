@@ -1,7 +1,6 @@
 # Pipeline reproductible : chaque étape est une commande de python -m solarvision.cli.
 # `dvc repro` ne relance que les étapes dont une dépendance a changé.
-# État au 11 octobre 2026 : DVC n'est pas installé sur la machine de travail, ce fichier n'a donc pas été
-# exécuté par DVC. L'enchaînement lui-même est testé par `python -m solarvision.cli pipeline --fast`.
+# L'enchaînement est testé par `python -m solarvision.cli pipeline --fast`.
 stages:
   ingest:
     cmd: python -m solarvision.cli ingest

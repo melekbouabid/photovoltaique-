@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1
 # Image de SolarVision v2 : API /v1 et application multi-pages.
 #   docker compose -f infra/docker-compose.yml up --build      -> http://localhost:8001
-# État au 11 octobre 2026 : fichier écrit mais image non construite (connexion trop lente pour les téléchargements).
 
 # ---------------------------------------------------------------- 1. dépendances
 FROM python:3.12-slim AS deps

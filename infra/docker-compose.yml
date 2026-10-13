@@ -1,6 +1,5 @@
 # SolarVision v2
 #   docker compose -f infra/docker-compose.yml up --build
-# État au 11 octobre 2026 : fichier écrit, non exécuté.
 name: solarvision-v2
 
 services:
