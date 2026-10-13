@@ -1,0 +1,27 @@
+# Python 3.14 - versions utilisées pour produire les notebooks, les modèles et l'application
+numpy==2.3.5
+pandas==2.3.3
+matplotlib==3.10.8
+scipy==1.17.0
+statsmodels==0.15.0
+pmdarima==2.1.1
+arch==8.0.0
+scikit-learn==1.8.0
+xgboost==3.1.3
+torch==2.12.1
+prophet==1.5.0
+requests==2.32.5
+pypdf==6.10.2
+pyarrow==22.0.0
+nbformat==5.10.4
+nbconvert==7.17.1
+ipykernel==7.2.0
+# Assistant RAG et application web
+rank-bm25==0.2.2
+fastapi==0.115.5
+uvicorn==0.32.1
+pydantic==2.12.5
+httpx==0.28.1
+pytest==9.1.1
+# Facultatif : PDF du rapport (impression par Chromium : python -m playwright install chromium)
+playwright==1.61.0

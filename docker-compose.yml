@@ -1,0 +1,28 @@
+# SolarVision - Séries temporelles
+#   docker compose up --build                          application : http://localhost:8000 (API : /docs)
+#   docker compose --profile etude run --rm notebook   ré-exécute mini_projet_python.ipynb (environ 15 minutes)
+# Le service « notebook » monte le dossier du projet et y réécrit le notebook, figures/ et resultats/.
+name: solarvision
+
+services:
+  app:
+    build:
+      context: .
+      target: app
+    image: solarvision-series-temporelles:2.0
+    ports:
+      - "${PORT:-8000}:8000"
+    # Clé Groq de l'assistant RAG (GROQ_API_KEY). Sans fichier .env, l'assistant répond en mode extractif.
+    env_file:
+      - path: .env
+        required: false
+    restart: unless-stopped
+
+  notebook:
+    profiles: ["etude"]
+    build:
+      context: .
+      target: etude
+    image: solarvision-etude-python:2.0
+    volumes:
+      - .:/projet

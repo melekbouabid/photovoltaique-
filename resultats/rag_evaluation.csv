@@ -1,0 +1,17 @@
+question,passage attendu,rang trouvé,hit@1,hit@4,mode,durée (s)
+Quelle ville produit le plus d'électricité solaire par kWc ?,comparaison des 9 villes,1,True,True,extractif,0.0
+Quelle est la production photovoltaïque moyenne en décembre à Paris ?,Fiche Paris : production par mois,1,True,True,extractif,0.0
+Combien produit 1 kWc à Tunis par an ?,Fiche Tunis : production annuelle,1,True,True,extractif,0.0
+Quelle est la pente optimale des modules à Séville ?,Fiche Séville : production annuelle,1,True,True,extractif,0.0
+Combien d'heures de lumière naturelle par jour en hiver à Tozeur ?,Fiche Tozeur : éclairement,1,True,True,extractif,0.0
+Quel est le meilleur modèle de prévision sans météo ?,meilleur modèle,3,False,True,extractif,0.0
+Comment PVGIS calcule-t-il la production photovoltaïque ?,Modèle de production photovoltaïque,1,True,True,extractif,0.0
+D'où viennent les données de rayonnement de PVGIS ?,Bases de données utilisées,4,False,True,extractif,0.0
+Qu'est-ce que le test KPSS ?,Test KPSS,1,True,True,extractif,0.0
+Que signifie la causalité de Granger ?,Causalité de Granger,1,True,True,extractif,0.0
+Qu'est-ce qu'un modèle GARCH ?,ARCH et GARCH,1,True,True,extractif,0.0
+Quelle production moyenne en juillet en Espagne ?,Comparaison par pays,1,True,True,extractif,0.0
+Que contient le jeu de données tn_eclairement_journalier.csv ?,tn_eclairement_journalier.csv,1,True,True,extractif,0.0
+Que mesure la variable besoin_eclairage_h ?,Dictionnaire des variables,2,False,True,extractif,0.0
+Quelle irradiation le rapport SolarVision supposait-il à Tunis ?,formule énergétique du rapport,3,False,True,extractif,0.0
+Pourquoi certains jours PVGIS ont-ils été imputés ?,Transformations et précautions,3,False,True,extractif,0.0

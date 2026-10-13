@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Prévisions{% endblock %}
+{% block content %}
+<h1>Prévisions à sept jours</h1>
+<p class="lead">Prévision de J+1 à J+7 depuis une date d'émission, avec son intervalle à 95 %.
+<span class="tag ex-ante">ex ante</span> : le modèle n'utilise rien de postérieur à la date d'émission.</p>
+<div class="card">
+<form class="controls" method="get" action="/previsions">
+  <label>Ville
+    <select name="ville">{% for c in cities %}<option value="{{ c.id }}"{% if c.id == ville %} selected{% endif %}>{{ c.nom }} ({{ c.pays }})</option>{% endfor %}</select>
+  </label>
+  <label>Date d'émission
+    <input type="date" name="origine" value="{{ forecast.origine if forecast else '' }}"{% if bounds %} min="{{ bounds[0] }}" max="{{ bounds[1] }}"{% endif %}>
+  </label>
+  <label>Puissance (kWc)
+    <input type="number" name="puissance_kwc" value="{{ puissance_kwc }}" min="0.1" step="0.1">
+  </label>
+  <button type="submit">Prévoir</button>
+</form>
+</div>
+{% if error %}<p class="notice error">{{ error }}</p>{% endif %}
+{% if forecast %}
+<div class="card">
+  <div class="legend">
+    <span class="legend-item"><span class="swatch line" style="background:var(--ink-2)"></span>Observé</span>
+    <span class="legend-item"><span class="swatch line" style="background:var(--series-1)"></span>Prévision ex ante</span>
+    <span class="legend-item"><span class="swatch" style="background:var(--band)"></span>Intervalle à 95 %</span>
+    <span class="legend-item"><span class="swatch line" style="background:var(--muted)"></span>Normale saisonnière</span>
+  </div>
+  {{ chart }}
+  <p class="note">Modèle : {{ model_labels.get(forecast.modele.nom, forecast.modele.nom) }} version {{ forecast.modele.version }}.
+  Intervalle {{ forecast.type_intervalle }}. Les observations après la date d'émission servent seulement à juger la prévision.</p>
+</div>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Date</th><th>Horizon</th><th class="num">Prévision</th><th class="num">Borne basse</th><th class="num">Borne haute</th>
+  <th class="num">Normale</th><th class="num">Observé</th><th class="num">Erreur</th></tr></thead>
+  <tbody>
+  {% for p in forecast.previsions %}
+  <tr><td>{{ p.date }}</td><td>J+{{ p.horizon }}</td><td class="num">{{ fmt(p.prevision) }}</td><td class="num">{{ fmt(p.borne_basse) }}</td>
+  <td class="num">{{ fmt(p.borne_haute) }}</td><td class="num">{{ fmt(p.normale) }}</td><td class="num">{{ fmt(p.observation) }}</td>
+  <td class="num">{{ fmt(p.observation - p.prevision) }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p class="note">Valeurs en kWh par jour pour {{ fmt(forecast.puissance_kwc, 1) }} kWc.</p>
+</div>
+{% endif %}
+{% if scenarios %}
+<h2>Ex ante et ex post dans cette ville</h2>
+<p class="lead">Erreur moyenne de J+1 à J+7 sur l'échantillon de test. Un modèle <span class="tag ex-post">ex post</span> connaît la
+météo observée des jours visés : c'est une borne optimiste, jamais une performance opérationnelle.</p>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Modèle</th><th>Scénario</th><th class="num">RMSE</th><th class="num">MAE</th><th class="num">WAPE (%)</th></tr></thead>
+  <tbody>
+  {% for r in scenarios %}
+  <tr><td>{{ model_labels.get(r.modele, r.modele) }}</td>
+  <td><span class="tag {{ 'ex-post' if r.scenario == 'ex_post' else 'ex-ante' }}">{{ scenario_labels[r.scenario] }}</span></td>
+  <td class="num">{{ fmt(r.RMSE, 4) }}</td><td class="num">{{ fmt(r.MAE, 4) }}</td><td class="num">{{ fmt(r.WAPE, 1) }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+{% endblock %}

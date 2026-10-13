@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SolarVision{% endblock %} · SolarVision</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="bar">
+    <a class="brand" href="/">SolarVision</a>
+    <nav aria-label="Pages">
+      {% for href, label in pages %}<a href="{{ href }}"{% if href == current %} aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}
+    </nav>
+  </div>
+</header>
+<main>
+  {% for message in missing %}<p class="notice">{{ message }}</p>{% endfor %}
+  {% block content %}{% endblock %}
+</main>
+<footer>
+  Données : PVGIS © Union européenne (JRC), Open-Meteo (ERA5, CC BY 4.0), NASA POWER. Productions simulées, non mesurées.
+  API : <a href="/docs">documentation</a>.
+</footer>
+</body>
+</html>

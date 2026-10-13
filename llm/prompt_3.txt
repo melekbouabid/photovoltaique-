@@ -1,0 +1,11 @@
+À partir des résultats ci-dessous, propose des recommandations de gestion pour l'exploitant d'installations photovoltaïques en toiture à Tunis (planification de la maintenance et du nettoyage des modules, pilotage d'une batterie, engagement de production auprès du réseau, information des usagers).
+
+Résultats :
+- Meilleur modèle sans prévision météo (ex ante) : LSTM global 9 villes (ex ante), erreur absolue moyenne 0.83 kWh/kWc/jour (MAPE 29.4 %), RMSE à 1 jour 0.99 et à 7 jours 1.09.
+- Meilleur modèle avec météo observée (ex post) : LSTM (ex post), erreur absolue moyenne 0.50 kWh/kWc/jour (MAPE 15.9 %).
+- Références : persistance (demain = aujourd'hui) MAE 0.98 ; normale saisonnière MAE 0.86.
+- Production annuelle d'1 kWc à Tunis : 1585 kWh ; production moyenne en janvier 3.20 et en juillet 5.43 kWh/kWc/jour.
+- L'incertitude des prévisions est plus forte de novembre à mars (variance conditionnelle, modèle Variance saisonnière + GARCH(1,1) Student asym.).
+- Les données sont simulées par PVGIS à partir d'images satellite (2005-2023), pas mesurées sur une installation réelle.
+
+Donne 4 recommandations concrètes. Pour chacune, formule toi-même ses limites et ses risques. Termine par une liste de ce que ces résultats ne permettent PAS de conclure. Réponds en français, 350 mots au maximum.

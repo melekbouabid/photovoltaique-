@@ -1,0 +1,28 @@
+Voici les résultats d'une étude de prévision de la production photovoltaïque journalière d'une installation de 1 kWc à Tunis, à 7 jours. Les modèles ont été estimés sur 6245 jours (2005-01-01 au 2022-02-05) et évalués sur 694 jours (2022-02-06 au 2023-12-31), avec 688 prévisions glissantes de 7 jours.
+
+« ex ante » : le modèle ne connaît du futur que la date. « ex post » : il reçoit en plus la météo réellement observée sur les 7 jours (nébulosité, pluie, humidité, aérosols).
+
+Erreurs de prévision (kWh/kWc/jour ; production moyenne sur le test : 4.48 kWh/kWc/jour) :
+                               information   RMSE    MAE  MAPE (%)  RMSE h=1  RMSE h=7
+modèle                                                                                
+Persistance (J)                    ex ante  1.434  0.984    33.474     1.236     1.466
+Climatologie                       ex ante  1.100  0.856    30.191     1.102     1.097
+ARIMA-Fourier manuel               ex ante  1.089  0.841    29.732     1.030     1.099
+ARIMA-Fourier auto                 ex ante  1.089  0.841    29.732     1.030     1.099
+VAR                                ex ante  1.081  0.834    29.467     1.009     1.096
+Prophet (ex ante)                  ex ante  1.097  0.837    30.255     1.098     1.094
+LSTM (ex ante)                     ex ante  1.082  0.835    29.504     0.987     1.106
+GRU (ex ante)                      ex ante  1.082  0.830    29.523     0.987     1.102
+Hybride ARIMA + LSTM (ex ante)     ex ante  1.085  0.821    29.707     0.994     1.104
+XGBoost direct (ex ante)           ex ante  1.083  0.841    29.850     0.985     1.103
+LSTM global 9 villes (ex ante)     ex ante  1.078  0.829    29.409     0.989     1.094
+SARIMAX météo (ex post)            ex post  0.725  0.550    17.209     0.713     0.727
+LSTM (ex post)                     ex post  0.699  0.503    15.911     0.701     0.701
+GRU (ex post)                      ex post  0.713  0.515    15.541     0.714     0.717
+
+Autres résultats :
+- Causalité de Granger : le passé de la nébulosité aide à prévoir la production (F = 98.8, p = 2.0e-63).
+- Dans le SARIMAX météo, 10 points de nébulosité supplémentaires changent la production de -0.256 kWh/kWc, plus +0.0047 kWh/kWc par kWh/m² de rayonnement extraterrestre (effet plus fort l'été).
+- Les erreurs ont une variance non constante (test ARCH-LM, p = 4.3e-47), plus forte l'hiver, modélisée par : Variance saisonnière + GARCH(1,1) Student asym..
+
+Explique ces résultats à un décideur non statisticien (gestionnaire d'un parc de toitures solaires à Tunis), en 250 mots au maximum, sans jargon. Dis quel modèle tu recommandes et pourquoi.

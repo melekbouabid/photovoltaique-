@@ -1,0 +1,35 @@
+# SolarVision v2
+#   docker compose -f infra/docker-compose.yml up --build
+# État au 11 octobre 2026 : fichier écrit, non exécuté.
+name: solarvision-v2
+
+services:
+  # API /v1 et application multi-pages : les pages sont servies par le même processus que l'API.
+  api:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    image: solarvision-v2:2.0
+    ports:
+      - "8001:8001"
+    restart: unless-stopped
+
+  # Interface de suivi des expériences (lecture de la base SQLite locale).
+  mlflow:
+    image: solarvision-v2:2.0
+    depends_on: [api]
+    command: ["mlflow", "ui", "--backend-store-uri", "sqlite:///mlflow.db", "--host", "0.0.0.0", "--port", "5000"]
+    volumes:
+      - ../mlflow.db:/projet/mlflow.db
+      - ../mlartifacts:/projet/mlartifacts
+    ports:
+      - "5000:5000"
+
+  # Tâche ponctuelle : recalcule la dérive et l'erreur glissante, puis s'arrête.
+  monitoring:
+    image: solarvision-v2:2.0
+    depends_on: [api]
+    profiles: ["suivi"]
+    command: ["python", "-m", "solarvision.cli", "monitor"]
+    volumes:
+      - ../reports:/projet/reports

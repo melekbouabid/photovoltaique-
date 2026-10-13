@@ -1,0 +1,39 @@
+Tu es un statisticien spécialiste des séries temporelles. Voici les statistiques descriptives d'une série journalière, sans autre information sur les modèles déjà essayés.
+
+Série : production photovoltaïque journalière simulée par PVGIS pour 1 kWc installé à Tunis (kWh/kWc), du 2005-01-01 au 2022-02-05 (6245 observations). Séries associées : éclairement horizontal, nébulosité, température, pluie, aérosols.
+
+Statistiques descriptives :
+                  moyenne  écart-type  variance    min      max  skewness  kurtosis (excès)
+pv_kwh_kwc          4.295       1.402     1.965  0.211    6.427    -0.815            -0.277
+ghi_kwh_m2          4.947       2.258     5.098  0.419    8.970     0.068            -1.322
+nebulosite_pct     38.295      27.333   747.107  0.000  100.000     0.356            -0.887
+t2m_moy_c          18.712       6.062    36.743  4.908   36.027     0.158            -1.103
+precipitation_mm    1.159       3.556    12.648  0.000   78.900     6.815            78.351
+aerosols_aod        0.245       0.195     0.038  0.030    2.830     3.348            20.031
+
+Production moyenne par mois (kWh/kWc/jour) : [3.2, 3.67, 4.23, 4.73, 4.99, 5.21, 5.43, 5.22, 4.45, 3.98, 3.4, 3.06]
+Écart-type par mois : [1.25, 1.35, 1.53, 1.41, 1.25, 0.85, 0.41, 0.69, 1.1, 1.18, 1.17, 1.15]
+Autocorrélation de la production aux retards 1, 2, 7, 30, 182, 365 : [0.512, 0.388, 0.325, 0.283, -0.311, 0.329]
+Autocorrélation de la série désaisonnalisée aux retards 1 à 7 : [0.26, 0.073, 0.032, 0.042, 0.03, 0.01, -0.019]
+
+Tests de stationnarité (ADF : H0 = racine unitaire ; KPSS : H0 = stationnarité) :
+                                            ADF stat  ADF p  KPSS stat  KPSS p
+série                                                                         
+production                                    -5.844    0.0      0.027  0.1000
+production - diff. ordre 1                   -24.060    0.0      0.013  0.1000
+production - désaisonnalisée (Fourier)       -34.770    0.0      0.392  0.0808
+nébulosité                                    -7.406    0.0      0.042  0.1000
+nébulosité - diff. ordre 1                   -24.443    0.0      0.030  0.1000
+nébulosité - désaisonnalisée (Fourier)       -28.700    0.0      0.181  0.1000
+température                                   -5.497    0.0      0.062  0.1000
+température - diff. ordre 1                  -11.768    0.0      0.015  0.1000
+température - désaisonnalisée (Fourier)      -20.825    0.0      1.934  0.0100
+production désaisonnalisée, avec tendance    -34.825    0.0      0.031  0.1000
+température désaisonnalisée, avec tendance   -23.993    0.0      0.041  0.1000
+
+Questions :
+1. Quelles hypothèses de modèles proposes-tu de tester (au moins quatre), et pourquoi ?
+2. Quels ordres de différenciation (d et D) recommandes-tu, et comment traiter la saisonnalité annuelle ?
+3. Faut-il transformer la série ?
+4. Quels pièges vois-tu ?
+Réponds en français, de façon concise et structurée.

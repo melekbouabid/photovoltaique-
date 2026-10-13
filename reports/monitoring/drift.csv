@@ -1,0 +1,211 @@
+ville,variable,psi,ks_stat,ks_p,ecart_moyen,niveau
+barcelone,pv_crystSi_kwh_kwc,0.0390193,0.052546,0.0613218,0.0307542,stable
+barcelone,expost_nebulosite_pct,0.0242147,0.0622282,0.015047,3.04503,stable
+barcelone,expost_t2m_moy_c,0.501024,0.28701,5.48371e-46,1.19038,alerte
+barcelone,expost_humidite_pct,0.0940762,0.136346,1.35397e-10,-2.68672,stable
+barcelone,expost_precipitation_mm,0.0357315,0.056624,0.0347857,-0.193285,stable
+barcelone,expost_aerosols_aod,0.0412755,0.0808045,0.000532036,-0.00291481,stable
+barcelone,expost_ghi_nasa_kwh_m2,0.0269341,0.0379933,0.319721,0.0272473,stable
+bilbao,pv_crystSi_kwh_kwc,0.00700109,0.0286934,0.670995,0.0516745,stable
+bilbao,expost_nebulosite_pct,0.0621085,0.105616,1.58024e-06,4.22412,stable
+bilbao,expost_t2m_moy_c,0.194225,0.200698,1.64022e-22,1.27232,à surveiller
+bilbao,expost_humidite_pct,0.0436742,0.062877,0.013578,-1.10064,stable
+bilbao,expost_precipitation_mm,0.0131983,0.0303166,0.602493,-0.0901188,stable
+bilbao,expost_aerosols_aod,0.0170132,0.0407018,0.245208,0.0108764,stable
+bilbao,expost_ghi_nasa_kwh_m2,0.00609554,0.0250884,0.815828,0.0419464,stable
+bizerte,pv_crystSi_kwh_kwc,0.0196994,0.0453578,0.148381,0.0585571,stable
+bizerte,expost_nebulosite_pct,0.0361135,0.0452729,0.148997,0.607523,stable
+bizerte,expost_t2m_moy_c,0.203914,0.190461,2.57762e-20,0.897455,à surveiller
+bizerte,expost_humidite_pct,0.0972762,0.12195,1.46422e-08,-2.6075,stable
+bizerte,expost_precipitation_mm,0.0267046,0.0341285,0.450644,-0.257327,stable
+bizerte,expost_aerosols_aod,0.0570312,0.0908858,6.03441e-05,-0.000113825,stable
+bizerte,expost_ghi_nasa_kwh_m2,0.040832,0.0767943,0.00117911,0.105088,stable
+bordeaux,pv_crystSi_kwh_kwc,0.0165999,0.0392907,0.281993,0.0615688,stable
+bordeaux,expost_nebulosite_pct,0.0195241,0.0456863,0.142846,2.93868,stable
+bordeaux,expost_t2m_moy_c,0.229013,0.195917,1.75711e-21,1.52347,à surveiller
+bordeaux,expost_humidite_pct,0.0367274,0.0774095,0.00105578,0.668065,stable
+bordeaux,expost_precipitation_mm,0.0419516,0.0573685,0.031527,0.820624,stable
+bordeaux,expost_aerosols_aod,0.0346829,0.0473119,0.117882,0.00472158,stable
+bordeaux,expost_ghi_nasa_kwh_m2,0.00981109,0.0385057,0.304032,0.0864304,stable
+gabes,pv_crystSi_kwh_kwc,0.0198421,0.0434302,0.183943,0.0268526,stable
+gabes,expost_nebulosite_pct,0.0399515,0.0596883,0.0222079,-0.803931,stable
+gabes,expost_t2m_moy_c,0.154373,0.19287,7.91093e-21,1.01638,à surveiller
+gabes,expost_humidite_pct,0.111395,0.126115,3.98278e-09,-3.90417,à surveiller
+gabes,expost_precipitation_mm,0.0459137,0.0449247,0.15525,-0.0707607,stable
+gabes,expost_aerosols_aod,0.0200771,0.0446229,0.160411,0.00445435,stable
+gabes,expost_ghi_nasa_kwh_m2,0.0368954,0.0655766,0.00880616,0.018099,stable
+gafsa,pv_crystSi_kwh_kwc,0.0815692,0.0535271,0.0538146,0.0524125,stable
+gafsa,expost_nebulosite_pct,0.0360102,0.0628971,0.013553,-0.679273,stable
+gafsa,expost_t2m_moy_c,0.152766,0.177174,1.26342e-17,1.09108,à surveiller
+gafsa,expost_humidite_pct,0.153227,0.169662,3.41569e-16,-4.01877,à surveiller
+gafsa,expost_precipitation_mm,0.0114702,0.0379024,0.321438,-0.0384933,stable
+gafsa,expost_aerosols_aod,0.00960142,0.031946,0.534974,0.0164261,stable
+gafsa,expost_ghi_nasa_kwh_m2,0.0241579,0.0383601,0.308063,0.0278529,stable
+grenade,pv_crystSi_kwh_kwc,0.0409636,0.0378223,0.325007,0.0764703,stable
+grenade,expost_nebulosite_pct,0.0277035,0.0424148,0.204361,2.28922,stable
+grenade,expost_t2m_moy_c,0.205566,0.205022,1.75606e-23,1.36082,à surveiller
+grenade,expost_humidite_pct,0.460065,0.290065,5.61374e-47,-9.22978,alerte
+grenade,expost_precipitation_mm,0.0434661,0.0503001,0.0819353,-0.0947144,stable
+grenade,expost_aerosols_aod,0.0245945,0.0422468,0.207911,0.0198496,stable
+grenade,expost_ghi_nasa_kwh_m2,0.00808358,0.0235271,0.870386,0.0054091,stable
+kairouan,pv_crystSi_kwh_kwc,0.0236493,0.05096,0.0753807,0.0678155,stable
+kairouan,expost_nebulosite_pct,0.0372477,0.0388954,0.292476,0.484292,stable
+kairouan,expost_t2m_moy_c,0.280247,0.230349,1.32137e-29,1.38653,alerte
+kairouan,expost_humidite_pct,0.260591,0.209677,1.45032e-24,-4.96361,alerte
+kairouan,expost_precipitation_mm,0.0250069,0.0497509,0.0872301,-0.0792039,stable
+kairouan,expost_aerosols_aod,0.0385364,0.0812705,0.000485183,0.00461276,stable
+kairouan,expost_ghi_nasa_kwh_m2,0.0328746,0.089756,7.82184e-05,0.0481752,stable
+lille,pv_crystSi_kwh_kwc,0.027966,0.0718283,0.00298483,0.196046,stable
+lille,expost_nebulosite_pct,0.0261967,0.0425689,0.200927,-0.995939,stable
+lille,expost_t2m_moy_c,0.137929,0.154614,1.63976e-13,1.06167,à surveiller
+lille,expost_humidite_pct,0.0572396,0.0966445,1.55284e-05,-1.64201,stable
+lille,expost_precipitation_mm,0.0227293,0.0388929,0.292484,0.403625,stable
+lille,expost_aerosols_aod,0.162911,0.176373,1.80748e-17,-0.0394834,à surveiller
+lille,expost_ghi_nasa_kwh_m2,0.0690468,0.0998782,6.99553e-06,0.224218,stable
+lyon,pv_crystSi_kwh_kwc,0.0442909,0.0579982,0.0287819,0.182767,stable
+lyon,expost_nebulosite_pct,0.0118133,0.0294248,0.639146,-0.703773,stable
+lyon,expost_t2m_moy_c,0.228869,0.202926,5.34527e-23,1.65569,à surveiller
+lyon,expost_humidite_pct,0.0950587,0.131371,7.36991e-10,-2.85892,stable
+lyon,expost_precipitation_mm,0.0327127,0.058207,0.0277522,-0.153056,stable
+lyon,expost_aerosols_aod,0.0298301,0.0390927,0.28781,-0.00344477,stable
+lyon,expost_ghi_nasa_kwh_m2,0.0446087,0.0734153,0.00224322,0.1759,stable
+madrid,pv_crystSi_kwh_kwc,0.0407529,0.0628427,0.0137316,-0.0462326,stable
+madrid,expost_nebulosite_pct,0.0582664,0.0891378,8.96497e-05,5.639,stable
+madrid,expost_t2m_moy_c,0.215186,0.186327,1.86212e-19,1.34734,à surveiller
+madrid,expost_humidite_pct,0.0395107,0.0548866,0.0443687,0.283422,stable
+madrid,expost_precipitation_mm,0.0113485,0.0425152,0.202412,0.378179,stable
+madrid,expost_aerosols_aod,0.0103875,0.0330521,0.491241,0.0114592,stable
+madrid,expost_ghi_nasa_kwh_m2,0.0133932,0.0324456,0.514655,-0.0117213,stable
+malaga,pv_crystSi_kwh_kwc,0.0238399,0.041077,0.235296,0.020141,stable
+malaga,expost_nebulosite_pct,0.0381875,0.0449748,0.154277,1.63735,stable
+malaga,expost_t2m_moy_c,0.268348,0.214814,9.0073e-26,1.07227,alerte
+malaga,expost_humidite_pct,0.405758,0.274369,5.28673e-42,-7.75188,alerte
+malaga,expost_precipitation_mm,0.0248942,0.0282003,0.691762,-0.246879,stable
+malaga,expost_aerosols_aod,0.0245927,0.0422468,0.207911,0.0198479,stable
+malaga,expost_ghi_nasa_kwh_m2,0.0315811,0.049041,0.0959061,-0.00432218,stable
+marseille,pv_crystSi_kwh_kwc,0.0417965,0.0447533,0.158437,0.0633674,stable
+marseille,expost_nebulosite_pct,0.0131668,0.0459911,0.138021,2.19287,stable
+marseille,expost_t2m_moy_c,0.286963,0.223926,5.48191e-28,1.16321,alerte
+marseille,expost_humidite_pct,0.0229498,0.0543861,0.0475354,-0.691708,stable
+marseille,expost_precipitation_mm,0.0306427,0.0472622,0.118923,-0.428605,stable
+marseille,expost_aerosols_aod,0.0450709,0.0924599,4.25264e-05,-0.0132349,stable
+marseille,expost_ghi_nasa_kwh_m2,0.0126294,0.0323779,0.51828,0.0115787,stable
+medenine,pv_crystSi_kwh_kwc,0.0196368,0.0504773,0.0801651,0.0655477,stable
+medenine,expost_nebulosite_pct,0.035917,0.0649146,0.00986989,-2.08262,stable
+medenine,expost_t2m_moy_c,0.0931235,0.140022,3.78937e-11,0.86089,stable
+medenine,expost_humidite_pct,0.098992,0.125758,4.58663e-09,-4.41561,stable
+medenine,expost_precipitation_mm,0.0158048,0.0315081,0.552258,0.0681658,stable
+medenine,expost_aerosols_aod,0.0200771,0.0446229,0.160411,0.00445435,stable
+medenine,expost_ghi_nasa_kwh_m2,0.0368954,0.0655766,0.00880616,0.018099,stable
+montpellier,pv_crystSi_kwh_kwc,0.0381465,0.0679592,0.00593517,-0.0083472,stable
+montpellier,expost_nebulosite_pct,0.03897,0.0786741,0.000828244,5.25403,stable
+montpellier,expost_t2m_moy_c,0.319507,0.251141,3.58007e-35,1.39468,alerte
+montpellier,expost_humidite_pct,0.0401126,0.0495675,0.0894192,-1.08439,stable
+montpellier,expost_precipitation_mm,0.00571523,0.021462,0.929328,-0.254458,stable
+montpellier,expost_aerosols_aod,0.0281246,0.068293,0.00558324,-0.0104199,stable
+montpellier,expost_ghi_nasa_kwh_m2,0.00720059,0.0251507,0.814112,0.0374659,stable
+murcie,pv_crystSi_kwh_kwc,0.0185653,0.0461529,0.135459,0.0478147,stable
+murcie,expost_nebulosite_pct,0.0428836,0.0816014,0.000452251,5.13438,stable
+murcie,expost_t2m_moy_c,0.286974,0.232724,3.32522e-30,1.19933,alerte
+murcie,expost_humidite_pct,0.0397352,0.0552017,0.0424625,-0.513014,stable
+murcie,expost_precipitation_mm,0.0116331,0.0255677,0.797694,0.176013,stable
+murcie,expost_aerosols_aod,0.0221377,0.040497,0.249517,0.0243654,stable
+murcie,expost_ghi_nasa_kwh_m2,0.015034,0.0247806,0.827094,-0.0385681,stable
+nantes,pv_crystSi_kwh_kwc,0.0146857,0.0490666,0.095383,0.0972996,stable
+nantes,expost_nebulosite_pct,0.0242853,0.038074,0.316185,1.25463,stable
+nantes,expost_t2m_moy_c,0.219247,0.205811,1.19174e-23,1.4088,à surveiller
+nantes,expost_humidite_pct,0.0442667,0.0741977,0.00195229,-1.73803,stable
+nantes,expost_precipitation_mm,0.0227257,0.0641495,0.0110866,0.40351,stable
+nantes,expost_aerosols_aod,0.041648,0.0918309,4.88533e-05,-0.0137146,stable
+nantes,expost_ghi_nasa_kwh_m2,0.0289038,0.0620997,0.0153692,0.157357,stable
+nice,pv_crystSi_kwh_kwc,0.0503839,0.0507918,0.0770239,0.0466971,stable
+nice,expost_nebulosite_pct,0.00545776,0.027815,0.706961,-0.45148,stable
+nice,expost_t2m_moy_c,0.408045,0.282688,1.32428e-44,1.31909,alerte
+nice,expost_humidite_pct,0.496307,0.262838,1.54968e-38,-7.54601,alerte
+nice,expost_precipitation_mm,0.0538811,0.0866572,0.000157812,-0.670182,stable
+nice,expost_aerosols_aod,0.0650832,0.112472,2.45369e-07,-0.0147713,stable
+nice,expost_ghi_nasa_kwh_m2,0.01409,0.0403869,0.253141,0.0371187,stable
+palma,pv_crystSi_kwh_kwc,0.0228552,0.0455022,0.145982,0.0900464,stable
+palma,expost_nebulosite_pct,0.0449328,0.088325,0.000107477,4.35473,stable
+palma,expost_t2m_moy_c,0.324835,0.227938,5.39695e-29,1.08675,alerte
+palma,expost_humidite_pct,0.0320925,0.0468841,0.12363,-0.349373,stable
+palma,expost_precipitation_mm,0.0211236,0.0412616,0.230529,0.182333,stable
+palma,expost_aerosols_aod,0.0387655,0.0468995,0.123575,0.0163863,stable
+palma,expost_ghi_nasa_kwh_m2,0.0103211,0.0298212,0.623442,0.0400852,stable
+paris,pv_crystSi_kwh_kwc,0.0205154,0.0642905,0.0108775,0.185747,stable
+paris,expost_nebulosite_pct,0.0213855,0.041437,0.226301,-0.813808,stable
+paris,expost_t2m_moy_c,0.156548,0.173311,7.32736e-17,1.23691,à surveiller
+paris,expost_humidite_pct,0.0567174,0.0923069,4.3869e-05,-1.79509,stable
+paris,expost_precipitation_mm,0.0274531,0.0481621,0.106097,0.491736,stable
+paris,expost_aerosols_aod,0.123204,0.171566,1.51409e-16,-0.0318155,à surveiller
+paris,expost_ghi_nasa_kwh_m2,0.0505605,0.0745814,0.00179813,0.184849,stable
+saragosse,pv_crystSi_kwh_kwc,0.01859,0.0361017,0.379794,-0.0111615,stable
+saragosse,expost_nebulosite_pct,0.0555982,0.0819196,0.000423729,5.66395,stable
+saragosse,expost_t2m_moy_c,0.218781,0.184409,4.59755e-19,1.51354,à surveiller
+saragosse,expost_humidite_pct,0.0537707,0.0958487,1.88064e-05,-1.78863,stable
+saragosse,expost_precipitation_mm,0.00897253,0.032284,0.521124,-0.0472401,stable
+saragosse,expost_aerosols_aod,0.0295811,0.0286535,0.671906,0.0115266,stable
+saragosse,expost_ghi_nasa_kwh_m2,0.0228956,0.0349518,0.420335,-0.0183198,stable
+seville,pv_crystSi_kwh_kwc,0.0168773,0.0298131,0.62386,0.0182887,stable
+seville,expost_nebulosite_pct,0.0331218,0.0665316,0.00752557,4.11532,stable
+seville,expost_t2m_moy_c,0.135249,0.164061,3.64283e-15,0.969131,à surveiller
+seville,expost_humidite_pct,0.0607852,0.062096,0.0153701,-0.787434,stable
+seville,expost_precipitation_mm,0.0234916,0.0225248,0.901112,0.0534369,stable
+seville,expost_aerosols_aod,0.0187898,0.0441612,0.168851,0.0156385,stable
+seville,expost_ghi_nasa_kwh_m2,0.0152048,0.030841,0.580063,0.0353618,stable
+sfax,pv_crystSi_kwh_kwc,0.013403,0.0403825,0.253271,0.0548653,stable
+sfax,expost_nebulosite_pct,0.0290592,0.0404983,0.249516,0.518686,stable
+sfax,expost_t2m_moy_c,0.22884,0.216572,3.41885e-26,0.969562,à surveiller
+sfax,expost_humidite_pct,0.0752979,0.10976,5.19073e-07,-2.58734,stable
+sfax,expost_precipitation_mm,0.0170102,0.0551847,0.0425864,-0.05866,stable
+sfax,expost_aerosols_aod,0.0385915,0.0812705,0.000485183,0.00460446,stable
+sfax,expost_ghi_nasa_kwh_m2,0.0253584,0.050696,0.0774896,0.00821831,stable
+sousse,pv_crystSi_kwh_kwc,0.0103773,0.0301638,0.608792,0.024423,stable
+sousse,expost_nebulosite_pct,0.0325694,0.0400025,0.262007,0.881929,stable
+sousse,expost_t2m_moy_c,0.253139,0.224576,3.77021e-28,1.11675,alerte
+sousse,expost_humidite_pct,0.0748727,0.110422,4.27473e-07,-2.13761,stable
+sousse,expost_precipitation_mm,0.0199162,0.0502235,0.0822275,-0.0975914,stable
+sousse,expost_aerosols_aod,0.0385364,0.0812705,0.000485183,0.00461276,stable
+sousse,expost_ghi_nasa_kwh_m2,0.0328746,0.089756,7.82184e-05,0.0481752,stable
+strasbourg,pv_crystSi_kwh_kwc,0.0208306,0.0556228,0.0403199,0.152277,stable
+strasbourg,expost_nebulosite_pct,0.031599,0.0756725,0.00146242,1.99421,stable
+strasbourg,expost_t2m_moy_c,0.162248,0.173966,5.32757e-17,1.37171,à surveiller
+strasbourg,expost_humidite_pct,0.0657874,0.102581,3.50012e-06,-2.27981,stable
+strasbourg,expost_precipitation_mm,0.0399568,0.0585688,0.0262339,0.405827,stable
+strasbourg,expost_aerosols_aod,0.0927047,0.134563,2.55897e-10,-0.0320822,stable
+strasbourg,expost_ghi_nasa_kwh_m2,0.0521598,0.0793716,0.000710174,0.225331,stable
+tataouine,pv_crystSi_kwh_kwc,0.0234617,0.0482239,0.105975,0.0934382,stable
+tataouine,expost_nebulosite_pct,0.0421352,0.0719921,0.00289562,-2.3917,stable
+tataouine,expost_t2m_moy_c,0.0844923,0.1381,7.43896e-11,0.886994,stable
+tataouine,expost_humidite_pct,0.0969733,0.11582,9.4595e-08,-3.9647,stable
+tataouine,expost_precipitation_mm,0.0179615,0.0286032,0.674023,0.0156804,stable
+tataouine,expost_aerosols_aod,0.0177645,0.0396481,0.27165,0.00581265,stable
+tataouine,expost_ghi_nasa_kwh_m2,0.0127255,0.0441167,0.170048,0.0407554,stable
+toulouse,pv_crystSi_kwh_kwc,0.0339219,0.0453781,0.147827,0.0788481,stable
+toulouse,expost_nebulosite_pct,0.0238815,0.0593293,0.0235043,2.28947,stable
+toulouse,expost_t2m_moy_c,0.28109,0.209684,1.44106e-24,1.76348,alerte
+toulouse,expost_humidite_pct,0.0211438,0.0388511,0.293681,-0.451121,stable
+toulouse,expost_precipitation_mm,0.0170276,0.0323851,0.517919,-0.0333565,stable
+toulouse,expost_aerosols_aod,0.023309,0.0314135,0.557323,0.000524638,stable
+toulouse,expost_ghi_nasa_kwh_m2,0.0252092,0.0664045,0.00765141,0.112263,stable
+tozeur,pv_crystSi_kwh_kwc,0.0489248,0.0866579,0.000157809,0.110701,stable
+tozeur,expost_nebulosite_pct,0.0416363,0.0551535,0.0429665,-0.638492,stable
+tozeur,expost_t2m_moy_c,0.1416,0.1839,5.79359e-19,1.01886,à surveiller
+tozeur,expost_humidite_pct,0.0503957,0.101449,4.68472e-06,-2.27759,stable
+tozeur,expost_precipitation_mm,0.00954245,0.0242433,0.846622,-0.0149386,stable
+tozeur,expost_aerosols_aod,0.0083816,0.0219675,0.916675,0.00628428,stable
+tozeur,expost_ghi_nasa_kwh_m2,0.00946442,0.0322217,0.524487,0.0377395,stable
+tunis,pv_crystSi_kwh_kwc,0.0175792,0.0535255,0.0538315,0.123862,stable
+tunis,expost_nebulosite_pct,0.0277361,0.0451409,0.1515,0.26094,stable
+tunis,expost_t2m_moy_c,0.314326,0.238168,1.24525e-31,1.27065,alerte
+tunis,expost_humidite_pct,0.119637,0.130913,8.40993e-10,-2.9472,à surveiller
+tunis,expost_precipitation_mm,0.0436587,0.0800015,0.000625963,-0.170759,stable
+tunis,expost_aerosols_aod,0.0947103,0.109292,5.85428e-07,-0.00136262,stable
+tunis,expost_ghi_nasa_kwh_m2,0.0148541,0.0519807,0.0656131,0.032055,stable
+valence,pv_crystSi_kwh_kwc,0.0218097,0.0405366,0.249347,0.0586852,stable
+valence,expost_nebulosite_pct,0.0444541,0.0918436,4.84476e-05,5.18951,stable
+valence,expost_t2m_moy_c,0.175515,0.197505,8.00938e-22,0.816831,à surveiller
+valence,expost_humidite_pct,0.0481461,0.0710687,0.00342655,-1.43982,stable
+valence,expost_precipitation_mm,0.0239499,0.0387083,0.297581,0.17679,stable
+valence,expost_aerosols_aod,0.0337053,0.0465617,0.128393,0.0187254,stable
+valence,expost_ghi_nasa_kwh_m2,0.0204425,0.0403094,0.254037,0.0238887,stable

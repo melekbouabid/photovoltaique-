@@ -1,0 +1,6 @@
+"serie","ADF_stat","ADF_p","KPSS_stat","KPSS_p"
+"production",-7.515,0.01,0.077,0.1
+"production - diff. ordre 1",-29.779,0.01,0.002,0.1
+"production - désaisonnalisée",-18.349,0.01,0.392,0.0805
+"nébulosité",-9.407,0.01,0.098,0.1
+"température",-4.27,0.01,0.218,0.1

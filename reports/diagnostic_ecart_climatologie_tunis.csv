@@ -1,0 +1,9 @@
+variante,rmse_tunis,ecart_a_l_etude_historique
+"moyenne par jour de l'année sur l'apprentissage, lissage 31 j",1.10022,1.65001e-05
+"moyenne par jour de l'année sur l'apprentissage, lissage 15 j",1.10151,0.00131024
+"moyenne par jour de l'année sur l'apprentissage, lissage 7 j",1.10587,0.00566544
+"moyenne par jour de l'année sur l'apprentissage, lissage 1 j",1.1324,0.0322007
+"normale 2005-2020, lissage 31 j",1.09994,-0.000259502
+moyenne mensuelle de l'apprentissage,1.11395,0.0137528
+"lissage 31 j, erreur sur les dates de test",1.10065,0.00044612
+"sans lissage, erreur sur les dates de test",1.13263,0.0324346

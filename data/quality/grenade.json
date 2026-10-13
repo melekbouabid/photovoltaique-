@@ -1,0 +1,38 @@
+{
+  "ville": "grenade",
+  "pays": "Espagne",
+  "lignes": 6939,
+  "debut": "2005-01-01",
+  "fin": "2023-12-31",
+  "jours_imputes": 14,
+  "dates_imputees": [
+    "2008-01-22",
+    "2008-01-23",
+    "2008-03-01",
+    "2008-03-06",
+    "2008-05-17",
+    "2008-05-18",
+    "2009-04-18",
+    "2009-04-19",
+    "2009-07-21",
+    "2009-08-15",
+    "2009-08-16",
+    "2009-12-30",
+    "2014-12-02",
+    "2016-10-16"
+  ],
+  "manquants_pct": 0.0,
+  "manquants_par_colonne_pct": {},
+  "aberrants_iqr": {
+    "pv_crystSi_kwh_kwc": 135,
+    "pv_CIS_kwh_kwc": 140,
+    "pv_CdTe_kwh_kwc": 142
+  },
+  "production_annuelle_kwh_kwc": {
+    "pv_crystSi_kwh_kwc": 1666.7,
+    "pv_CIS_kwh_kwc": 1651.6,
+    "pv_CdTe_kwh_kwc": 1701.5
+  },
+  "statut": "ok",
+  "raisons": []
+}

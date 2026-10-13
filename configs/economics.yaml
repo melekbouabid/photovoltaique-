@@ -1,0 +1,55 @@
+# Hypothèses économiques. AUCUNE de ces valeurs n'est une donnée du projet : ce sont des ordres de grandeur
+# à confirmer auprès de la source indiquée avant toute utilisation. Statut de chaque paramètre : TODO_VERIFY.
+# Chaque paramètre est donné par trois valeurs [basse, centrale, haute] : la simulation de Monte-Carlo tire
+# dans une loi triangulaire, et tous les résultats sont publiés avec un intervalle (P10, P50, P90).
+# Ce calcul n'est pas un conseil financier.
+
+status: TODO_VERIFY
+currency: EUR
+
+system:
+  peak_power_kwp: 3.0                        # installation résidentielle type
+  lifetime_years: 25
+  self_consumption_share: [0.25, 0.40, 0.70] # part de la production consommée sur place ; TODO_VERIFY (dépend du foyer)
+
+monte_carlo:
+  draws: 5000
+  percentiles: [10, 50, 90]
+
+common:
+  discount_rate: [0.02, 0.04, 0.07]          # TODO_VERIFY : taux d'actualisation réel
+  energy_price_inflation: [0.00, 0.02, 0.05] # TODO_VERIFY : hausse annuelle du prix de l'électricité
+  om_cost_share_of_capex: [0.010, 0.015, 0.020]   # TODO_VERIFY : entretien annuel, en part de l'investissement
+
+technologies:
+  # Coût relatif au silicium cristallin et dégradation annuelle. TODO_VERIFY : les couches minces (CIS, CdTe)
+  # sont rares en résidentiel ; source à confirmer : rapports IRENA et Fraunhofer ISE « Photovoltaics Report ».
+  crystSi: {capex_multiplier: [1.00, 1.00, 1.00], degradation_per_year: [0.003, 0.005, 0.008]}
+  CIS: {capex_multiplier: [0.95, 1.10, 1.30], degradation_per_year: [0.005, 0.010, 0.015]}
+  CdTe: {capex_multiplier: [0.90, 1.05, 1.25], degradation_per_year: [0.003, 0.005, 0.010]}
+
+countries:
+  France:
+    source_a_confirmer: "Tarif réglementé de vente et arrêté tarifaire EDF OA (CRE) ; base carbone ADEME"
+    retail_price_eur_kwh: [0.19, 0.22, 0.27]        # TODO_VERIFY
+    export_price_eur_kwh: [0.04, 0.08, 0.13]        # TODO_VERIFY : rachat du surplus, installations de 9 kWc au plus
+    capex_eur_per_kwp: [1500, 2000, 2600]           # TODO_VERIFY : silicium cristallin, pose comprise
+    grid_emission_g_co2_kwh: [30, 55, 80]           # TODO_VERIFY
+  Tunisie:
+    source_a_confirmer: "Tarifs basse tension de la STEG et régime de comptage net ; ANME (PROSOL Elec)"
+    exchange_rate_eur_per_tnd: [0.27, 0.30, 0.33]   # TODO_VERIFY : sert à convertir les tarifs STEG
+    retail_price_eur_kwh: [0.05, 0.08, 0.12]        # TODO_VERIFY : tarif par tranches, converti en euros
+    export_price_eur_kwh: [0.03, 0.06, 0.10]        # TODO_VERIFY : valeur du kWh injecté en comptage net
+    capex_eur_per_kwp: [800, 1100, 1500]            # TODO_VERIFY
+    grid_emission_g_co2_kwh: [420, 480, 560]        # TODO_VERIFY
+  Espagne:
+    source_a_confirmer: "PVPC (Red Eléctrica) et compensation simplifiée des excédents (RD 244/2019) ; MITECO"
+    retail_price_eur_kwh: [0.12, 0.17, 0.24]        # TODO_VERIFY
+    export_price_eur_kwh: [0.03, 0.06, 0.10]        # TODO_VERIFY
+    capex_eur_per_kwp: [1100, 1400, 1900]           # TODO_VERIFY
+    grid_emission_g_co2_kwh: [120, 170, 230]        # TODO_VERIFY
+
+forecast_value:
+  # Coût d'une erreur de prévision : chaque kWh d'écart entre le plan et la production réelle est acheté
+  # ou revendu en urgence avec une pénalité. TODO_VERIFY : dépend entièrement du contrat de l'exploitant.
+  imbalance_penalty_eur_kwh: [0.01, 0.03, 0.06]

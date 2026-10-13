@@ -1,0 +1,37 @@
+{
+  "ville": "seville",
+  "pays": "Espagne",
+  "lignes": 6939,
+  "debut": "2005-01-01",
+  "fin": "2023-12-31",
+  "jours_imputes": 13,
+  "dates_imputees": [
+    "2008-01-22",
+    "2008-01-23",
+    "2008-03-01",
+    "2008-03-06",
+    "2008-05-17",
+    "2008-05-18",
+    "2009-04-18",
+    "2009-04-19",
+    "2009-07-21",
+    "2009-08-15",
+    "2009-08-16",
+    "2014-12-02",
+    "2016-10-16"
+  ],
+  "manquants_pct": 0.0,
+  "manquants_par_colonne_pct": {},
+  "aberrants_iqr": {
+    "pv_crystSi_kwh_kwc": 160,
+    "pv_CIS_kwh_kwc": 168,
+    "pv_CdTe_kwh_kwc": 174
+  },
+  "production_annuelle_kwh_kwc": {
+    "pv_crystSi_kwh_kwc": 1666.2,
+    "pv_CIS_kwh_kwc": 1654.7,
+    "pv_CdTe_kwh_kwc": 1719.3
+  },
+  "statut": "ok",
+  "raisons": []
+}

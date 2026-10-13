@@ -1,0 +1,40 @@
+# Intégration continue : style, tests, parcours rapide de bout en bout, notebook, image Docker.
+# État au 11 octobre 2026 : ce fichier n'a pas encore tourné, le dépôt n'étant pas publié sur GitHub.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  qualite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Dépendances (PyTorch en version processeur)
+        run: |
+          pip install --index-url https://download.pytorch.org/whl/cpu torch
+          pip install -e ".[dev,mlops]"
+      - name: Style
+        run: ruff check src tests scripts
+      - name: Tests unitaires
+        run: python -m pytest tests/unit tests/test_r_isolation.py -q
+      - name: Parcours rapide (3 villes, téléchargements compris)
+        run: python -m solarvision.cli pipeline --fast
+      - name: Tests sur les données, anti-fuite, API, métriques de référence
+        run: python -m pytest tests -q -m "not data and not slow"
+      - name: Notebook en mode rapide
+        run: python -m nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output-dir /tmp notebooks/solarvision_v2.ipynb
+  image:
+    runs-on: ubuntu-latest
+    needs: qualite
+    steps:
+      - uses: actions/checkout@v4
+      - name: Construction de l'image de l'API
+        run: docker build -f infra/Dockerfile -t solarvision-v2:ci .

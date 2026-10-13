@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Économie{% endblock %}
+{% block content %}
+<h1>Bénéfices économiques</h1>
+<p class="lead">Économies sur la facture, temps de retour, valeur actuelle nette et CO2 évité pour une installation résidentielle.</p>
+<p class="notice">Toutes les hypothèses sont des ordres de grandeur non vérifiés (TODO_VERIFY dans
+<code>configs/economics.yaml</code>). Les résultats sont indicatifs : ce n'est pas un conseil financier.</p>
+{% if error %}<p class="notice error">{{ error }}</p>{% endif %}
+{% if case %}
+<div class="card">
+<form class="controls" method="get" action="/economie">
+  <label>Ville
+    <select name="ville">{% for c in cities %}<option value="{{ c.id }}"{% if c.id == ville %} selected{% endif %}>{{ c.nom }} ({{ c.pays }})</option>{% endfor %}</select>
+  </label>
+  <label>Technologie
+    <select name="technologie">{% for t in technologies %}<option{% if t == case.technologie %} selected{% endif %}>{{ t }}</option>{% endfor %}</select>
+  </label>
+  <label>Puissance (kWc) : <output>{{ fmt(case.puissance_kwc, 1) }}</output>
+    <input type="range" name="puissance_kwc" min="1" max="9" step="0.5" value="{{ case.puissance_kwc }}" oninput="this.previousElementSibling.value=this.value">
+  </label>
+  <label>Prix d'achat (€/kWh) : <output>{{ fmt(case.hypotheses.retail_price, 3) }}</output>
+    <input type="range" name="prix_achat" min="0.03" max="0.40" step="0.005" value="{{ case.hypotheses.retail_price }}" oninput="this.previousElementSibling.value=this.value">
+  </label>
+  <label>Prix de rachat (€/kWh) : <output>{{ fmt(case.hypotheses.export_price, 3) }}</output>
+    <input type="range" name="prix_rachat" min="0" max="0.20" step="0.005" value="{{ case.hypotheses.export_price }}" oninput="this.previousElementSibling.value=this.value">
+  </label>
+  <label>Autoconsommation : <output>{{ fmt(case.hypotheses.self_consumption, 2) }}</output>
+    <input type="range" name="autoconsommation" min="0.1" max="1" step="0.05" value="{{ case.hypotheses.self_consumption }}" oninput="this.previousElementSibling.value=this.value">
+  </label>
+  <label>Coût (€/kWc) : <output>{{ fmt(case.hypotheses.capex_per_kwp, 0) }}</output>
+    <input type="range" name="cout_kwc" min="600" max="3000" step="50" value="{{ case.hypotheses.capex_per_kwp }}" oninput="this.previousElementSibling.value=this.value">
+  </label>
+  <label>Taux d'actualisation : <output>{{ fmt(case.hypotheses.discount_rate, 3) }}</output>
+    <input type="range" name="taux_actualisation" min="0" max="0.10" step="0.005" value="{{ case.hypotheses.discount_rate }}" oninput="this.previousElementSibling.value=this.value">
+  </label>
+  <button type="submit">Recalculer</button>
+</form>
+<p class="note">Source à confirmer pour {{ case.pays }} : {{ case.source_a_confirmer }}.</p>
+</div>
+<div class="grid-2">
+  <div class="card">
+    <h2 style="margin-top:0">Avec vos hypothèses</h2>
+    <table>
+      <tbody>
+      <tr><th>Production</th><td class="num">{{ fmt(case.production_kwh_kwc_an, 0) }} kWh/kWc/an</td></tr>
+      <tr><th>Investissement</th><td class="num">{{ fmt(case.investissement_eur, 0) }} €</td></tr>
+      <tr><th>Économie sur la facture, première année</th><td class="num">{{ fmt(case.cas_central.economie_an1_eur, 0) }} €</td></tr>
+      <tr><th>Revenu du surplus, première année</th><td class="num">{{ fmt(case.cas_central.revenu_rachat_an1_eur, 0) }} €</td></tr>
+      <tr><th>Temps de retour</th><td class="num">{{ fmt(case.cas_central.temps_retour_ans, 1) }} ans</td></tr>
+      <tr><th>Valeur actuelle nette sur {{ case.duree_vie_ans }} ans</th><td class="num">{{ fmt(case.cas_central.van_eur, 0) }} €</td></tr>
+      <tr><th>Taux de rentabilité interne</th><td class="num">{{ fmt(case.cas_central.tri_pct, 1) }} %</td></tr>
+      <tr><th>Coût actualisé de l'énergie</th><td class="num">{{ fmt(case.cas_central.lcoe_eur_kwh, 3) }} €/kWh</td></tr>
+      <tr><th>CO2 évité sur {{ case.duree_vie_ans }} ans</th><td class="num">{{ fmt(case.cas_central.co2_evite_t, 1) }} t</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Un tiret signale un investissement jamais remboursé sur la durée de vie.</p>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">Incertitude (simulation de Monte-Carlo)</h2>
+    {% if case.simulation %}
+    <table>
+      <thead><tr><th></th><th class="num">P10</th><th class="num">P50</th><th class="num">P90</th></tr></thead>
+      <tbody>
+      <tr><th>Valeur actuelle nette (€)</th><td class="num">{{ fmt(case.simulation.van_eur_p10, 0) }}</td><td class="num">{{ fmt(case.simulation.van_eur_p50, 0) }}</td><td class="num">{{ fmt(case.simulation.van_eur_p90, 0) }}</td></tr>
+      <tr><th>Temps de retour (ans)</th><td class="num">{{ fmt(case.simulation.temps_retour_ans_p10, 1) }}</td><td class="num">{{ fmt(case.simulation.temps_retour_ans_p50, 1) }}</td><td class="num">{{ fmt(case.simulation.temps_retour_ans_p90, 1) }}</td></tr>
+      <tr><th>Taux de rentabilité interne (%)</th><td class="num">{{ fmt(case.simulation.tri_pct_p10, 1) }}</td><td class="num">{{ fmt(case.simulation.tri_pct_p50, 1) }}</td><td class="num">{{ fmt(case.simulation.tri_pct_p90, 1) }}</td></tr>
+      <tr><th>Coût de l'énergie (€/kWh)</th><td class="num">{{ fmt(case.simulation.lcoe_eur_kwh_p10, 3) }}</td><td class="num">{{ fmt(case.simulation.lcoe_eur_kwh_p50, 3) }}</td><td class="num">{{ fmt(case.simulation.lcoe_eur_kwh_p90, 3) }}</td></tr>
+      <tr><th>CO2 évité (t)</th><td class="num">{{ fmt(case.simulation.co2_evite_t_p10, 1) }}</td><td class="num">{{ fmt(case.simulation.co2_evite_t_p50, 1) }}</td><td class="num">{{ fmt(case.simulation.co2_evite_t_p90, 1) }}</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Installation de {{ fmt(case.simulation.puissance_kwc, 1) }} kWc, hypothèses tirées dans leurs plages.
+    Probabilité d'une valeur actuelle nette positive : {{ fmt(100 * case.simulation.probabilite_van_positive, 0) }} %.</p>
+    {% else %}
+    <p>Simulation absente : lancer <code>python -m solarvision.cli economics</code>.</p>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% if ranking %}
+<h2>Classement des villes</h2>
+<div class="card table-wrap">
+<table>
+  <thead><tr><th>Ville</th><th>Pays</th><th>Meilleure technologie</th><th class="num">VAN P10 (€)</th><th class="num">VAN P50 (€)</th>
+  <th class="num">VAN P90 (€)</th><th class="num">Temps de retour P50 (ans)</th><th>Deuxième</th><th class="num">Probabilité que la première gagne</th><th>Écart</th></tr></thead>
+  <tbody>
+  {% for r in ranking %}
+  <tr><td>{{ r.ville }}</td><td>{{ r.pays }}</td><td>{{ r.meilleure_technologie_van }}</td><td class="num">{{ fmt(r.van_p10, 0) }}</td>
+  <td class="num">{{ fmt(r.van_p50, 0) }}</td><td class="num">{{ fmt(r.van_p90, 0) }}</td><td class="num">{{ fmt(r.temps_retour_p50, 1) }}</td>
+  <td>{{ r.deuxieme }}</td><td class="num">{{ fmt(100 * r.probabilite_premiere_devant, 0) }} %</td>
+  <td>{{ "non concluant" if r.ecart_non_concluant else "net" }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+{% endblock %}
